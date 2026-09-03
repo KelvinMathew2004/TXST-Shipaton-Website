@@ -8,6 +8,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
@@ -31,16 +32,17 @@
                         'float-delayed': 'float 7s ease-in-out infinite 2s',
                         'float-fast': 'float 5s ease-in-out infinite 1s',
                         'float-slow': 'float 8s ease-in-out infinite 3s',
-                        'spin-liquid': 'spin-liquid 4s linear infinite',
+                        'wave': 'wave 3s linear infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-15px)' },
                         },
-                        'spin-liquid': {
-                            '0%': { transform: 'rotate(0deg)' },
-                            '100%': { transform: 'rotate(360deg)' },
+                        wave: {
+                            '0%': { transform: 'translateX(0) translateZ(0) scaleY(1)' },
+                            '50%': { transform: 'translateX(-25%) translateZ(0) scaleY(0.55)' },
+                            '100%': { transform: 'translateX(-50%) translateZ(0) scaleY(1)' },
                         }
                     },
                     boxShadow: {
@@ -51,6 +53,7 @@
             }
         }
     </script>
+    
     <style>
         body { background-color: #1D162C; color: #FFF7EC; overflow-x: hidden; }
 
@@ -79,44 +82,68 @@
             border-radius: 8px;
         }
 
+        /* Sponsor Liquid Fill Effect (from StackOverflow Reference) */
         .sponsor-card { position: relative; overflow: hidden; }
         .sponsor-base, .sponsor-color {
             position: absolute; inset: 0; width: 100%; height: 100%;
-            -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
+            -webkit-mask-size: 80%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
             mask-size: 80%; mask-repeat: no-repeat; mask-position: center;
         }
         .sponsor-base { background-color: #4b5563; z-index: 1; } 
         .sponsor-color {
             background-color: transparent; z-index: 2;
+            overflow: hidden; 
         }
 
-        /* Improved Liquid Blob Fill */
-        .liquid-container {
+        .liquid-wave {
             position: absolute;
-            top: 120%; 
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background-repeat: repeat-x;
+            background-position: 0 bottom;
+            transform-origin: center bottom;
+            bottom: -100%; /* Start hidden below */
+            transition: bottom 0.8s ease-in-out;
+            z-index: 3;
+        }
+        
+        .sponsor-card:hover .liquid-wave {
+            bottom: 0; /* Rise up to fill the logo */
+        }
+
+        /* Add SVG data URI for the wave shape dynamically per brand color */
+        .wave-adobe {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,123.15,193.38,108.64C236.4,98.66,279.7,78.27,321.39,56.44Z' fill='%23FF0000'%3E%3C/path%3E%3C/svg%3E");
+            background-size: 50% 100%;
+            background-position: left bottom;
+        }
+        
+        .wave-revenue {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,123.15,193.38,108.64C236.4,98.66,279.7,78.27,321.39,56.44Z' fill='%23F1545B'%3E%3C/path%3E%3C/svg%3E");
+            background-size: 50% 100%;
+            background-position: left bottom;
+        }
+
+        /* Solid block below the wave to ensure full coverage when risen */
+        .liquid-fill {
+            position: absolute;
             left: 0;
             width: 100%;
             height: 100%;
-            transition: top 0.8s ease-in-out;
-        }
-        .sponsor-card:hover .liquid-container {
-            top: 0%; 
-        }
-        .liquid-drop {
-            position: absolute;
-            width: 300px; 
-            height: 300px;
+            bottom: -100%; /* Start hidden below */
             background-color: var(--brand-color);
-            bottom: -50px; 
-            left: 50%;
-            margin-left: -150px;
-            border-radius: 40%;
-            animation: spin-liquid 4s linear infinite;
+            transition: bottom 0.8s ease-in-out;
+            z-index: 2;
         }
-        .liquid-drop:nth-child(2) {
-            border-radius: 45%;
-            opacity: 0.6; 
-            animation: spin-liquid 5.5s linear infinite reverse;
+        .sponsor-card:hover .liquid-fill {
+            bottom: -20px; /* Rise up behind wave */
+        }
+
+        /* Custom Adobe Logo adjustment */
+        .adobe-mask {
+            -webkit-mask-size: 60%;
+            mask-size: 60%;
         }
 
         .host-img-wrapper {
@@ -164,7 +191,7 @@
     <nav class="w-full fixed top-0 left-0 z-50 bg-[#1D162C]/90 backdrop-blur-md border-b border-shipBorder">
         <div class="max-w-[1400px] mx-auto px-6 lg:px-8 h-24 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <img src="./tinyCat.png" alt="Logo" class="w-16 h-16 object-contain">
+                <img src="./tinyCat.png" alt="Logo" class="w-16 h-16 object-contain shrink-0">
                 
                 <span class="font-bold text-2xl tracking-tight flex items-start text-shipWhite leading-none pt-1">
                     TXST Shipathon
@@ -176,11 +203,12 @@
                 <a href="#details" class="hover:text-shipWhite transition-colors">Details</a>
                 <a href="#hosts" class="hover:text-shipWhite transition-colors">Judges</a>
             </div>
+            <!-- Mobile 26 badge and hidden Register button logic -->
             <div class="flex items-center gap-2 pl-4 sm:pl-0 shrink-0">
                 <img src="./tiny26.png" alt="26" class="h-[16px] object-contain shrink-0 sm:hidden">
-                <a id="nav-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn bg-shipOrange hover:bg-shipOrangeHover text-black px-4 py-2 rounded font-bold text-sm transition-all shadow-flat-sm flex items-center gap-2 shrink-0">
+                <a id="nav-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn bg-shipOrange hover:bg-shipOrangeHover text-black px-4 py-2 rounded font-bold text-sm transition-all shadow-flat-sm hidden sm:flex items-center gap-2 shrink-0">
                     Register 
-                    <svg class="w-4 h-4 btn-arrow hidden sm:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                 </a>
             </div>
         </div>
@@ -204,37 +232,37 @@
                             <span class="w-2.5 h-2.5 rounded-full bg-shipOrange shadow-[0_0_8px_#FF8100]"></span> 
                             <span id="cd-label-text">HACKATHON STARTS 14 SEP 2026 @ 9:00AM CDT</span>
                         </p>
-                        <div class="flex items-center gap-3 sm:gap-4 h-[120px] sm:h-[150px]">
-                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[100px] h-[110px] sm:w-[130px] sm:h-[140px]">
-                                <span id="cd-days" class="text-5xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
-                                <span class="text-[10px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-2 sm:mt-3">Days</span>
+                        <div class="flex items-center gap-1.5 sm:gap-4 h-[100px] sm:h-[150px]">
+                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
+                                <span id="cd-days" class="text-4xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
+                                <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Days</span>
                             </div>
-                            <div class="flex flex-col gap-2 justify-center pb-4">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
-                            </div>
-                            
-                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[100px] h-[110px] sm:w-[130px] sm:h-[140px]">
-                                <span id="cd-hours" class="text-5xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
-                                <span class="text-[10px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-2 sm:mt-3">Hours</span>
-                            </div>
-                            <div class="flex flex-col gap-2 justify-center pb-4">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
+                            <div class="flex flex-col gap-1.5 sm:gap-2 justify-center pb-2 sm:pb-4">
+                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
                             </div>
                             
-                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[100px] h-[110px] sm:w-[130px] sm:h-[140px]">
-                                <span id="cd-mins" class="text-5xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
-                                <span class="text-[10px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-2 sm:mt-3">Minutes</span>
+                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
+                                <span id="cd-hours" class="text-4xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
+                                <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Hours</span>
                             </div>
-                            <div class="flex flex-col gap-2 justify-center pb-4">
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
-                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
+                            <div class="flex flex-col gap-1.5 sm:gap-2 justify-center pb-2 sm:pb-4">
+                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
                             </div>
                             
-                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[100px] h-[110px] sm:w-[130px] sm:h-[140px]">
-                                <span id="cd-secs" class="text-5xl sm:text-7xl font-black block tracking-tight text-shipOrange tabular-nums leading-none">00</span>
-                                <span class="text-[10px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-2 sm:mt-3">Seconds</span>
+                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
+                                <span id="cd-mins" class="text-4xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
+                                <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Minutes</span>
+                            </div>
+                            <div class="flex flex-col gap-1.5 sm:gap-2 justify-center pb-2 sm:pb-4">
+                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                            </div>
+                            
+                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
+                                <span id="cd-secs" class="text-4xl sm:text-7xl font-black block tracking-tight text-shipOrange tabular-nums leading-none">00</span>
+                                <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Seconds</span>
                             </div>
                         </div>
                     </div>
@@ -277,7 +305,7 @@
                     <h4 class="text-xl font-bold mb-3 text-shipWhite">Where we're shipping</h4>
                     <p class="text-shipGray mb-2 text-sm">Texas State University</p>
                     <p class="text-shipWhite font-medium text-lg">LBJ Ballroom</p>
-                    <p class="text-xs text-shipOrange mt-4">🍕 Snacks and drinks will be provided!</p>
+                    <p class="text-xs text-shipOrange mt-4">🥤 Snacks and drinks will be provided!</p>
                 </div>
 
                 <!-- Dynamic Challenge/Prompt Card -->
@@ -298,7 +326,6 @@
         </div>
     </section>
 
-    <!-- SECTION: Pre & During Hackathon -->
     <section id="active-event-section" class="py-20 relative">
         <img src="./smallCat.webp" class="absolute left-10 top-0 opacity-60 animate-float-delayed pointer-events-none w-24 md:w-32" alt="Floating Cat">
 
@@ -313,7 +340,7 @@
                     <div class="flex-1 text-center sm:text-left">
                         <h4 class="text-2xl font-bold mb-2 text-shipWhite">Grand Prize</h4>
                         <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded to the overall best mobile application built during the hackathon. The exact prize is hidden, but it's our biggest loot yet.</p>
-                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Hidden <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
+                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2-2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                     </div>
                 </div>
 
@@ -322,7 +349,7 @@
                     <div class="flex-1 text-center sm:text-left">
                         <h4 class="text-2xl font-bold mb-2 text-shipWhite">Slide Deck Prize</h4>
                         <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded for the most visually compelling presentation and prototype. Adobe Express and AI tools strongly encouraged.</p>
-                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Hidden <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
+                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2-2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                     </div>
                 </div>
             </div>
@@ -334,22 +361,18 @@
                 <h3 class="text-3xl font-bold tracking-tight mb-8 text-center text-shipWhite">Powered by the best.</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
-                        <div class="sponsor-base" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png'); max-width: 60%; height: auto;"></div>
-                        <div class="sponsor-color" style="--brand-color: #FF0000; -webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png'); max-width: 60%; height: auto;">
-                            <div class="liquid-container">
-                                <div class="liquid-drop"></div>
-                                <div class="liquid-drop"></div>
-                            </div>
+                        <div class="sponsor-base adobe-mask" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png');"></div>
+                        <div class="sponsor-color adobe-mask" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png');">
+                            <div class="liquid-fill" style="--brand-color: #FF0000;"></div>
+                            <div class="liquid-wave wave-adobe animate-wave"></div>
                         </div>
                     </div>
 
                     <div class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
                         <div class="sponsor-base" style="-webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');"></div>
-                        <div class="sponsor-color" style="--brand-color: #F1545B; -webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');">
-                            <div class="liquid-container">
-                                <div class="liquid-drop"></div>
-                                <div class="liquid-drop"></div>
-                            </div>
+                        <div class="sponsor-color" style="-webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');">
+                            <div class="liquid-fill" style="--brand-color: #F1545B;"></div>
+                            <div class="liquid-wave wave-revenue animate-wave"></div>
                         </div>
                     </div>
                 </div>
@@ -375,7 +398,6 @@
         </div>
     </section>
 
-    <!-- Hosts & Judges -->
     <section id="hosts" class="py-24 border-t border-shipBorder/50 bg-[#1D162C]">
         <div class="max-w-[1200px] mx-auto px-6 lg:px-8 text-center">
             <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-shipWhite">Meet the judges.</h3>
@@ -420,7 +442,10 @@
     <footer class="py-6 border-t border-shipBorder/30 text-center text-shipGray text-sm">
         <div class="max-w-[1400px] mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 TXST Shipathon. A local event part of the global Shipathon.</p>
-            <button onclick="document.getElementById('coc-modal').classList.remove('hidden')" class="hover:text-shipWhite transition-colors underline underline-offset-4">Code of Conduct</button>
+            <div class="flex items-center gap-6">
+                <a href="https://revenuecat-shipaton-2026.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Submissions+open" target="_blank" class="text-shipGray/60 hover:text-shipWhite transition-colors underline underline-offset-4 text-xs">Global Devpost ↗</a>
+                <button onclick="document.getElementById('coc-modal').classList.remove('hidden')" class="hover:text-shipWhite transition-colors underline underline-offset-4">Code of Conduct</button>
+            </div>
         </div>
     </footer>
 
@@ -654,16 +679,6 @@
                     bubblesContainer.classList.add('blur-[4px]', 'opacity-50');
                 }
             }
-
-            document.querySelectorAll('.sponsor-card').forEach(card => {
-                card.addEventListener('mousemove', e => {
-                    const rect = card.getBoundingClientRect();
-                    const x = ((e.clientX - rect.left) / rect.width) * 100;
-                    const y = ((e.clientY - rect.top) / rect.height) * 100;
-                    card.querySelector('.sponsor-color').style.setProperty('--x', `${x}%`);
-                    card.querySelector('.sponsor-color').style.setProperty('--y', `${y}%`);
-                });
-            });
 
             initializeState();
         });
