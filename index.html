@@ -19,8 +19,8 @@
                     },
                     colors: {
                         shipBg: '#1D162C',       
-                        shipCard: '#2A203F',     
-                        shipBorder: '#453561',   
+                        shipCard: '#2E243D',     
+                        shipBorder: '#5F4C66',   
                         shipOrange: '#FF8100',   
                         shipOrangeHover: '#E57400',
                         shipWhite: '#FFF7EC',
@@ -59,8 +59,8 @@
 
         .bg-grid {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: radial-gradient(circle at center, #594a86 1px, transparent 1px);
-            background-size: 90px 90px; opacity: 0.2; z-index: -1; pointer-events: none;
+            background-image: radial-gradient(circle at center, #8A7BB3 1.5px, transparent 1.5px);
+            background-size: 120px 120px; opacity: 0.35; z-index: -1; pointer-events: none;
         }
 
         .glow-bg {
@@ -70,19 +70,19 @@
         }
 
         .ship-card {
-            background-color: #2A203F; 
-            border: 1px solid #453561; 
+            background-color: #2E243D; 
+            border: 2px solid #5F4C66; 
             border-radius: 12px;
             transition: all 0.3s ease;
         }
 
         .cd-box {
-            background-color: #2E233C;
-            border: 2px solid #52417A; 
+            background-color: #2E243D;
+            border: 2px solid #5F4C66; 
             border-radius: 8px;
         }
 
-        /* Sponsor Liquid Fill Effect (from StackOverflow Reference) */
+        /* Sponsor Liquid Fill Effect */
         .sponsor-card { position: relative; overflow: hidden; }
         .sponsor-base, .sponsor-color {
             position: absolute; inset: 0; width: 100%; height: 100%;
@@ -112,7 +112,6 @@
             bottom: 0; /* Rise up to fill the logo */
         }
 
-        /* Add SVG data URI for the wave shape dynamically per brand color */
         .wave-adobe {
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,123.15,193.38,108.64C236.4,98.66,279.7,78.27,321.39,56.44Z' fill='%23FF0000'%3E%3C/path%3E%3C/svg%3E");
             background-size: 50% 100%;
@@ -125,7 +124,6 @@
             background-position: left bottom;
         }
 
-        /* Solid block below the wave to ensure full coverage when risen */
         .liquid-fill {
             position: absolute;
             left: 0;
@@ -140,7 +138,6 @@
             bottom: -20px; /* Rise up behind wave */
         }
 
-        /* Custom Adobe Logo adjustment */
         .adobe-mask {
             -webkit-mask-size: 60%;
             mask-size: 60%;
@@ -188,14 +185,13 @@
     <div class="bg-grid"></div>
     <div class="glow-bg"></div>
 
-    <nav class="w-full fixed top-0 left-0 z-50 bg-[#1D162C]/90 backdrop-blur-md border-b border-shipBorder">
+    <nav class="w-full fixed top-0 left-0 z-50 bg-[#1D162C]/90 backdrop-blur-md border-b-2 border-[#5F4C66]">
         <div class="max-w-[1400px] mx-auto px-6 lg:px-8 h-24 flex items-center justify-between">
             <div class="flex items-center gap-3">
                 <img src="./tinyCat.png" alt="Logo" class="w-16 h-16 object-contain shrink-0">
                 
-                <span class="font-bold text-2xl tracking-tight flex items-start text-shipWhite leading-none pt-1">
-                    TXST Shipathon
-                    <img src="./tiny26.png" alt="26" class="h-[18px] object-contain ml-1 -mt-1 hidden sm:block">
+                <span class="font-bold text-xl sm:text-2xl tracking-tight text-shipWhite leading-none pt-1 whitespace-nowrap">
+                    TXST Shipathon<img src="./tiny26.png" alt="26" class="h-[14px] sm:h-[18px] object-contain inline-block ml-1.5 -mt-1 sm:-mt-1.5">
                 </span>
             </div>
             <div class="hidden md:flex items-center gap-8 text-sm font-medium text-shipGray">
@@ -203,9 +199,7 @@
                 <a href="#details" class="hover:text-shipWhite transition-colors">Details</a>
                 <a href="#hosts" class="hover:text-shipWhite transition-colors">Judges</a>
             </div>
-            <!-- Mobile 26 badge and hidden Register button logic -->
-            <div class="flex items-center gap-2 pl-4 sm:pl-0 shrink-0">
-                <img src="./tiny26.png" alt="26" class="h-[16px] object-contain shrink-0 sm:hidden">
+            <div class="flex items-center pl-4 sm:pl-0 shrink-0">
                 <a id="nav-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn bg-shipOrange hover:bg-shipOrangeHover text-black px-4 py-2 rounded font-bold text-sm transition-all shadow-flat-sm hidden sm:flex items-center gap-2 shrink-0">
                     Register 
                     <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
@@ -223,13 +217,20 @@
                     <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6 text-shipWhite">
                         A local edition of the world's <span class="text-shipOrange">biggest</span> mobile hackathon.
                     </h1>
-                    <p class="text-lg text-shipGray mb-10 max-w-3xl leading-relaxed">
+                    
+                    <!-- Desktop Description -->
+                    <p class="text-lg text-shipGray mb-10 max-w-3xl leading-relaxed hidden sm:block">
                         Shipathon 2026 is RevenueCat's global hackathon. Here at Texas State, we're hosting a local campus event to build real apps, compete for local prizes, and ship. Open to all majors! Build your prototype here, and you can level it up later to submit to the global hackathon by adding their extra requirements.
+                    </p>
+                    
+                    <!-- Mobile Description -->
+                    <p class="text-base text-shipGray mb-8 leading-relaxed sm:hidden pr-2">
+                        Shipathon 2026 is RevenueCat's global hackathon. Join our Texas State event to build apps, win local prizes, and ship. Open to all majors! Build your prototype here, then level it up for the global competition.
                     </p>
                     
                     <div id="countdown-container" class="mb-6 w-full overflow-x-auto pb-6">
                         <p id="countdown-label" class="font-mono text-[13px] font-bold tracking-widest text-shipLightOrange mb-3 uppercase flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-shipOrange shadow-[0_0_8px_#FF8100]"></span> 
+                            <span class="w-2.5 h-2.5 rounded-full bg-shipOrange"></span> 
                             <span id="cd-label-text">HACKATHON STARTS 14 SEP 2026 @ 9:00AM CDT</span>
                         </p>
                         <div class="flex items-center gap-1.5 sm:gap-4 h-[100px] sm:h-[150px]">
@@ -281,7 +282,7 @@
         </div>
     </main>
 
-    <section id="details" class="py-20 border-t border-shipBorder/30 relative">
+    <section id="details" class="py-20 border-y-2 border-[#5F4C66] bg-[#2D1E3D] relative">
         <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
             <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase">Event Details</h2>
             <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-shipWhite">Everything you need to know.</h3>
@@ -289,7 +290,7 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <!-- Location / Time Cards -->
                 <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
-                    <div class="w-12 h-12 bg-shipBg border border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
+                    <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
                     <h4 class="text-xl font-bold mb-3 text-shipWhite">When to be there</h4>
@@ -299,18 +300,18 @@
                 </div>
 
                 <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
-                    <div class="w-12 h-12 bg-shipBg border border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
+                    <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
                     <h4 class="text-xl font-bold mb-3 text-shipWhite">Where we're shipping</h4>
                     <p class="text-shipGray mb-2 text-sm">Texas State University</p>
                     <p class="text-shipWhite font-medium text-lg">LBJ Ballroom</p>
-                    <p class="text-xs text-shipOrange mt-4">🥤 Snacks and drinks will be provided!</p>
+                    <p class="text-xs text-shipOrange mt-4 flex items-center gap-1.5"><svg class="w-4 h-4 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path></svg> Snacks and drinks will be provided!</p>
                 </div>
 
                 <!-- Dynamic Challenge/Prompt Card -->
                 <div class="ship-card p-8 border-shipOrange/30 relative overflow-hidden bg-shipOrange/5 md:col-span-1 lg:col-span-1 flex flex-col hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg" id="prompt-container">
-                    <div class="w-12 h-12 bg-shipBg border border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
+                    <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                     </div>
                     <h4 class="text-xl font-bold mb-3 text-shipWhite">The Challenge</h4>
@@ -340,7 +341,7 @@
                     <div class="flex-1 text-center sm:text-left">
                         <h4 class="text-2xl font-bold mb-2 text-shipWhite">Grand Prize</h4>
                         <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded to the overall best mobile application built during the hackathon. The exact prize is hidden, but it's our biggest loot yet.</p>
-                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2-2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
+                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                     </div>
                 </div>
 
@@ -349,7 +350,7 @@
                     <div class="flex-1 text-center sm:text-left">
                         <h4 class="text-2xl font-bold mb-2 text-shipWhite">Slide Deck Prize</h4>
                         <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded for the most visually compelling presentation and prototype. Adobe Express and AI tools strongly encouraged.</p>
-                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2-2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
+                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                     </div>
                 </div>
             </div>
@@ -394,11 +395,11 @@
                 <h4 id="bubbles-title" class="text-2xl font-bold mb-2 text-shipWhite">Everything Shipped</h4>
                 <p id="bubbles-subtitle" class="text-shipGray">Saluting every team that crossed the finish line.</p>
             </div>
-            <div class="relative w-full min-h-[400px] flex flex-wrap justify-center content-center gap-4 p-8 border border-shipBorder/30 rounded-2xl bg-shipCard/80 shadow-flat-lg" id="bubbles-container"></div>
+            <div class="relative w-full min-h-[400px] flex flex-wrap justify-center content-center gap-4 p-8 border-2 border-[#5F4C66] rounded-2xl bg-shipCard shadow-flat-lg" id="bubbles-container"></div>
         </div>
     </section>
 
-    <section id="hosts" class="py-24 border-t border-shipBorder/50 bg-[#1D162C]">
+    <section id="hosts" class="py-24 border-t-2 border-[#5F4C66] bg-[#2D1E3D]">
         <div class="max-w-[1200px] mx-auto px-6 lg:px-8 text-center">
             <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-shipWhite">Meet the judges.</h3>
             <p class="text-shipGray max-w-2xl mx-auto mb-16">Fellow TXST builders who grew closer through hackathons. We're here to help you ship your best work.</p>
@@ -439,7 +440,7 @@
         </div>
     </section>
 
-    <footer class="py-6 border-t border-shipBorder/30 text-center text-shipGray text-sm">
+    <footer class="py-6 border-t-2 border-[#5F4C66] text-center text-shipGray text-sm bg-shipBg">
         <div class="max-w-[1400px] mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 TXST Shipathon. A local event part of the global Shipathon.</p>
             <div class="flex items-center gap-6">
@@ -450,7 +451,7 @@
     </footer>
 
     <div id="coc-modal" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-shipCard border border-shipBorder rounded-xl max-w-2xl w-full p-8 relative shadow-flat-lg">
+        <div class="bg-shipCard border-2 border-[#5F4C66] rounded-xl max-w-2xl w-full p-8 relative shadow-flat-lg">
             <button onclick="document.getElementById('coc-modal').classList.add('hidden')" class="absolute top-4 right-4 text-shipGray hover:text-shipWhite">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
@@ -464,31 +465,20 @@
     </div>
 
     <!-- Local Dev UI Tool -->
-    <div id="dev-controls" class="fixed bottom-4 left-4 z-[100] hidden bg-black/90 backdrop-blur-md border border-shipBorder p-4 rounded-xl shadow-flat-lg flex-col gap-2">
+    <div id="dev-controls" class="fixed bottom-4 left-4 z-[100] hidden bg-black/90 backdrop-blur-md border-2 border-[#5F4C66] p-4 rounded-xl shadow-flat-lg flex-col gap-2">
         <span class="text-[10px] text-shipGray font-mono uppercase tracking-wider">Local Dev Tools</span>
         <div class="flex gap-2">
-            <button onclick="setDevState(0)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors">Stage 0</button>
-            <button onclick="setDevState(1)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors">Stage 1</button>
-            <button onclick="setDevState(2)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors">Stage 2</button>
-            <button onclick="setDevState(3)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors">Stage 3</button>
+            <button onclick="setDevState(0)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors border border-[#5F4C66]">Stage 0</button>
+            <button onclick="setDevState(1)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors border border-[#5F4C66]">Stage 1</button>
+            <button onclick="setDevState(2)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors border border-[#5F4C66]">Stage 2</button>
+            <button onclick="setDevState(3)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors border border-[#5F4C66]">Stage 3</button>
         </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // ==========================================
-            // FEATURE FLAG & SETTINGS
-            // 0 = PRE HACKATHON
-            // 1 = DURING HACKATHON 
-            // 2 = GRADING STAGE (Submissions closed, results pending)
-            // 3 = POST HACKATHON (Results revealed)
-            // ==========================================
             let HACKATHON_STATE = 0; 
 
-            // ==========================================
-            // PROMPT CONTENT (FILL THESE IN LATER)
-            // ==========================================
             const HACKATHON_CONTENT = {
                 preRequisites: "Ensure you have the necessary IDEs installed (e.g., Xcode for iOS or Android Studio) before the event begins. You will also need an <a href='https://adobesparkpost-web.app.link/e/cXxlzPSXV4b' target='_blank' class='text-shipOrange hover:underline'>Adobe Express account</a> for your presentation. Don't forget to bring your laptop fully charged (power outlets may be limited)!",
                 promptDescription: "Nice try reading the source code! 🕵️‍♂️ The real prompt is locked away securely until the event starts. For now, your challenge is to build an app that translates cat meows into Shakespearean sonnets.", 
@@ -502,18 +492,22 @@
             const START_DATE = new Date(2026, 8, 14, 9, 0, 0).getTime(); 
             const END_DATE = new Date(2026, 8, 14, 23, 59, 0).getTime(); 
 
-            // Put mock/random data here for Stage 2 (will be blurred).
-            // Put final actual winners here for Stage 3 (will be revealed).
             const WINNING_DATA = {
                 grandPrize: [
                     { app: "StudyBuddy AI", team: "Alice, Bob, Charlie" },
-                    { app: "CampusNav", team: "Dave, Eve" }
+                    { app: "CampusNav", team: "Dave, Eve" },
+                    { app: "FoodFinder", team: "Frank, Grace" },
+                    { app: "FitTrack Pro", team: "Hank, Ivy" },
+                    { app: "EventHype", team: "Jack, Karl, Liam" }
                 ],
                 slideDeck: [
                     { app: "EcoSort", team: "Liam, Mia" },
-                    { app: "RoomMate Radar", team: "Noah, Olivia" }
+                    { app: "RoomMate Radar", team: "Noah, Olivia" },
+                    { app: "ArtSpace", team: "Paul, Quinn" },
+                    { app: "QuickTutor", team: "Rose, Sam" },
+                    { app: "VibeCheck", team: "Tom, Uma, Vic" }
                 ],
-                otherSubmissions: ["SnoozeAlert", "TutorMatch", "LaundryPing"]
+                otherSubmissions: ["SnoozeAlert", "TutorMatch", "LaundryPing", "CodeDash", "ParkIt", "GrocerEase"]
             };
 
             const cdContainer = document.getElementById('countdown-container');
@@ -608,12 +602,12 @@
                     heroSubtitle.style.display = 'none';
 
                     if (HACKATHON_STATE === 2) {
-                        heroContainer.innerHTML = `<div class="inline-block bg-shipOrange/20 border border-shipOrange text-shipOrange px-6 py-3 rounded-lg font-bold text-base w-fit animate-pulse shadow-flat-sm">Judging in Progress...</div>`;
+                        heroContainer.innerHTML = `<div class="inline-block bg-shipOrange/20 border-2 border-shipOrange text-shipOrange px-6 py-3 rounded-lg font-bold text-base w-fit shadow-[0_0_15px_rgba(255,129,0,0.2)]">Judging in Progress...</div>`;
                         document.getElementById('archive-title').innerText = "Judging in Progress";
                         document.getElementById('bubbles-title').innerText = "Submissions Closed";
                         document.getElementById('bubbles-subtitle').innerText = "The judges are currently reviewing all projects.";
                     } else {
-                        heroContainer.innerHTML = `<div class="inline-block bg-[#1D162C] border border-shipBorder text-shipGray px-6 py-3 rounded-lg font-bold text-base cursor-not-allowed w-fit shadow-flat-sm">Event Concluded</div>`;
+                        heroContainer.innerHTML = `<div class="inline-block bg-[#1D162C] border-2 border-[#5F4C66] text-shipGray px-6 py-3 rounded-lg font-bold text-base cursor-not-allowed w-fit shadow-flat-sm">Event Concluded</div>`;
                         document.getElementById('archive-title').innerText = "2026 Results";
                     }
                     
@@ -649,7 +643,6 @@
                 timerInterval = setInterval(update, 1000);
             }
 
-            // --- DEV TOOLS (Local Testing) ---
             const hostname = window.location.hostname;
             if (hostname !== 'txstshipaton.com' && hostname !== 'www.txstshipaton.com') {
                 const devControls = document.getElementById('dev-controls');
@@ -661,7 +654,6 @@
                 HACKATHON_STATE = state;
                 clearInterval(timerInterval);
                 
-                // Reset UI before applying new state
                 cdContainer.style.display = '';
                 navBtn.style.display = '';
                 heroSubtitle.style.display = '';
@@ -669,7 +661,6 @@
                 document.getElementById('active-event-section').classList.remove('hidden');
                 document.getElementById('post-event-section').classList.add('hidden');
                 
-                // Reset nav button back to registration mode just in case
                 navBtn.href = "https://luma.com/w7bixtts";
                 navBtn.innerHTML = `Register <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`;
                 
@@ -686,7 +677,7 @@
                         <div class="relative">
                             <div class="space-y-3 ${isGrading ? 'blur-[6px] opacity-40 select-none pointer-events-none' : ''}">
                                 ${data.map((item, idx) => `
-                                    <div class="flex items-center gap-4 p-3 rounded-lg ${idx === 0 ? 'bg-shipOrange/10 border border-shipOrange/40' : 'bg-shipBg border border-shipBorder/50'}">
+                                    <div class="flex items-center gap-4 p-3 rounded-lg ${idx === 0 ? 'bg-shipOrange/10 border-2 border-shipOrange/40' : 'bg-shipBg border-2 border-[#5F4C66]/50'}">
                                         <div class="font-black text-xl w-8 text-center ${idx === 0 ? 'text-yellow-500' : 'text-shipGray'}">
                                             ${idx === 0 ? '👑' : idx + 1}
                                         </div>
@@ -700,7 +691,7 @@
                             
                             ${isGrading ? `
                             <div class="absolute inset-0 flex items-center justify-center z-10">
-                                <div class="bg-shipCard/90 border border-shipOrange text-shipOrange px-6 py-3 rounded-full font-bold shadow-[0_0_30px_rgba(255,129,0,0.3)] flex items-center gap-2 animate-pulse">
+                                <div class="bg-shipCard/90 border-2 border-shipOrange text-shipOrange px-6 py-3 rounded-full font-bold shadow-[0_0_30px_rgba(255,129,0,0.3)] flex items-center gap-2">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                                     Results Pending
                                 </div>
@@ -716,7 +707,7 @@
                 const bubbleHtml = WINNING_DATA.otherSubmissions.map((text, i) => {
                     const delay = (i % 3) * 1.5;
                     const duration = 5 + (i % 3);
-                    return `<div class="bg-shipCard border border-shipBorder px-4 py-2 rounded-full text-sm text-shipGray shadow-flat-sm cursor-default" style="animation: float ${duration}s ease-in-out infinite ${delay}s">${text}</div>`;
+                    return `<div class="bg-shipCard border-2 border-[#5F4C66] px-4 py-2 rounded-full text-sm text-shipGray shadow-flat-sm cursor-default" style="animation: float ${duration}s ease-in-out infinite ${delay}s">${text}</div>`;
                 }).join('');
                 
                 const bubblesContainer = document.getElementById('bubbles-container');
