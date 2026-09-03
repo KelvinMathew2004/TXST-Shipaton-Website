@@ -463,6 +463,17 @@
         </div>
     </div>
 
+    <!-- Local Dev UI Tool -->
+    <div id="dev-controls" class="fixed bottom-4 left-4 z-[100] hidden bg-black/90 backdrop-blur-md border border-shipBorder p-4 rounded-xl shadow-flat-lg flex-col gap-2">
+        <span class="text-[10px] text-shipGray font-mono uppercase tracking-wider">Local Dev Tools</span>
+        <div class="flex gap-2">
+            <button onclick="setDevState(0)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors">Stage 0</button>
+            <button onclick="setDevState(1)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors">Stage 1</button>
+            <button onclick="setDevState(2)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors">Stage 2</button>
+            <button onclick="setDevState(3)" class="px-3 py-1.5 bg-shipCard hover:bg-shipOrange hover:text-black text-shipWhite text-xs font-bold rounded transition-colors">Stage 3</button>
+        </div>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             
@@ -473,14 +484,14 @@
             // 2 = GRADING STAGE (Submissions closed, results pending)
             // 3 = POST HACKATHON (Results revealed)
             // ==========================================
-            const HACKATHON_STATE = 0; 
+            let HACKATHON_STATE = 0; 
 
             // ==========================================
             // PROMPT CONTENT (FILL THESE IN LATER)
             // ==========================================
             const HACKATHON_CONTENT = {
                 preRequisites: "Ensure you have the necessary IDEs installed (e.g., Xcode for iOS or Android Studio) before the event begins. You will also need an <a href='https://adobesparkpost-web.app.link/e/cXxlzPSXV4b' target='_blank' class='text-shipOrange hover:underline'>Adobe Express account</a> for your presentation. Don't forget to bring your laptop fully charged (power outlets may be limited)!",
-                promptDescription: "", 
+                promptDescription: "Nice try reading the source code! 🕵️‍♂️ The real prompt is locked away securely until the event starts. For now, your challenge is to build an app that translates cat meows into Shakespearean sonnets.", 
                 categories: [], 
                 submissionRules: "", 
                 slideTemplateLink: "", 
@@ -510,8 +521,8 @@
             const promptContent = document.getElementById('prompt-content-dynamic');
             const fullPromptDetails = document.getElementById('full-prompt-details');
             const navBtn = document.getElementById('nav-action-btn');
-            const heroBtn = document.getElementById('hero-action-btn');
             const heroSubtitle = document.getElementById('hero-subtitle');
+            const heroContainer = document.getElementById('hero-action-container');
             
             function buildPromptHTML(state) {
                 if (state === 0) {
@@ -565,6 +576,12 @@
 
             function initializeState() {
                 if (HACKATHON_STATE === 0) {
+                    heroContainer.innerHTML = `
+                        <a id="hero-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn btn-with-glow bg-shipOrange text-black px-6 py-3 rounded-lg font-bold text-base transition-all w-fit flex justify-center items-center gap-2">
+                            Register for 2026 
+                            <svg class="w-5 h-5 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </a>
+                    `;
                     promptContent.innerHTML = buildPromptHTML(0);
                     startTimer(START_DATE, "HACKATHON STARTS 14 SEP 2026 @ 9:00AM CDT");
                 } 
@@ -574,8 +591,11 @@
                     navBtn.href = HACKATHON_CONTENT.googleFormLink;
                     navBtn.innerHTML = `Submit Project <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`;
                     
-                    heroBtn.href = HACKATHON_CONTENT.googleFormLink;
-                    heroBtn.innerHTML = `Submit Your Project <svg class="w-5 h-5 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`;
+                    heroContainer.innerHTML = `
+                        <a id="hero-action-btn" href="${HACKATHON_CONTENT.googleFormLink}" target="_blank" class="group-btn btn-with-glow bg-shipOrange text-black px-6 py-3 rounded-lg font-bold text-base transition-all w-fit flex justify-center items-center gap-2">
+                            Submit Your Project <svg class="w-5 h-5 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </a>
+                    `;
                     heroSubtitle.innerText = "*Submissions close strictly at 11:59 PM CDT.";
                     
                     startTimer(END_DATE, "SUBMISSIONS CLOSE 14 SEP 2026 @ 11:59PM CDT");
@@ -588,12 +608,12 @@
                     heroSubtitle.style.display = 'none';
 
                     if (HACKATHON_STATE === 2) {
-                        heroBtn.outerHTML = `<div class="inline-block bg-shipOrange/20 border border-shipOrange text-shipOrange px-6 py-3 rounded-lg font-bold text-base w-fit animate-pulse shadow-flat-sm">Judging in Progress...</div>`;
+                        heroContainer.innerHTML = `<div class="inline-block bg-shipOrange/20 border border-shipOrange text-shipOrange px-6 py-3 rounded-lg font-bold text-base w-fit animate-pulse shadow-flat-sm">Judging in Progress...</div>`;
                         document.getElementById('archive-title').innerText = "Judging in Progress";
                         document.getElementById('bubbles-title').innerText = "Submissions Closed";
                         document.getElementById('bubbles-subtitle').innerText = "The judges are currently reviewing all projects.";
                     } else {
-                        heroBtn.outerHTML = `<div class="inline-block bg-[#1D162C] border border-shipBorder text-shipGray px-6 py-3 rounded-lg font-bold text-base cursor-not-allowed w-fit shadow-flat-sm">Event Concluded</div>`;
+                        heroContainer.innerHTML = `<div class="inline-block bg-[#1D162C] border border-shipBorder text-shipGray px-6 py-3 rounded-lg font-bold text-base cursor-not-allowed w-fit shadow-flat-sm">Event Concluded</div>`;
                         document.getElementById('archive-title').innerText = "2026 Results";
                     }
                     
@@ -628,6 +648,33 @@
                 update();
                 timerInterval = setInterval(update, 1000);
             }
+
+            // --- DEV TOOLS (Local Testing) ---
+            const hostname = window.location.hostname;
+            if (hostname !== 'txstshipaton.com' && hostname !== 'www.txstshipaton.com') {
+                const devControls = document.getElementById('dev-controls');
+                devControls.classList.remove('hidden');
+                devControls.classList.add('flex');
+            }
+
+            window.setDevState = function(state) {
+                HACKATHON_STATE = state;
+                clearInterval(timerInterval);
+                
+                // Reset UI before applying new state
+                cdContainer.style.display = '';
+                navBtn.style.display = '';
+                heroSubtitle.style.display = '';
+                heroSubtitle.innerText = "*Registration is mandatory due to venue capacity limits.";
+                document.getElementById('active-event-section').classList.remove('hidden');
+                document.getElementById('post-event-section').classList.add('hidden');
+                
+                // Reset nav button back to registration mode just in case
+                navBtn.href = "https://luma.com/w7bixtts";
+                navBtn.innerHTML = `Register <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`;
+                
+                initializeState();
+            };
 
             function renderLeaderboards(state) {
                 const isGrading = state === 2;
