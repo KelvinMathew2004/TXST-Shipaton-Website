@@ -4,63 +4,79 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TXST Shipathon 2026</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🚀</text></svg>">
+    <link rel="icon" href="./tinyCat.svg" type="image/svg+xml">
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    fontFamily: { 
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'] 
+                    },
                     colors: {
-                        shipBg: '#130B1C',      
-                        shipCard: '#1D1328',    
-                        shipBorder: '#3F3254',
-                        shipOrange: '#E86724',
-                        shipOrangeHover: '#C7561B'
+                        shipBg: '#1D162C',       
+                        shipCard: '#2A203F',     
+                        shipBorder: '#453561',   
+                        shipOrange: '#FF8100',   
+                        shipOrangeHover: '#E57400',
+                        shipWhite: '#FFF7EC',
+                        shipGray: '#DDCBBC',
+                        shipLightOrange: '#FFBA55'
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'float-delayed': 'float 7s ease-in-out infinite 2s',
                         'float-fast': 'float 5s ease-in-out infinite 1s',
                         'float-slow': 'float 8s ease-in-out infinite 3s',
+                        'spin-liquid': 'spin-liquid 4s linear infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
+                            '50%': { transform: 'translateY(-15px)' },
+                        },
+                        'spin-liquid': {
+                            '0%': { transform: 'rotate(0deg)' },
+                            '100%': { transform: 'rotate(360deg)' },
                         }
+                    },
+                    boxShadow: {
+                        'flat-lg': '8px 8px 0px 0px rgba(10, 5, 15, 0.4)',
+                        'flat-sm': '4px 4px 0px 0px rgba(10, 5, 15, 0.4)',
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: #130B1C; color: #ffffff; overflow-x: hidden; }
+        body { background-color: #1D162C; color: #FFF7EC; overflow-x: hidden; }
 
         .bg-grid {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: radial-gradient(circle at center, #7a6599 1px, transparent 1px);
-            background-size: 90px 90px; opacity: 0.45; z-index: -1; pointer-events: none;
+            background-image: radial-gradient(circle at center, #594a86 1px, transparent 1px);
+            background-size: 90px 90px; opacity: 0.2; z-index: -1; pointer-events: none;
         }
 
         .glow-bg {
             position: absolute; top: 0; right: 0; transform: translate(20%, -20%);
-            width: 800px; height: 800px; background: radial-gradient(circle, rgba(232,103,36,0.05) 0%, rgba(19,11,28,0) 60%);
+            width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,129,0,0.06) 0%, rgba(14,9,22,0) 60%);
             z-index: -1; pointer-events: none;
         }
 
         .ship-card {
-            background-color: #1D1328; border: 1px solid #3F3254; border-radius: 12px;
+            background-color: #2A203F; 
+            border: 1px solid #453561; 
+            border-radius: 12px;
             transition: all 0.3s ease;
         }
 
         .cd-box {
-            background-color: #170F22;
-            border: 1px solid #2A1C3D;
-            border-top: 1px solid #3F3254; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background-color: #2E233C;
+            border: 2px solid #52417A; 
+            border-radius: 8px;
         }
 
         .sponsor-card { position: relative; overflow: hidden; }
@@ -69,31 +85,53 @@
             -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
             mask-size: 80%; mask-repeat: no-repeat; mask-position: center;
         }
-        .sponsor-base { background-color: #6b7280; z-index: 1; }
+        .sponsor-base { background-color: #4b5563; z-index: 1; } 
         .sponsor-color {
-            background-color: var(--brand-color); z-index: 2;
-            clip-path: circle(var(--radius, 0%) at var(--x, 50%) var(--y, 50%));
-            transition: clip-path 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+            background-color: transparent; z-index: 2;
         }
-        .sponsor-card:hover .sponsor-color { --radius: 150%; }
+        
+        /* Smooth Liquid Blob Fill */
+        .liquid-drop {
+            position: absolute;
+            width: 200%; height: 200%;
+            top: 110%; left: -50%;
+            background-color: var(--brand-color);
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+            transition: top 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+            animation: spin-liquid 4s linear infinite;
+        }
+        .sponsor-card:hover .liquid-drop {
+            top: -50%;
+        }
 
         .host-img-wrapper {
             border: 2px solid transparent; 
             border-radius: 50%;
             transition: all 0.2s ease-in-out;
-            box-shadow: 0px 0px 0px 0px transparent;
         }
         .group:hover .host-img-wrapper {
-            border-color: #E86724;
-            box-shadow: 6px 6px 0px 0px rgba(115, 41, 10, 0.8);
+            border-color: #FF8100;
+            box-shadow: 6px 6px 0px 0px rgba(255, 129, 0, 0.5); 
             transform: translate(-3px, -3px);
         }
 
         .btn-arrow {
             transition: transform 0.2s ease;
         }
+        
+        .group-btn:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0px 0px rgba(10, 5, 15, 0.4);
+        }
         .group-btn:hover .btn-arrow {
             transform: translate(2px, -2px);
+        }
+
+        .btn-with-glow {
+            box-shadow: 4px 4px 0px 0px rgba(10, 5, 15, 0.4), 0px 0px 100px 10px rgba(255, 129, 0, 0.15);
+        }
+        .group-btn.btn-with-glow:hover {
+            box-shadow: 6px 6px 0px 0px rgba(10, 5, 15, 0.4), 0px 0px 120px 15px rgba(255, 129, 0, 0.25);
         }
 
         .category-grid {
@@ -103,26 +141,28 @@
         }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-shipOrange selection:text-white pb-20">
+<body class="font-sans antialiased selection:bg-shipOrange selection:text-shipWhite pb-20 text-shipWhite">
 
     <div class="bg-grid"></div>
     <div class="glow-bg"></div>
 
-    <nav class="w-full fixed top-0 left-0 z-50 bg-shipBg/90 backdrop-blur-md border-b border-shipBorder">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 bg-shipCard rounded-lg flex items-center justify-center border border-shipBorder overflow-hidden">
-                    <img src="https://placehold.co/100x100/1D1328/E86724?text=Logo" alt="Logo" class="w-full h-full object-cover">
-                </div>
-                <span class="font-bold text-xl tracking-tight">TXST Shipathon <span class="text-xs align-top text-gray-400 bg-shipCard px-1.5 py-0.5 rounded border border-shipBorder ml-1">26</span></span>
+    <nav class="w-full fixed top-0 left-0 z-50 bg-[#1D162C]/90 backdrop-blur-md border-b border-shipBorder">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 h-24 flex items-center justify-between">
+            <div class="flex items-center gap-0.5">
+                <img src="./tinyCat.svg" alt="Logo" class="w-32 h-32 object-contain">
+                
+                <span class="font-bold text-2xl tracking-tight flex items-start text-shipWhite">
+                    TXST Shipathon
+                    <img src="./tiny26.png" alt="26" class="h-[18px] object-contain ml-1 mt-1">
+                </span>
             </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
-                <a href="#about" class="hover:text-white transition-colors">About</a>
-                <a href="#details" class="hover:text-white transition-colors">Details</a>
-                <a href="#hosts" class="hover:text-white transition-colors">Judges</a>
+            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-shipGray">
+                <a href="#about" class="hover:text-shipWhite transition-colors">About</a>
+                <a href="#details" class="hover:text-shipWhite transition-colors">Details</a>
+                <a href="#hosts" class="hover:text-shipWhite transition-colors">Judges</a>
             </div>
             <div>
-                <a id="nav-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn bg-shipOrange hover:bg-shipOrangeHover text-white px-5 py-2.5 rounded-md font-bold text-sm transition-colors flex items-center gap-2">
+                <a id="nav-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn bg-shipOrange hover:bg-shipOrangeHover text-black px-4 py-2 rounded font-bold text-sm transition-all shadow-flat-sm flex items-center gap-2">
                     Register 
                     <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                 </a>
@@ -130,58 +170,67 @@
         </div>
     </nav>
 
-    <main id="about" class="pt-32 pb-16 relative">
-        <img src="https://placehold.co/150x150/transparent/E86724?text=Small+Cat" class="absolute right-10 top-32 opacity-80 animate-float pointer-events-none w-24 md:w-32 hidden lg:block" alt="Floating Cat">
+    <main id="about" class="pt-36 pb-16 relative">
+        <img src="./mediumCat.svg" class="absolute right-0 lg:right-6 top-32 opacity-90 animate-float pointer-events-none w-48 md:w-64 hidden lg:block" alt="Floating Cat">
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
             <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-10">
-                <div class="flex-1 text-left w-full">
-                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6">
-                        The world's biggest mobile hackathon for people who actually <span class="text-shipOrange">ship.</span>
+                <div class="flex-1 text-left w-full max-w-[1100px]"> 
+                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6 text-shipWhite">
+                        A local edition of the world's <span class="text-shipOrange">biggest</span> mobile hackathon.
                     </h1>
-                    <p class="text-lg text-gray-400 mb-10 max-w-2xl leading-relaxed">
-                        Shipathon 2026 is RevenueCat's global hackathon. Here at Texas State, we're building real apps, competing for big prizes, and showing the world what we shipped. Open to all majors!
+                    <p class="text-lg text-shipGray mb-10 max-w-3xl leading-relaxed">
+                        Shipathon 2026 is RevenueCat's global hackathon. Here at Texas State, we're hosting a local campus event to build real apps, compete for local prizes, and ship. Open to all majors! Build your prototype here, and you can level it up later to submit to the global hackathon by adding their extra requirements.
                     </p>
                     
-                    <div id="countdown-container" class="mb-10 w-full overflow-x-auto pb-4">
-                        <p id="countdown-label" class="text-[11px] font-bold tracking-widest text-gray-400 mb-3 uppercase flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-shipOrange animate-pulse shadow-[0_0_8px_#E86724]"></span> 
+                    <div id="countdown-container" class="mb-10 w-full overflow-x-auto pb-6">
+                        <p id="countdown-label" class="font-mono text-[13px] font-bold tracking-widest text-shipLightOrange mb-3 uppercase flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-shipOrange shadow-[0_0_8px_#FF8100]"></span> 
                             <span id="cd-label-text">HACKATHON STARTS 14 SEP 2026 @ 9:00AM CDT</span>
                         </p>
-                        <div class="flex items-center gap-2 sm:gap-4">
-                            <div class="cd-box rounded-xl px-4 sm:px-6 py-5 text-center min-w-[90px] sm:min-w-[120px]">
-                                <span id="cd-days" class="text-5xl sm:text-6xl font-black block mb-1 tracking-tight">00</span>
-                                <span class="text-[10px] sm:text-xs tracking-widest text-gray-500 font-bold uppercase">Days</span>
+                        <div class="flex items-center gap-3 sm:gap-4 h-[120px] sm:h-[150px]">
+                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[100px] h-[110px] sm:w-[130px] sm:h-[140px]">
+                                <span id="cd-days" class="text-5xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
+                                <span class="text-[10px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-2 sm:mt-3">Days</span>
                             </div>
-                            <div class="flex flex-col gap-2 pb-6"><span class="w-1.5 h-1.5 rounded-full bg-gray-600"></span><span class="w-1.5 h-1.5 rounded-full bg-gray-600"></span></div>
-                            
-                            <div class="cd-box rounded-xl px-4 sm:px-6 py-5 text-center min-w-[90px] sm:min-w-[120px]">
-                                <span id="cd-hours" class="text-5xl sm:text-6xl font-black block mb-1 tracking-tight">00</span>
-                                <span class="text-[10px] sm:text-xs tracking-widest text-gray-500 font-bold uppercase">Hours</span>
+                            <div class="flex flex-col gap-2 justify-center pb-4">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
                             </div>
-                            <div class="flex flex-col gap-2 pb-6"><span class="w-1.5 h-1.5 rounded-full bg-gray-600"></span><span class="w-1.5 h-1.5 rounded-full bg-gray-600"></span></div>
                             
-                            <div class="cd-box rounded-xl px-4 sm:px-6 py-5 text-center min-w-[90px] sm:min-w-[120px]">
-                                <span id="cd-mins" class="text-5xl sm:text-6xl font-black block mb-1 tracking-tight">00</span>
-                                <span class="text-[10px] sm:text-xs tracking-widest text-gray-500 font-bold uppercase">Minutes</span>
+                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[100px] h-[110px] sm:w-[130px] sm:h-[140px]">
+                                <span id="cd-hours" class="text-5xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
+                                <span class="text-[10px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-2 sm:mt-3">Hours</span>
                             </div>
-                            <div class="flex flex-col gap-2 pb-6"><span class="w-1.5 h-1.5 rounded-full bg-gray-600"></span><span class="w-1.5 h-1.5 rounded-full bg-gray-600"></span></div>
+                            <div class="flex flex-col gap-2 justify-center pb-4">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
+                            </div>
                             
-                            <div class="cd-box rounded-xl px-4 sm:px-6 py-5 text-center min-w-[90px] sm:min-w-[120px]">
-                                <span id="cd-secs" class="text-5xl sm:text-6xl font-black block mb-1 tracking-tight text-shipOrange">00</span>
-                                <span class="text-[10px] sm:text-xs tracking-widest text-gray-500 font-bold uppercase">Seconds</span>
+                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[100px] h-[110px] sm:w-[130px] sm:h-[140px]">
+                                <span id="cd-mins" class="text-5xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
+                                <span class="text-[10px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-2 sm:mt-3">Minutes</span>
+                            </div>
+                            <div class="flex flex-col gap-2 justify-center pb-4">
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
+                                <span class="w-1.5 h-1.5 rounded-full bg-[#52417A]"></span>
+                            </div>
+                            
+                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[100px] h-[110px] sm:w-[130px] sm:h-[140px]">
+                                <span id="cd-secs" class="text-5xl sm:text-7xl font-black block tracking-tight text-shipOrange tabular-nums leading-none">00</span>
+                                <span class="text-[10px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-2 sm:mt-3">Seconds</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="flex flex-col gap-2 mt-2">
                         <div id="hero-action-container" class="flex flex-col sm:flex-row gap-4">
-                            <a id="hero-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn bg-shipOrange hover:bg-shipOrangeHover text-white px-8 py-4 rounded-lg font-bold text-lg transition-colors flex justify-center items-center gap-2 shadow-[0_0_20px_rgba(232,103,36,0.5)] w-fit">
+                            <a id="hero-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn btn-with-glow bg-shipOrange text-black px-6 py-3 rounded-lg font-bold text-base transition-all w-fit flex justify-center items-center gap-2">
                                 Register for 2026 
                                 <svg class="w-5 h-5 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                             </a>
                         </div>
-                        <p class="text-sm text-gray-400 font-medium">*Registration is mandatory due to venue capacity limits.</p>
+                        <p id="hero-subtitle" class="text-sm text-shipGray font-medium">*Registration is mandatory due to venue capacity limits.</p>
                     </div>
                 </div>
             </div>
@@ -189,170 +238,180 @@
     </main>
 
     <section id="details" class="py-20 border-t border-shipBorder/30 relative">
-        <img src="https://placehold.co/200x200/transparent/E86724?text=Small+Cat" class="absolute left-10 bottom-10 opacity-40 animate-float-delayed pointer-events-none w-32 md:w-48" alt="Floating Cat">
-        
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
             <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase">Event Details</h2>
-            <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-12">Everything you need to know.</h3>
+            <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-shipWhite">Everything you need to know.</h3>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="ship-card p-8 hover:-translate-y-1 hover:border-[#5B4A78]">
+                <!-- Location / Time Cards -->
+                <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
                     <div class="w-12 h-12 bg-shipBg border border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">When to be there</h4>
-                    <p class="text-gray-400 mb-2 text-sm">Monday, September 14th</p>
-                    <p class="text-white font-medium text-lg">9:00 AM — 12:00 AM</p>
-                    <p class="text-xs text-gray-500 mt-4">*Flexible schedule: you can leave early, but please arrive on time if you need to form a team.</p>
+                    <h4 class="text-xl font-bold mb-3 text-shipWhite">When to be there</h4>
+                    <p class="text-shipGray mb-2 text-sm">Monday, September 14th</p>
+                    <p class="text-shipWhite font-medium text-lg">9:00 AM — 10:00 PM</p>
+                    <p class="text-xs text-shipGray mt-4">*Flexible schedule: you can leave early, but please arrive on time if you need to form a team. Submissions are due by 11:59 PM.</p>
                 </div>
 
-                <div class="ship-card p-8 hover:-translate-y-1 hover:border-[#5B4A78]">
+                <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
                     <div class="w-12 h-12 bg-shipBg border border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">Where we're shipping</h4>
-                    <p class="text-gray-400 mb-2 text-sm">Texas State University</p>
-                    <p class="text-white font-medium text-lg">LBJ Ballroom</p>
+                    <h4 class="text-xl font-bold mb-3 text-shipWhite">Where we're shipping</h4>
+                    <p class="text-shipGray mb-2 text-sm">Texas State University</p>
+                    <p class="text-shipWhite font-medium text-lg">LBJ Ballroom</p>
                     <p class="text-xs text-shipOrange mt-4">🍕 Snacks and drinks will be provided!</p>
                 </div>
 
-                <div class="ship-card p-8 border-shipOrange/30 relative overflow-hidden bg-shipOrange/5 md:col-span-1 lg:col-span-1 flex flex-col" id="prompt-container">
+                <!-- Dynamic Challenge/Prompt Card -->
+                <div class="ship-card p-8 border-shipOrange/30 relative overflow-hidden bg-shipOrange/5 md:col-span-1 lg:col-span-1 flex flex-col hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg" id="prompt-container">
                     <div class="w-12 h-12 bg-shipBg border border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                     </div>
-                    <h4 class="text-xl font-bold mb-3">The Challenge</h4>
+                    <h4 class="text-xl font-bold mb-3 text-shipWhite">The Challenge</h4>
                     <div id="prompt-content-dynamic" class="flex-1 flex flex-col justify-between">
-                        </div>
+                        <!-- Populated by JS -->
+                    </div>
                 </div>
             </div>
             
-            <div id="full-prompt-details" class="mt-6 ship-card p-8 border-shipOrange/30 hidden">
-                </div>
+            <div id="full-prompt-details" class="mt-8 ship-card p-8 border-shipOrange/30 hidden shadow-flat-lg">
+                <!-- Populated by JS -->
+            </div>
         </div>
     </section>
 
+    <!-- SECTION: Pre & During Hackathon -->
     <section id="active-event-section" class="py-20 relative">
-        <img src="https://placehold.co/250x250/transparent/E86724?text=Medium+Cat" class="absolute right-10 top-0 opacity-60 animate-float-delayed pointer-events-none w-32 md:w-56" alt="Floating Cat">
+        <img src="./smallCat.webp" class="absolute left-10 top-0 opacity-60 animate-float-delayed pointer-events-none w-24 md:w-32" alt="Floating Cat">
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
             <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center">Prize Categories</h2>
-            <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-center">Two big reasons to ship.</h3>
+            <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-center text-shipWhite">Two big reasons to ship.</h3>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-24">
-                <div class="ship-card p-0 flex flex-col sm:flex-row items-center overflow-hidden">
-                    <div class="w-full sm:w-1/3 bg-[#170F22] p-6 flex justify-center items-center h-full border-b sm:border-b-0 sm:border-r border-shipBorder">
-                        <img src="https://placehold.co/150x150/170F22/E86724?text=Trophy" alt="Grand Prize" class="w-24 h-24 object-contain">
-                    </div>
-                    <div class="w-full sm:w-2/3 p-8">
-                        <h4 class="text-2xl font-bold mb-2">Grand Prize</h4>
-                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">Awarded to the overall best mobile application built during the hackathon. The exact prize is hidden, but it's our biggest loot yet.</p>
-                        <span class="text-sm font-semibold text-shipOrange flex items-center gap-1">Prize Hidden <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
+                
+                <div class="ship-card p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-flat-lg">
+                    <img src="./grandPrize.png" alt="Grand Prize" class="w-20 h-20 object-contain shrink-0">
+                    <div class="flex-1 text-center sm:text-left">
+                        <h4 class="text-2xl font-bold mb-2 text-shipWhite">Grand Prize</h4>
+                        <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded to the overall best mobile application built during the hackathon. The exact prize is hidden, but it's our biggest loot yet.</p>
+                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Hidden <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                     </div>
                 </div>
 
-                <div class="ship-card p-0 flex flex-col sm:flex-row items-center overflow-hidden">
-                    <div class="w-full sm:w-1/3 bg-[#170F22] p-6 flex justify-center items-center h-full border-b sm:border-b-0 sm:border-r border-shipBorder">
-                        <img src="https://placehold.co/150x150/170F22/E86724?text=Slides" alt="Slide Deck Prize" class="w-24 h-24 object-contain">
-                    </div>
-                    <div class="w-full sm:w-2/3 p-8">
-                        <h4 class="text-2xl font-bold mb-2">Slide Deck Prize</h4>
-                        <p class="text-gray-400 mb-4 text-sm leading-relaxed">Awarded for the most visually compelling presentation and prototype. Adobe Express and AI tools strongly encouraged.</p>
-                        <span class="text-sm font-semibold text-shipOrange flex items-center gap-1">Prize Hidden <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
+                <div class="ship-card p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-flat-lg">
+                    <img src="./slidePrize.png" alt="Slide Deck Prize" class="w-20 h-20 object-contain shrink-0">
+                    <div class="flex-1 text-center sm:text-left">
+                        <h4 class="text-2xl font-bold mb-2 text-shipWhite">Slide Deck Prize</h4>
+                        <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded for the most visually compelling presentation and prototype. Adobe Express and AI tools strongly encouraged.</p>
+                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Hidden <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                     </div>
                 </div>
             </div>
 
-            <div class="max-w-3xl mx-auto">
+            <div class="max-w-[1000px] mx-auto relative">
+                <img src="./mediumCat2.svg" class="absolute -right-16 -top-16 opacity-70 animate-float-fast pointer-events-none w-24 md:w-32 hidden md:block" alt="Floating Cat">
+                
                 <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center">Event Sponsors</h2>
-                <h3 class="text-3xl font-bold tracking-tight mb-8 text-center">Powered by the best.</h3>
+                <h3 class="text-3xl font-bold tracking-tight mb-8 text-center text-shipWhite">Powered by the best.</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                    <div class="ship-card sponsor-card h-32 flex items-center justify-center p-8 bg-[#170F22]">
-                        <div class="sponsor-base" style="-webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path d=%22M14.49 19.34l-2.09-5.18h-4.8l-2.09 5.18H1L12 2l11 17.34h-4.51zm-4.49-11.7l-1.57 3.9h3.14l-1.57-3.9z%22/></svg>');"></div>
-                        <div class="sponsor-color" style="--brand-color: #FF0000; -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path d=%22M14.49 19.34l-2.09-5.18h-4.8l-2.09 5.18H1L12 2l11 17.34h-4.51zm-4.49-11.7l-1.57 3.9h3.14l-1.57-3.9z%22/></svg>');"></div>
+                    <div class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
+                        <div class="sponsor-base" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png'); -webkit-mask-size: 50%; mask-size: 50%;"></div>
+                        <div class="sponsor-color" style="--brand-color: #FF0000; -webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png'); -webkit-mask-size: 50%; mask-size: 50%;">
+                            <div class="liquid-drop"></div>
+                        </div>
                     </div>
 
-                    <div class="ship-card sponsor-card h-32 flex items-center justify-center p-8 bg-[#170F22]">
-                        <div class="sponsor-base" style="-webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path d=%22M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z%22/></svg>');"></div>
-                        <div class="sponsor-color" style="--brand-color: #F56038; -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22><path d=%22M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z%22/></svg>');"></div>
+                    <div class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
+                        <div class="sponsor-base" style="-webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');"></div>
+                        <div class="sponsor-color" style="--brand-color: #F1545B; -webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');">
+                            <div class="liquid-drop"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- SECTION: Post Hackathon (Results / Grading) -->
     <section id="post-event-section" class="py-20 hidden relative overflow-hidden">
-        <img src="https://placehold.co/800x800/transparent/E86724?text=Big+Cat" class="absolute -right-10 top-[40%] -translate-y-1/2 opacity-30 animate-float-slow pointer-events-none w-[50vw] max-w-[600px]" alt="Giant Floating Cat">
+        <img src="./largeCat2.svg" class="absolute -right-10 top-[40%] -translate-y-1/2 opacity-20 animate-float-slow pointer-events-none w-[50vw] max-w-[600px]" alt="Giant Floating Cat">
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
             <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center">Hackathon Archive</h2>
-            <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-16 text-center">2026 Results</h3>
+            <h3 id="archive-title" class="text-4xl md:text-5xl font-bold tracking-tight mb-16 text-center text-shipWhite">2026 Results</h3>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-24" id="leaderboards-container"></div>
 
             <div class="text-center mb-8">
-                <h4 class="text-2xl font-bold mb-2">Everything Shipped</h4>
-                <p class="text-gray-400">Saluting every team that crossed the finish line.</p>
+                <h4 id="bubbles-title" class="text-2xl font-bold mb-2 text-shipWhite">Everything Shipped</h4>
+                <p id="bubbles-subtitle" class="text-shipGray">Saluting every team that crossed the finish line.</p>
             </div>
-            <div class="relative w-full min-h-[400px] flex flex-wrap justify-center content-center gap-4 p-8 border border-shipBorder/30 rounded-2xl bg-[#170F22]/80" id="bubbles-container"></div>
+            <div class="relative w-full min-h-[400px] flex flex-wrap justify-center content-center gap-4 p-8 border border-shipBorder/30 rounded-2xl bg-shipCard/80 shadow-flat-lg" id="bubbles-container"></div>
         </div>
     </section>
 
-    <section id="hosts" class="py-24 border-t border-shipBorder/50 bg-[#170F22]">
-        <div class="max-w-6xl mx-auto px-6 text-center">
-            <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-4">Meet the judges.</h3>
-            <p class="text-gray-400 max-w-2xl mx-auto mb-16">Fellow TXST builders who grew closer through hackathons. We're here to help you ship your best work.</p>
+    <!-- Hosts & Judges -->
+    <section id="hosts" class="py-24 border-t border-shipBorder/50 bg-[#1D162C]">
+        <div class="max-w-[1200px] mx-auto px-6 lg:px-8 text-center">
+            <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-shipWhite">Meet the judges.</h3>
+            <p class="text-shipGray max-w-2xl mx-auto mb-16">Fellow TXST builders who grew closer through hackathons. We're here to help you ship your best work.</p>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
-                <a href="https://linkedin.com/in/#" target="_blank" class="flex flex-col items-center group cursor-pointer block">
-                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipCard">
-                        <img src="https://placehold.co/300x300/1D1328/ffffff?text=MT" alt="Meidad Troper" class="w-full h-full rounded-full object-cover">
+                <a href="https://www.linkedin.com/in/meidad-troper-13383a28a/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
+                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
+                        <img src="./meidadHeadshot.png" alt="Meidad Troper" class="w-full h-full rounded-full object-cover">
                     </div>
                     <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Meidad Troper</h4>
-                    <p class="text-[13px] text-gray-400 mt-1">Host & Judge</p>
+                    <p class="text-[13px] text-shipGray mt-1">Image Quality Engineer • Apple</p>
                 </a>
 
-                <a href="https://linkedin.com/in/#" target="_blank" class="flex flex-col items-center group cursor-pointer block">
-                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipCard">
-                        <img src="https://placehold.co/300x300/1D1328/ffffff?text=PK" alt="Priyanka Karki" class="w-full h-full rounded-full object-cover">
+                <a href="https://www.linkedin.com/in/priyanka-karki/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
+                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
+                        <img src="./priyankaHeadshot.png" alt="Priyanka Karki" class="w-full h-full rounded-full object-cover">
                     </div>
                     <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Priyanka Karki</h4>
-                    <p class="text-[13px] text-gray-400 mt-1">Host & Judge</p>
+                    <p class="text-[13px] text-shipGray mt-1">Ex-SDE Intern (2x) • Amazon</p>
                 </a>
 
-                <a href="https://linkedin.com/in/#" target="_blank" class="flex flex-col items-center group cursor-pointer block">
-                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipCard">
-                        <img src="https://placehold.co/300x300/1D1328/ffffff?text=VS" alt="Vaidic Soni" class="w-full h-full rounded-full object-cover">
+                <a href="https://www.linkedin.com/in/vaidic-soni1004/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
+                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
+                        <img src="./vaidicHeadshot.png" alt="Vaidic Soni" class="w-full h-full rounded-full object-cover">
                     </div>
                     <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Vaidic Soni</h4>
-                    <p class="text-[13px] text-gray-400 mt-1">Host & Judge</p>
+                    <p class="text-[13px] text-shipGray mt-1">AI Intern • Launch Box</p>
                 </a>
 
-                <a href="https://linkedin.com/in/#" target="_blank" class="flex flex-col items-center group cursor-pointer block">
-                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipCard">
-                        <img src="https://placehold.co/300x300/1D1328/ffffff?text=KM" alt="Kelvin Mathew" class="w-full h-full rounded-full object-cover">
+                <a href="#" target="_blank" class="flex flex-col items-center group cursor-pointer block">
+                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
+                        <img src="./kelvinHeadshot.jpg" alt="Kelvin Mathew" class="w-full h-full rounded-full object-cover">
                     </div>
                     <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Kelvin Mathew</h4>
-                    <p class="text-[13px] text-gray-400 mt-1">Host & Judge</p>
+                    <p class="text-[13px] text-shipGray mt-1">Ex-SDE Intern • Amazon</p>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer class="py-10 border-t border-shipBorder/30 text-center text-gray-500 text-sm">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <footer class="py-10 border-t border-shipBorder/30 text-center text-shipGray text-sm">
+        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 TXST Shipathon. A local event part of the global Shipathon.</p>
-            <button onclick="document.getElementById('coc-modal').classList.remove('hidden')" class="hover:text-white transition-colors underline underline-offset-4">Code of Conduct</button>
+            <button onclick="document.getElementById('coc-modal').classList.remove('hidden')" class="hover:text-shipWhite transition-colors underline underline-offset-4">Code of Conduct</button>
         </div>
     </footer>
 
     <div id="coc-modal" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-        <div class="bg-shipCard border border-shipBorder rounded-xl max-w-2xl w-full p-8 relative">
-            <button onclick="document.getElementById('coc-modal').classList.add('hidden')" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+        <div class="bg-shipCard border border-shipBorder rounded-xl max-w-2xl w-full p-8 relative shadow-flat-lg">
+            <button onclick="document.getElementById('coc-modal').classList.add('hidden')" class="absolute top-4 right-4 text-shipGray hover:text-shipWhite">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
-            <h3 class="text-2xl font-bold mb-4">Code of Conduct</h3>
-            <div class="text-gray-300 text-sm space-y-4 max-h-[60vh] overflow-y-auto pr-2">
-                <p>TXST Shipathon is dedicated to providing a safe, inclusive, and harassment-free experience for everyone.</p>
+            <h3 class="text-2xl font-bold mb-4 text-shipWhite">Code of Conduct</h3>
+            <div class="text-shipGray text-sm space-y-4 max-h-[60vh] overflow-y-auto pr-2">
+                <p>TXST Shipathon is dedicated to providing a safe, inclusive, and welcoming experience for everyone, regardless of background or identity.</p>
+                <p>We do not tolerate harassment, discrimination, or disrespectful behavior in any form. All attendees, sponsors, partners, and volunteers are required to comply with this code of conduct throughout the entirety of the event.</p>
+                <p>If you experience or witness any unacceptable behavior, please immediately reach out to a judge or event organizer. Violations may result in immediate expulsion from the hackathon at the sole discretion of the organizers.</p>
             </div>
         </div>
     </div>
@@ -364,7 +423,8 @@
             // FEATURE FLAG & SETTINGS
             // 0 = PRE HACKATHON
             // 1 = DURING HACKATHON 
-            // 2 = POST HACKATHON 
+            // 2 = GRADING STAGE (Submissions closed, results pending)
+            // 3 = POST HACKATHON (Results revealed)
             // ==========================================
             const HACKATHON_STATE = 0; 
 
@@ -372,7 +432,7 @@
             // PROMPT CONTENT (FILL THESE IN LATER)
             // ==========================================
             const HACKATHON_CONTENT = {
-                preRequisites: "Ensure you have the necessary IDEs installed (e.g., Xcode for iOS or Android Studio) before the event begins. You will also need an <a href='https://adobesparkpost-web.app.link/e/cXxlzPSXV4b' target='_blank' class='text-shipOrange hover:underline'>Adobe Express account</a> for your presentation.",
+                preRequisites: "Ensure you have the necessary IDEs installed (e.g., Xcode for iOS or Android Studio) before the event begins. You will also need an <a href='https://adobesparkpost-web.app.link/e/cXxlzPSXV4b' target='_blank' class='text-shipOrange hover:underline'>Adobe Express account</a> for your presentation. Don't forget to bring your laptop fully charged (power outlets may be limited)!",
                 promptDescription: "", 
                 categories: [], 
                 submissionRules: "", 
@@ -382,8 +442,10 @@
             };
 
             const START_DATE = new Date(2026, 8, 14, 9, 0, 0).getTime(); 
-            const END_DATE = new Date(2026, 8, 15, 0, 0, 0).getTime(); 
+            const END_DATE = new Date(2026, 8, 14, 23, 59, 0).getTime(); 
 
+            // Put mock/random data here for Stage 2 (will be blurred).
+            // Put final actual winners here for Stage 3 (will be revealed).
             const WINNING_DATA = {
                 grandPrize: [
                     { app: "StudyBuddy AI", team: "Alice, Bob, Charlie" },
@@ -402,24 +464,25 @@
             const fullPromptDetails = document.getElementById('full-prompt-details');
             const navBtn = document.getElementById('nav-action-btn');
             const heroBtn = document.getElementById('hero-action-btn');
+            const heroSubtitle = document.getElementById('hero-subtitle');
             
             function buildPromptHTML(state) {
                 if (state === 0) {
                     return `
                         <div class="mb-4">
-                            <p class="text-gray-400 mb-2 text-sm font-semibold uppercase tracking-wider">Preparation</p>
-                            <p class="text-white text-sm leading-relaxed">${HACKATHON_CONTENT.preRequisites}</p>
+                            <p class="text-shipGray mb-2 text-sm font-semibold uppercase tracking-wider">Preparation</p>
+                            <p class="text-shipWhite text-sm leading-relaxed">${HACKATHON_CONTENT.preRequisites}</p>
                         </div>
-                        <p class="text-shipOrange font-bold animate-pulse text-lg mt-auto">Full prompt announced at event kickoff.</p>
+                        <p class="text-shipOrange font-bold text-lg mt-auto">Full prompt announced at event kickoff.</p>
                     `;
                 } else {
-                    const catHTML = HACKATHON_CONTENT.categories.map(c => `<div class="bg-[#170F22] border border-shipBorder/50 px-3 py-2 rounded text-xs text-gray-300">${c}</div>`).join('');
+                    const catHTML = HACKATHON_CONTENT.categories.map(c => `<div class="bg-[#130E1F] border border-shipBorder/50 px-3 py-2 rounded text-xs text-shipGray">${c}</div>`).join('');
                     
                     fullPromptDetails.innerHTML = `
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div>
                                 <h4 class="text-xl font-bold mb-4 text-shipOrange flex items-center gap-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg> 
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2v-6a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg> 
                                     Categories Available
                                 </h4>
                                 <div class="category-grid">${catHTML}</div>
@@ -429,22 +492,26 @@
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg> 
                                     Submission Requirements
                                 </h4>
-                                <p class="text-gray-300 text-sm leading-relaxed mb-6">${HACKATHON_CONTENT.submissionRules}</p>
+                                <p class="text-shipGray text-sm leading-relaxed mb-6">${HACKATHON_CONTENT.submissionRules}</p>
                                 <div class="mt-auto flex flex-col gap-2">
-                                    <a href="${HACKATHON_CONTENT.slideTemplateLink}" target="_blank" class="group-btn bg-[#170F22] hover:bg-shipBorder text-white border border-shipBorder px-5 py-3 rounded-md font-bold text-sm transition-colors flex items-center gap-2 w-fit">
+                                    <a href="${HACKATHON_CONTENT.slideTemplateLink}" target="_blank" class="group-btn bg-[#130E1F] text-shipWhite border border-shipBorder px-4 py-2 rounded font-bold text-sm transition-all flex justify-center items-center gap-2 w-fit shadow-flat-sm">
                                         Slide Deck Template 
                                         <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                                     </a>
-                                    <a href="${HACKATHON_CONTENT.adobeReferralLink}" target="_blank" class="text-[11px] text-gray-500 hover:text-gray-300 underline underline-offset-2 transition-colors w-fit ml-1">Create Adobe Express Account</a>
+                                    <a href="${HACKATHON_CONTENT.adobeReferralLink}" target="_blank" class="text-[11px] text-shipGray hover:text-shipWhite underline underline-offset-2 transition-colors w-fit ml-1 mt-1">Create Adobe Express Account</a>
                                 </div>
                             </div>
                         </div>
                     `;
                     fullPromptDetails.classList.remove('hidden');
 
+                    let statusText = '';
+                    if (state === 2) statusText = '<p class="text-shipOrange text-sm font-bold mt-4">Submissions Closed. Judging in Progress.</p>';
+                    if (state === 3) statusText = '<p class="text-shipOrange text-sm font-bold mt-4">Hackathon Concluded.</p>';
+
                     return `
-                        <p class="text-white font-medium text-[15px] leading-relaxed">${HACKATHON_CONTENT.promptDescription}</p>
-                        ${state === 2 ? '<p class="text-shipOrange text-sm font-bold mt-4">Hackathon Concluded.</p>' : ''}
+                        <p class="text-shipWhite font-medium text-[15px] leading-relaxed">${HACKATHON_CONTENT.promptDescription}</p>
+                        ${statusText}
                     `;
                 }
             }
@@ -462,19 +529,30 @@
                     
                     heroBtn.href = HACKATHON_CONTENT.googleFormLink;
                     heroBtn.innerHTML = `Submit Your Project <svg class="w-5 h-5 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`;
+                    heroSubtitle.innerText = "*Submissions close strictly at 11:59 PM CDT.";
                     
-                    startTimer(END_DATE, "HACKING ENDS 15 SEP 2026 @ 12:00AM CDT");
+                    startTimer(END_DATE, "SUBMISSIONS CLOSE 14 SEP 2026 @ 11:59PM CDT");
                 }
-                else if (HACKATHON_STATE === 2) {
+                else if (HACKATHON_STATE === 2 || HACKATHON_STATE === 3) {
                     cdContainer.style.display = 'none';
-                    promptContent.innerHTML = buildPromptHTML(2);
+                    promptContent.innerHTML = buildPromptHTML(HACKATHON_STATE);
                     
                     navBtn.style.display = 'none';
-                    heroBtn.outerHTML = `<div class="inline-block bg-[#170F22] border border-shipBorder text-gray-400 px-8 py-4 rounded-lg font-bold text-lg cursor-not-allowed w-fit">Event Concluded</div>`;
+                    heroSubtitle.style.display = 'none';
+
+                    if (HACKATHON_STATE === 2) {
+                        heroBtn.outerHTML = `<div class="inline-block bg-shipOrange/20 border border-shipOrange text-shipOrange px-6 py-3 rounded-lg font-bold text-base w-fit animate-pulse shadow-flat-sm">Judging in Progress...</div>`;
+                        document.getElementById('archive-title').innerText = "Judging in Progress";
+                        document.getElementById('bubbles-title').innerText = "Submissions Closed";
+                        document.getElementById('bubbles-subtitle').innerText = "The judges are currently reviewing all projects.";
+                    } else {
+                        heroBtn.outerHTML = `<div class="inline-block bg-[#130E1F] border border-shipBorder text-shipGray px-6 py-3 rounded-lg font-bold text-base cursor-not-allowed w-fit shadow-flat-sm">Event Concluded</div>`;
+                        document.getElementById('archive-title').innerText = "2026 Results";
+                    }
                     
                     document.getElementById('active-event-section').classList.add('hidden');
                     document.getElementById('post-event-section').classList.remove('hidden');
-                    renderLeaderboards();
+                    renderLeaderboards(HACKATHON_STATE);
                 }
             }
 
@@ -504,23 +582,36 @@
                 timerInterval = setInterval(update, 1000);
             }
 
-            function renderLeaderboards() {
+            function renderLeaderboards(state) {
+                const isGrading = state === 2;
+
                 const buildList = (title, data) => `
-                    <div class="ship-card p-8 relative overflow-hidden bg-[#170F22]">
+                    <div class="ship-card p-8 relative overflow-hidden bg-shipCard shadow-flat-lg">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-shipOrange to-yellow-500"></div>
-                        <h4 class="text-2xl font-bold mb-6">${title}</h4>
-                        <div class="space-y-3">
-                            ${data.map((item, idx) => `
-                                <div class="flex items-center gap-4 p-3 rounded-lg ${idx === 0 ? 'bg-shipOrange/10 border border-shipOrange/40' : 'bg-shipCard border border-shipBorder/50'}">
-                                    <div class="font-black text-xl w-8 text-center ${idx === 0 ? 'text-yellow-500' : 'text-gray-500'}">
-                                        ${idx === 0 ? '👑' : idx + 1}
+                        <h4 class="text-2xl font-bold mb-6 text-shipWhite">${title}</h4>
+                        <div class="relative">
+                            <div class="space-y-3 ${isGrading ? 'blur-[6px] opacity-40 select-none pointer-events-none' : ''}">
+                                ${data.map((item, idx) => `
+                                    <div class="flex items-center gap-4 p-3 rounded-lg ${idx === 0 ? 'bg-shipOrange/10 border border-shipOrange/40' : 'bg-shipBg border border-shipBorder/50'}">
+                                        <div class="font-black text-xl w-8 text-center ${idx === 0 ? 'text-yellow-500' : 'text-shipGray'}">
+                                            ${idx === 0 ? '👑' : idx + 1}
+                                        </div>
+                                        <div>
+                                            <p class="font-bold text-shipWhite leading-tight text-sm">${item.app}</p>
+                                            <p class="text-[11px] text-shipGray mt-0.5">${item.team}</p>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <p class="font-bold text-white leading-tight text-sm">${item.app}</p>
-                                        <p class="text-[11px] text-gray-400 mt-0.5">${item.team}</p>
-                                    </div>
+                                `).join('')}
+                            </div>
+                            
+                            ${isGrading ? `
+                            <div class="absolute inset-0 flex items-center justify-center z-10">
+                                <div class="bg-shipCard/90 border border-shipOrange text-shipOrange px-6 py-3 rounded-full font-bold shadow-[0_0_30px_rgba(255,129,0,0.3)] flex items-center gap-2 animate-pulse">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    Results Pending
                                 </div>
-                            `).join('')}
+                            </div>
+                            ` : ''}
                         </div>
                     </div>`;
 
@@ -531,9 +622,15 @@
                 const bubbleHtml = WINNING_DATA.otherSubmissions.map((text, i) => {
                     const delay = (i % 3) * 1.5;
                     const duration = 5 + (i % 3);
-                    return `<div class="bg-shipCard border border-shipBorder px-4 py-2 rounded-full text-sm text-gray-300 shadow-lg cursor-default" style="animation: float ${duration}s ease-in-out infinite ${delay}s">${text}</div>`;
+                    return `<div class="bg-shipCard border border-shipBorder px-4 py-2 rounded-full text-sm text-shipGray shadow-flat-sm cursor-default" style="animation: float ${duration}s ease-in-out infinite ${delay}s">${text}</div>`;
                 }).join('');
-                document.getElementById('bubbles-container').innerHTML = bubbleHtml;
+                
+                const bubblesContainer = document.getElementById('bubbles-container');
+                bubblesContainer.innerHTML = bubbleHtml;
+                
+                if (isGrading) {
+                    bubblesContainer.classList.add('blur-[4px]', 'opacity-50');
+                }
             }
 
             document.querySelectorAll('.sponsor-card').forEach(card => {
