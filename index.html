@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TXST Shipathon 2026</title>
-    <link rel="icon" href="./tinyCat.svg" type="image/svg+xml">
+    <link rel="icon" href="./tinyCat.png" type="image/png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
@@ -89,19 +89,34 @@
         .sponsor-color {
             background-color: transparent; z-index: 2;
         }
-        
-        /* Smooth Liquid Blob Fill */
+
+        /* Improved Liquid Blob Fill */
+        .liquid-container {
+            position: absolute;
+            top: 120%; 
+            left: 0;
+            width: 100%;
+            height: 100%;
+            transition: top 0.8s ease-in-out;
+        }
+        .sponsor-card:hover .liquid-container {
+            top: 0%; 
+        }
         .liquid-drop {
             position: absolute;
-            width: 200%; height: 200%;
-            top: 110%; left: -50%;
+            width: 300px; 
+            height: 300px;
             background-color: var(--brand-color);
-            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
-            transition: top 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+            bottom: -50px; 
+            left: 50%;
+            margin-left: -150px;
+            border-radius: 40%;
             animation: spin-liquid 4s linear infinite;
         }
-        .sponsor-card:hover .liquid-drop {
-            top: -50%;
+        .liquid-drop:nth-child(2) {
+            border-radius: 45%;
+            opacity: 0.6; 
+            animation: spin-liquid 5.5s linear infinite reverse;
         }
 
         .host-img-wrapper {
@@ -148,12 +163,12 @@
 
     <nav class="w-full fixed top-0 left-0 z-50 bg-[#1D162C]/90 backdrop-blur-md border-b border-shipBorder">
         <div class="max-w-[1400px] mx-auto px-6 lg:px-8 h-24 flex items-center justify-between">
-            <div class="flex items-center gap-0.5">
-                <img src="./tinyCat.svg" alt="Logo" class="w-32 h-32 object-contain">
+            <div class="flex items-center gap-3">
+                <img src="./tinyCat.png" alt="Logo" class="w-16 h-16 object-contain">
                 
-                <span class="font-bold text-2xl tracking-tight flex items-start text-shipWhite">
+                <span class="font-bold text-2xl tracking-tight flex items-start text-shipWhite leading-none pt-1">
                     TXST Shipathon
-                    <img src="./tiny26.png" alt="26" class="h-[18px] object-contain ml-1 mt-1">
+                    <img src="./tiny26.png" alt="26" class="h-[18px] object-contain ml-1 -mt-1 hidden sm:block">
                 </span>
             </div>
             <div class="hidden md:flex items-center gap-8 text-sm font-medium text-shipGray">
@@ -161,17 +176,18 @@
                 <a href="#details" class="hover:text-shipWhite transition-colors">Details</a>
                 <a href="#hosts" class="hover:text-shipWhite transition-colors">Judges</a>
             </div>
-            <div>
-                <a id="nav-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn bg-shipOrange hover:bg-shipOrangeHover text-black px-4 py-2 rounded font-bold text-sm transition-all shadow-flat-sm flex items-center gap-2">
+            <div class="flex items-center gap-2 pl-4 sm:pl-0 shrink-0">
+                <img src="./tiny26.png" alt="26" class="h-[16px] object-contain shrink-0 sm:hidden">
+                <a id="nav-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn bg-shipOrange hover:bg-shipOrangeHover text-black px-4 py-2 rounded font-bold text-sm transition-all shadow-flat-sm flex items-center gap-2 shrink-0">
                     Register 
-                    <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    <svg class="w-4 h-4 btn-arrow hidden sm:block" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                 </a>
             </div>
         </div>
     </nav>
 
     <main id="about" class="pt-36 pb-16 relative">
-        <img src="./mediumCat.svg" class="absolute right-0 lg:right-6 top-32 opacity-90 animate-float pointer-events-none w-48 md:w-64 hidden lg:block" alt="Floating Cat">
+        <img src="./mediumCat.svg" class="absolute right-10 lg:right-24 top-48 opacity-90 animate-float pointer-events-none w-48 md:w-64 hidden lg:block" alt="Floating Cat">
 
         <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
             <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-10">
@@ -183,7 +199,7 @@
                         Shipathon 2026 is RevenueCat's global hackathon. Here at Texas State, we're hosting a local campus event to build real apps, compete for local prizes, and ship. Open to all majors! Build your prototype here, and you can level it up later to submit to the global hackathon by adding their extra requirements.
                     </p>
                     
-                    <div id="countdown-container" class="mb-10 w-full overflow-x-auto pb-6">
+                    <div id="countdown-container" class="mb-6 w-full overflow-x-auto pb-6">
                         <p id="countdown-label" class="font-mono text-[13px] font-bold tracking-widest text-shipLightOrange mb-3 uppercase flex items-center gap-2">
                             <span class="w-2.5 h-2.5 rounded-full bg-shipOrange shadow-[0_0_8px_#FF8100]"></span> 
                             <span id="cd-label-text">HACKATHON STARTS 14 SEP 2026 @ 9:00AM CDT</span>
@@ -223,7 +239,7 @@
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-2 mt-2">
+                    <div class="flex flex-col gap-2">
                         <div id="hero-action-container" class="flex flex-col sm:flex-row gap-4">
                             <a id="hero-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn btn-with-glow bg-shipOrange text-black px-6 py-3 rounded-lg font-bold text-base transition-all w-fit flex justify-center items-center gap-2">
                                 Register for 2026 
@@ -318,16 +334,22 @@
                 <h3 class="text-3xl font-bold tracking-tight mb-8 text-center text-shipWhite">Powered by the best.</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
-                        <div class="sponsor-base" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png'); -webkit-mask-size: 50%; mask-size: 50%;"></div>
-                        <div class="sponsor-color" style="--brand-color: #FF0000; -webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png'); -webkit-mask-size: 50%; mask-size: 50%;">
-                            <div class="liquid-drop"></div>
+                        <div class="sponsor-base" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png'); max-width: 60%; height: auto;"></div>
+                        <div class="sponsor-color" style="--brand-color: #FF0000; -webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png'); max-width: 60%; height: auto;">
+                            <div class="liquid-container">
+                                <div class="liquid-drop"></div>
+                                <div class="liquid-drop"></div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
                         <div class="sponsor-base" style="-webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');"></div>
                         <div class="sponsor-color" style="--brand-color: #F1545B; -webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');">
-                            <div class="liquid-drop"></div>
+                            <div class="liquid-container">
+                                <div class="liquid-drop"></div>
+                                <div class="liquid-drop"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -362,7 +384,7 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
                 <a href="https://www.linkedin.com/in/meidad-troper-13383a28a/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
                     <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
-                        <img src="./meidadHeadshot.png" alt="Meidad Troper" class="w-full h-full rounded-full object-cover">
+                        <img src="./meidadHeadshot.jpeg" alt="Meidad Troper" class="w-full h-full rounded-full object-cover">
                     </div>
                     <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Meidad Troper</h4>
                     <p class="text-[13px] text-shipGray mt-1">Image Quality Engineer • Apple</p>
@@ -381,12 +403,12 @@
                         <img src="./vaidicHeadshot.png" alt="Vaidic Soni" class="w-full h-full rounded-full object-cover">
                     </div>
                     <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Vaidic Soni</h4>
-                    <p class="text-[13px] text-shipGray mt-1">AI Intern • Launch Box</p>
+                    <p class="text-[13px] text-shipGray mt-1">AI Intern • The Launch Box</p>
                 </a>
 
-                <a href="#" target="_blank" class="flex flex-col items-center group cursor-pointer block">
+                <a href="https://www.linkedin.com/in/kelvinmathew/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
                     <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
-                        <img src="./kelvinHeadshot.jpg" alt="Kelvin Mathew" class="w-full h-full rounded-full object-cover">
+                        <img src="./kelvinHeadshot.png" alt="Kelvin Mathew" class="w-full h-full rounded-full object-cover">
                     </div>
                     <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Kelvin Mathew</h4>
                     <p class="text-[13px] text-shipGray mt-1">Ex-SDE Intern • Amazon</p>
@@ -395,7 +417,7 @@
         </div>
     </section>
 
-    <footer class="py-10 border-t border-shipBorder/30 text-center text-shipGray text-sm">
+    <footer class="py-6 border-t border-shipBorder/30 text-center text-shipGray text-sm">
         <div class="max-w-[1400px] mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p>&copy; 2026 TXST Shipathon. A local event part of the global Shipathon.</p>
             <button onclick="document.getElementById('coc-modal').classList.remove('hidden')" class="hover:text-shipWhite transition-colors underline underline-offset-4">Code of Conduct</button>
@@ -476,13 +498,13 @@
                         <p class="text-shipOrange font-bold text-lg mt-auto">Full prompt announced at event kickoff.</p>
                     `;
                 } else {
-                    const catHTML = HACKATHON_CONTENT.categories.map(c => `<div class="bg-[#130E1F] border border-shipBorder/50 px-3 py-2 rounded text-xs text-shipGray">${c}</div>`).join('');
+                    const catHTML = HACKATHON_CONTENT.categories.map(c => `<div class="bg-[#1D162C] border border-shipBorder/50 px-3 py-2 rounded text-xs text-shipGray">${c}</div>`).join('');
                     
                     fullPromptDetails.innerHTML = `
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                             <div>
                                 <h4 class="text-xl font-bold mb-4 text-shipOrange flex items-center gap-2">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2v-6a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg> 
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg> 
                                     Categories Available
                                 </h4>
                                 <div class="category-grid">${catHTML}</div>
@@ -494,7 +516,7 @@
                                 </h4>
                                 <p class="text-shipGray text-sm leading-relaxed mb-6">${HACKATHON_CONTENT.submissionRules}</p>
                                 <div class="mt-auto flex flex-col gap-2">
-                                    <a href="${HACKATHON_CONTENT.slideTemplateLink}" target="_blank" class="group-btn bg-[#130E1F] text-shipWhite border border-shipBorder px-4 py-2 rounded font-bold text-sm transition-all flex justify-center items-center gap-2 w-fit shadow-flat-sm">
+                                    <a href="${HACKATHON_CONTENT.slideTemplateLink}" target="_blank" class="group-btn bg-[#1D162C] text-shipWhite border border-shipBorder px-4 py-2 rounded font-bold text-sm transition-all flex justify-center items-center gap-2 w-fit shadow-flat-sm">
                                         Slide Deck Template 
                                         <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                                     </a>
@@ -546,7 +568,7 @@
                         document.getElementById('bubbles-title').innerText = "Submissions Closed";
                         document.getElementById('bubbles-subtitle').innerText = "The judges are currently reviewing all projects.";
                     } else {
-                        heroBtn.outerHTML = `<div class="inline-block bg-[#130E1F] border border-shipBorder text-shipGray px-6 py-3 rounded-lg font-bold text-base cursor-not-allowed w-fit shadow-flat-sm">Event Concluded</div>`;
+                        heroBtn.outerHTML = `<div class="inline-block bg-[#1D162C] border border-shipBorder text-shipGray px-6 py-3 rounded-lg font-bold text-base cursor-not-allowed w-fit shadow-flat-sm">Event Concluded</div>`;
                         document.getElementById('archive-title').innerText = "2026 Results";
                     }
                     
