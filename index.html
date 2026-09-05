@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TXST Shipathon</title>
     
-    <!-- Safari-friendly Favicon loading with Cache Buster -->
-    <link rel="icon" href="./tinyCat.png?v=2" type="image/png">
-    <link rel="apple-touch-icon" href="./tinyCat.png?v=2">
-    <link rel="shortcut icon" href="./tinyCat.png?v=2">
+    <!-- Safari-friendly Favicon loading -->
+    <link rel="icon" href="./tinyCat.png" type="image/png">
+    <link rel="apple-touch-icon" href="./tinyCat.png">
+    <link rel="shortcut icon" href="./tinyCat.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -37,17 +37,11 @@
                         'float-delayed': 'float 7s ease-in-out infinite 2s',
                         'float-fast': 'float 5s ease-in-out infinite 1s',
                         'float-slow': 'float 8s ease-in-out infinite 3s',
-                        'wave': 'wave 3s linear infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-15px)' },
-                        },
-                        wave: {
-                            '0%': { transform: 'translateX(0) translateZ(0) scaleY(1)' },
-                            '50%': { transform: 'translateX(-25%) translateZ(0) scaleY(0.55)' },
-                            '100%': { transform: 'translateX(-50%) translateZ(0) scaleY(1)' },
                         }
                     },
                     boxShadow: {
@@ -82,71 +76,29 @@
             border: 2px solid #5F4C66; 
             border-radius: 8px;
         }
-        /* Sponsor Liquid Fill Effect */
+        
+        /* Sponsor Reveal Effect */
         .sponsor-card { position: relative; overflow: hidden; display: block; text-decoration: none; }
-        .sponsor-base, .sponsor-color {
+        .sponsor-base, .sponsor-reveal {
             position: absolute; inset: 0; width: 100%; height: 100%;
             -webkit-mask-size: 80%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
             mask-size: 80%; mask-repeat: no-repeat; mask-position: center;
+            background-size: 80%; background-repeat: no-repeat; background-position: center;
         }
-        .sponsor-base { background-color: #4b5563; z-index: 1; } 
-        .sponsor-color {
-            background-color: transparent; z-index: 2;
-            overflow: hidden; 
+        .sponsor-base { background-color: #4b5563; z-index: 1; }
+        .sponsor-reveal {
+            opacity: 0; transition: opacity 0.4s ease-in-out; z-index: 2;
         }
-        .liquid-wave {
-            position: absolute;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            background-repeat: repeat-x;
-            background-position: 0 bottom;
-            transform-origin: center bottom;
-            bottom: -100%;
-            transition: bottom 0.8s ease-in-out;
-            z-index: 3;
-        }
-        
-        .sponsor-card:hover .liquid-wave {
-            bottom: 0; 
-        }
-        .wave-adobe {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,123.15,193.38,108.64C236.4,98.66,279.7,78.27,321.39,56.44Z' fill='%23FF0000'%3E%3C/path%3E%3C/svg%3E");
-            background-size: 50% 100%;
-            background-position: left bottom;
-        }
-        
-        .wave-revenue {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,123.15,193.38,108.64C236.4,98.66,279.7,78.27,321.39,56.44Z' fill='%23F1545B'%3E%3C/path%3E%3C/svg%3E");
-            background-size: 50% 100%;
-            background-position: left bottom;
-        }
-        .wave-swe {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,123.15,193.38,108.64C236.4,98.66,279.7,78.27,321.39,56.44Z' fill='%23DBC554'%3E%3C/path%3E%3C/svg%3E");
-            background-size: 50% 100%;
-            background-position: left bottom;
-        }
-        .liquid-fill {
-            position: absolute;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            bottom: -100%; 
-            background-color: var(--brand-color);
-            transition: bottom 0.8s ease-in-out;
-            z-index: 2;
-        }
-        .sponsor-card:hover .liquid-fill {
-            bottom: -20px; 
+        .sponsor-card:hover .sponsor-reveal {
+            opacity: 1; 
         }
         .adobe-mask {
-            -webkit-mask-size: 60%;
-            mask-size: 60%;
+            -webkit-mask-size: 60%; mask-size: 60%; background-size: 60%;
         }
         .swe-mask {
-            -webkit-mask-size: 50%;
-            mask-size: 50%;
+            -webkit-mask-size: 50%; mask-size: 50%; background-size: 50%;
         }
+
         .host-img-wrapper {
             border: 2px solid transparent; 
             border-radius: 50%;
@@ -185,7 +137,7 @@
     <div class="bg-grid"></div>
     <div class="glow-bg"></div>
 
-    <nav class="w-full fixed top-0 left-0 z-50 bg-[#1D162C]/90 backdrop-blur-md border-b-2 border-shipBorder">
+    <nav class="w-full absolute top-0 left-0 z-50 bg-[#1D162C]/90 backdrop-blur-md border-b-2 border-shipBorder">
         <div class="max-w-[1400px] mx-auto px-6 lg:px-8 h-24 flex items-center justify-between">
             <div class="flex items-center gap-2 sm:gap-3">
                 <img src="./tinyCat.png" alt="Logo" class="w-16 h-16 object-contain shrink-0">
@@ -221,7 +173,6 @@
                         A local edition of the world's <span class="text-shipOrange">biggest</span> mobile hackathon.
                     </h1>
                     
-                    <!-- Unified Description for all screens -->
                     <p class="text-base sm:text-lg text-shipGray mb-8 sm:mb-10 max-w-3xl leading-relaxed pr-2 sm:pr-0">
                         Shipathon is RevenueCat's global hackathon. Join our Texas State event to build apps, win local prizes, and ship. Open to all majors! Build your prototype here, then level it up for the global competition.
                     </p>
@@ -287,7 +238,6 @@
             <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-shipWhite">Everything you need to know.</h3>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Location / Time Cards -->
                 <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
                     <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -311,7 +261,6 @@
                     </p>
                 </div>
 
-                <!-- Dynamic Challenge/Prompt Card -->
                 <div class="ship-card p-8 border-shipOrange/30 relative overflow-hidden bg-shipOrange/5 md:col-span-1 lg:col-span-1 flex flex-col hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg" id="prompt-container">
                     <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
@@ -330,7 +279,6 @@
         </div>
     </section>
 
-    <!-- Prizes Section -->
     <section id="prizes-section" class="py-20 relative">
         <img src="./smallCat.webp" class="absolute right-12 lg:right-36 top-0 opacity-60 animate-float-delayed pointer-events-none w-24 md:w-32 scale-x-[-1]" alt="Floating Cat">
 
@@ -362,7 +310,6 @@
         </div>
     </section>
 
-    <!-- SECTION: Post Hackathon (Results / Grading) -->
     <section id="post-event-section" class="py-20 hidden relative overflow-hidden">
         <img src="./largeCat2.svg" class="absolute -right-10 top-[40%] -translate-y-1/2 opacity-20 animate-float-slow pointer-events-none w-[50vw] max-w-[600px]" alt="Giant Floating Cat">
 
@@ -392,7 +339,6 @@
         </div>
     </section>
 
-    <!-- Sponsors Section -->
     <section id="sponsors-section" class="py-20 relative">
         <div class="max-w-[1100px] mx-auto px-6 lg:px-8 relative z-10">
             <img src="./mediumCat2.svg" class="absolute -left-16 -top-16 opacity-70 animate-float-fast pointer-events-none w-24 md:w-32 hidden md:block scale-x-[-1]" alt="Floating Cat">
@@ -404,26 +350,17 @@
                 <!-- Adobe Sponsor -->
                 <a href="https://edu.adobe.com" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
                     <div class="sponsor-base adobe-mask" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png');"></div>
-                    <div class="sponsor-color adobe-mask" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png');">
-                        <div class="liquid-fill" style="--brand-color: #FF0000;"></div>
-                        <div class="liquid-wave wave-adobe animate-wave"></div>
-                    </div>
+                    <div class="sponsor-reveal adobe-mask" style="background-image: url('./adobeLogo.png');"></div>
                 </a>
                 <!-- RevenueCat Sponsor -->
                 <a href="https://www.revenuecat.com" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
                     <div class="sponsor-base" style="-webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');"></div>
-                    <div class="sponsor-color" style="-webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');">
-                        <div class="liquid-fill" style="--brand-color: #F1545B;"></div>
-                        <div class="liquid-wave wave-revenue animate-wave"></div>
-                    </div>
+                    <div class="sponsor-reveal" style="background-image: url('./revenueLogo.png');"></div>
                 </a>
                 <!-- SWE Sponsor -->
                 <a href="https://www.instagram.com/txstswe/" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
                     <div class="sponsor-base swe-mask" style="-webkit-mask-image: url('./sweLogo.png'); mask-image: url('./sweLogo.png');"></div>
-                    <div class="sponsor-color swe-mask" style="-webkit-mask-image: url('./sweLogo.png'); mask-image: url('./sweLogo.png');">
-                        <div class="liquid-fill" style="--brand-color: #DBC554;"></div>
-                        <div class="liquid-wave wave-swe animate-wave"></div>
-                    </div>
+                    <div class="sponsor-reveal swe-mask" style="background-image: url('./sweLogo.png');"></div>
                 </a>
             </div>
         </div>
