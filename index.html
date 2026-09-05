@@ -80,7 +80,7 @@
         .sponsor-card { position: relative; overflow: hidden; display: block; text-decoration: none; }
         .sponsor-base, .sponsor-reveal {
             position: absolute; inset: 0; margin: auto; 
-            width: 75%; height: 65%; /* Default scale for RevenueCat */
+            width: 75%; height: 65%;
             -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
             mask-size: contain; mask-repeat: no-repeat; mask-position: center;
             background-size: contain; background-repeat: no-repeat; background-position: center;
@@ -101,11 +101,6 @@
             opacity: 1; 
         }
 
-        @media (max-width: 767px) {
-            .sponsor-base { opacity: 0 !important; }
-            .sponsor-reveal { opacity: 1 !important; }
-        }
-        
         /* Specific sizing overrides using percentages for dynamic scaling */
         .adobe-mask {
             width: 60%; height: 50%;
@@ -148,304 +143,308 @@
         }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-shipOrange selection:text-shipWhite pb-20 text-shipWhite overflow-x-hidden">
-    <div class="bg-grid"></div>
-    <div class="glow-bg"></div>
+<body class="font-sans antialiased selection:bg-shipOrange selection:text-shipWhite text-shipWhite overflow-x-hidden bg-[#1D162C]">
+    
+    <!-- Wrapper completely blocks horizontal scrolling on mobile -->
+    <div class="relative w-full overflow-hidden flex flex-col min-h-screen pb-20">
+        <div class="bg-grid"></div>
+        <div class="glow-bg"></div>
 
-    <nav class="w-full absolute top-0 left-0 z-50 bg-[#1D162C]/90 backdrop-blur-md border-b-2 border-shipBorder">
-        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 h-24 flex items-center justify-between">
-            <div class="flex items-center gap-2 sm:gap-3">
-                <img src="./tinyCat.png" alt="Logo" class="w-16 h-16 object-contain shrink-0">
-                
-                <span class="font-pixel font-normal text-lg sm:text-xl md:text-2xl text-shipWhite pt-2 whitespace-nowrap flex items-center">
-                    TXST Shipathon
-                    <img src="./tiny26.png" alt="26" class="h-[12px] sm:h-[16px] object-contain ml-2 -mt-3 sm:-mt-4">
-                </span>
-            </div>
-
-            <div id="nav-shortcuts" class="hidden md:flex items-center gap-8 text-base font-bold text-shipGray transition-all">
-                <a href="#about" class="hover:text-shipWhite transition-colors">About</a>
-                <a href="#details" class="hover:text-shipWhite transition-colors">Details</a>
-                <a href="#hosts" class="hover:text-shipWhite transition-colors">Judges</a>
-            </div>
-
-            <div class="flex items-center pl-4 sm:pl-0 shrink-0">
-                <a id="nav-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn bg-shipOrange hover:bg-shipOrangeHover text-black px-4 py-2 rounded font-bold text-sm transition-all shadow-flat-sm hidden sm:flex items-center gap-2 shrink-0">
-                    Register 
-                    <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <main id="about" class="pt-36 pb-16 relative">
-        <img id="hero-cat-img" src="./mediumCat.svg" class="absolute right-10 lg:right-24 top-48 opacity-100 drop-shadow-[0_0_35px_rgba(255,129,0,0.25)] animate-float pointer-events-none w-48 md:w-64 hidden lg:block" alt="Floating Cat">
-
-        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
-            <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-10">
-                <div class="text-left w-full lg:w-2/3 xl:w-3/4 max-w-[1100px] lg:pr-8 xl:pr-0"> 
-                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6 text-shipWhite">
-                        A local edition of the world's <span class="text-shipOrange">biggest</span> mobile hackathon.
-                    </h1>
+        <nav class="w-full absolute top-0 left-0 z-50 bg-[#1D162C]/90 backdrop-blur-md border-b-2 border-shipBorder">
+            <div class="max-w-[1400px] mx-auto px-6 lg:px-8 h-24 flex items-center justify-between">
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <img src="./tinyCat.png" alt="Logo" class="w-16 h-16 object-contain shrink-0">
                     
-                    <p class="text-base sm:text-lg text-shipGray mb-8 sm:mb-10 max-w-3xl leading-relaxed pr-2 sm:pr-0">
-                        Shipathon is RevenueCat's global hackathon. Join our Texas State event to build apps, win local prizes, and ship. Open to all majors! Build your prototype here, then level it up for the global competition.
-                    </p>
-                    
-                    <div id="countdown-container" class="mb-6 w-full overflow-x-auto pb-6">
-                        <p id="countdown-label" class="font-mono text-[13px] font-bold tracking-widest text-shipLightOrange mb-3 uppercase flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-shipOrange"></span> 
-                            <span id="cd-label-text">HACKATHON STARTS 14 SEP @ 9:00AM CDT</span>
+                    <span class="font-pixel font-normal text-lg sm:text-xl md:text-2xl text-shipWhite pt-2 whitespace-nowrap flex items-center">
+                        TXST Shipathon
+                        <img src="./tiny26.png" alt="26" class="h-[12px] sm:h-[16px] object-contain ml-2 -mt-3 sm:-mt-4">
+                    </span>
+                </div>
+
+                <div id="nav-shortcuts" class="hidden md:flex items-center gap-8 text-base font-bold text-shipGray transition-all">
+                    <a href="#about" class="hover:text-shipWhite transition-colors">About</a>
+                    <a href="#details" class="hover:text-shipWhite transition-colors">Details</a>
+                    <a href="#hosts" class="hover:text-shipWhite transition-colors">Judges</a>
+                </div>
+
+                <div class="flex items-center pl-4 sm:pl-0 shrink-0">
+                    <a id="nav-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn bg-shipOrange hover:bg-shipOrangeHover text-black px-4 py-2 rounded font-bold text-sm transition-all shadow-flat-sm hidden sm:flex items-center gap-2 shrink-0">
+                        Register 
+                        <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+        </nav>
+
+        <main id="about" class="pt-40 pb-24 relative">
+            <img id="hero-cat-img" src="./mediumCat.svg" class="absolute right-10 lg:right-24 top-48 opacity-100 drop-shadow-[0_0_35px_rgba(255,129,0,0.25)] animate-float pointer-events-none w-48 md:w-64 hidden lg:block" alt="Floating Cat">
+
+            <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
+                <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-10">
+                    <div class="text-left w-full lg:w-2/3 xl:w-3/4 max-w-[1100px] lg:pr-8 xl:pr-0"> 
+                        <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6 text-shipWhite">
+                            A local edition of the world's <span class="text-shipOrange">biggest</span> mobile hackathon.
+                        </h1>
+                        
+                        <p class="text-base sm:text-lg text-shipGray mb-8 sm:mb-10 max-w-3xl leading-relaxed pr-2 sm:pr-0">
+                            Shipathon is RevenueCat's global hackathon. Join our Texas State event to build apps, win local prizes, and ship. Open to all majors! Build your prototype here, then level it up for the global competition.
                         </p>
-                        <div class="flex items-center gap-1.5 sm:gap-4 h-[100px] sm:h-[150px]">
-                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
-                                <span id="cd-days" class="text-4xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
-                                <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Days</span>
+                        
+                        <div id="countdown-container" class="mb-6 w-full overflow-x-auto pb-6">
+                            <p id="countdown-label" class="font-mono text-[13px] font-bold tracking-widest text-shipLightOrange mb-3 uppercase flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-shipOrange"></span> 
+                                <span id="cd-label-text">HACKATHON STARTS 14 SEP @ 9:00AM CDT</span>
+                            </p>
+                            <div class="flex items-center gap-1.5 sm:gap-4 h-[100px] sm:h-[150px]">
+                                <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
+                                    <span id="cd-days" class="text-4xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
+                                    <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Days</span>
+                                </div>
+                                <div class="flex flex-col gap-1.5 sm:gap-2 justify-center pb-2 sm:pb-4">
+                                    <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                                    <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                                </div>
+                                
+                                <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
+                                    <span id="cd-hours" class="text-4xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
+                                    <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Hours</span>
+                                </div>
+                                <div class="flex flex-col gap-1.5 sm:gap-2 justify-center pb-2 sm:pb-4">
+                                    <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                                    <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                                </div>
+                                
+                                <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
+                                    <span id="cd-mins" class="text-4xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
+                                    <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Minutes</span>
+                                </div>
+                                <div class="flex flex-col gap-1.5 sm:gap-2 justify-center pb-2 sm:pb-4">
+                                    <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                                    <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                                </div>
+                                
+                                <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
+                                    <span id="cd-secs" class="text-4xl sm:text-7xl font-black block tracking-tight text-shipOrange tabular-nums leading-none">00</span>
+                                    <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Seconds</span>
+                                </div>
                             </div>
-                            <div class="flex flex-col gap-1.5 sm:gap-2 justify-center pb-2 sm:pb-4">
-                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
-                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
+                        </div>
+
+                        <div class="flex flex-col gap-2">
+                            <div id="hero-action-container" class="flex flex-col sm:flex-row gap-4">
+                                <a id="hero-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn btn-with-glow bg-shipOrange text-black px-6 py-3 rounded-lg font-bold text-base transition-all w-fit flex justify-center items-center gap-2">
+                                    Register 
+                                    <svg class="w-5 h-5 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                                </a>
                             </div>
-                            
-                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
-                                <span id="cd-hours" class="text-4xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
-                                <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Hours</span>
-                            </div>
-                            <div class="flex flex-col gap-1.5 sm:gap-2 justify-center pb-2 sm:pb-4">
-                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
-                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
-                            </div>
-                            
-                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
-                                <span id="cd-mins" class="text-4xl sm:text-7xl font-black block tracking-tight tabular-nums leading-none text-shipWhite">00</span>
-                                <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Minutes</span>
-                            </div>
-                            <div class="flex flex-col gap-1.5 sm:gap-2 justify-center pb-2 sm:pb-4">
-                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
-                                <span class="w-1 h-1 sm:w-1.5 sm:h-1.5 rounded-full bg-[#52417A]"></span>
-                            </div>
-                            
-                            <div class="cd-box shadow-flat-lg flex flex-col justify-center items-center w-[72px] h-[84px] sm:w-[130px] sm:h-[140px]">
-                                <span id="cd-secs" class="text-4xl sm:text-7xl font-black block tracking-tight text-shipOrange tabular-nums leading-none">00</span>
-                                <span class="text-[9px] sm:text-[11px] tracking-widest text-shipGray font-bold uppercase mt-1.5 sm:mt-3">Seconds</span>
-                            </div>
+                            <p id="hero-subtitle" class="text-sm text-shipGray font-medium">*Registration is mandatory due to venue capacity limits.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <section id="details" class="py-24 border-y-2 border-[#5F4C66] bg-[#2D1E3D] relative">
+            <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
+                <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase">Event Details</h2>
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-shipWhite">Everything you need to know.</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
+                        <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold mb-3 text-shipWhite">When to be there</h4>
+                        <p class="text-shipGray mb-2 text-sm">Monday, September 14th</p>
+                        <p class="text-shipWhite font-medium text-lg">9:00 AM &rarr; 10:00 PM</p>
+                        <p class="text-xs text-shipGray mt-4">*Flexible schedule: you can leave early, but please arrive on time if you need to form a team. Submissions are due by 11:59 PM.</p>
+                    </div>
+
+                    <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
+                        <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold mb-3 text-shipWhite">Where we're shipping</h4>
+                        <p class="text-shipGray mb-2 text-sm">Texas State University</p>
+                        <p class="text-shipWhite font-medium text-lg">LBJ Ballroom</p>
+                        <p class="text-xs text-shipOrange mt-4 flex items-center gap-1.5">
+                            <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg> 
+                            Snacks and drinks will be provided!
+                        </p>
+                    </div>
+
+                    <div class="ship-card p-8 border-shipOrange/30 relative overflow-hidden bg-shipOrange/5 md:col-span-1 lg:col-span-1 flex flex-col hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg" id="prompt-container">
+                        <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                        </div>
+                        <h4 class="text-xl font-bold mb-3 text-shipWhite">The Challenge</h4>
+                        <div id="prompt-content-dynamic" class="flex-1 flex flex-col justify-between">
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="full-prompt-details" class="mt-8 ship-card p-8 border-shipOrange/30 hidden shadow-flat-lg">
+                </div>
+
+            </div>
+        </section>
+
+        <section id="prizes-section" class="pt-24 pb-12 relative">
+            <img src="./smallCat.webp" class="absolute right-12 lg:right-36 top-0 opacity-60 animate-float-delayed pointer-events-none w-24 md:w-32 scale-x-[-1]" alt="Floating Cat">
+
+            <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
+                <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center">Prize Categories</h2>
+                <h3 id="prizes-title" class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-center text-shipWhite">Two big reasons to ship.</h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="ship-card p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-flat-lg">
+                        <img src="./grandPrize.png" alt="Grand Prize" class="w-20 h-20 object-contain shrink-0">
+                        <div class="flex-1 text-center sm:text-left">
+                            <h4 class="text-2xl font-bold mb-2 text-shipWhite">Grand Prize</h4>
+                            <!-- TODO: UPDATE GRAND PRIZE DESCRIPTION AND IMAGE ONCE FINALIZED BEFORE EVENT -->
+                            <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded to the best overall mobile app. Creatively integrate the prompt into a compelling practical or entertaining experience. Full functionality isn't required, but ingenuity, striking design, and solid execution earn top marks.</p>
+                            <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                         </div>
                     </div>
 
-                    <div class="flex flex-col gap-2">
-                        <div id="hero-action-container" class="flex flex-col sm:flex-row gap-4">
-                            <a id="hero-action-btn" href="https://luma.com/w7bixtts" target="_blank" class="group-btn btn-with-glow bg-shipOrange text-black px-6 py-3 rounded-lg font-bold text-base transition-all w-fit flex justify-center items-center gap-2">
-                                Register 
-                                <svg class="w-5 h-5 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                            </a>
+                    <div class="ship-card p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-flat-lg">
+                        <img src="./slidePrize.png" alt="Slide Deck Prize" class="w-20 h-20 object-contain shrink-0">
+                        <div class="flex-1 text-center sm:text-left">
+                            <h4 class="text-2xl font-bold mb-2 text-shipWhite">Slide Deck Prize</h4>
+                            <!-- TODO: UPDATE SLIDE DECK PRIZE DESCRIPTION AND IMAGE ONCE FINALIZED BEFORE EVENT -->
+                            <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded for the most compelling presentation made in Adobe Express. Showcase your vision, impact, app screenshots, and a demo video all within your deck.</p>
+                            <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                         </div>
-                        <p id="hero-subtitle" class="text-sm text-shipGray font-medium">*Registration is mandatory due to venue capacity limits.</p>
                     </div>
 
                 </div>
             </div>
-        </div>
-    </main>
+        </section>
 
-    <section id="details" class="py-20 border-y-2 border-[#5F4C66] bg-[#2D1E3D] relative">
-        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
-            <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase">Event Details</h2>
-            <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-shipWhite">Everything you need to know.</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
-                    <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3 text-shipWhite">When to be there</h4>
-                    <p class="text-shipGray mb-2 text-sm">Monday, September 14th</p>
-                    <p class="text-shipWhite font-medium text-lg">9:00 AM &rarr; 10:00 PM</p>
-                    <p class="text-xs text-shipGray mt-4">*Flexible schedule: you can leave early, but please arrive on time if you need to form a team. Submissions are due by 11:59 PM.</p>
-                </div>
+        <section id="post-event-section" class="py-12 hidden relative overflow-hidden">
+            <img src="./largeCat2.svg" class="absolute -right-10 top-[40%] -translate-y-1/2 opacity-20 animate-float-slow pointer-events-none w-[50vw] max-w-[600px]" alt="Giant Floating Cat">
 
-                <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
-                    <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3 text-shipWhite">Where we're shipping</h4>
-                    <p class="text-shipGray mb-2 text-sm">Texas State University</p>
-                    <p class="text-shipWhite font-medium text-lg">LBJ Ballroom</p>
-                    <p class="text-xs text-shipOrange mt-4 flex items-center gap-1.5">
-                        <svg class="w-4 h-4 inline-block" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" x2="6" y1="2" y2="4"/><line x1="10" x2="10" y1="2" y2="4"/><line x1="14" x2="14" y1="2" y2="4"/></svg> 
-                        Snacks and drinks will be provided!
-                    </p>
-                </div>
-
-                <div class="ship-card p-8 border-shipOrange/30 relative overflow-hidden bg-shipOrange/5 md:col-span-1 lg:col-span-1 flex flex-col hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg" id="prompt-container">
-                    <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
-                    </div>
-                    <h4 class="text-xl font-bold mb-3 text-shipWhite">The Challenge</h4>
-                    <div id="prompt-content-dynamic" class="flex-1 flex flex-col justify-between">
-                    </div>
-                </div>
-            </div>
-            
-            <div id="full-prompt-details" class="mt-8 ship-card p-8 border-shipOrange/30 hidden shadow-flat-lg">
-            </div>
-
-        </div>
-    </section>
-
-    <section id="prizes-section" class="py-20 relative">
-        <img src="./smallCat.webp" class="absolute right-12 lg:right-36 top-0 opacity-60 animate-float-delayed pointer-events-none w-24 md:w-32 scale-x-[-1]" alt="Floating Cat">
-
-        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
-            <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center">Prize Categories</h2>
-            <h3 id="prizes-title" class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-center text-shipWhite">Two big reasons to ship.</h3>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
+                <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center">Hackathon Archive</h2>
                 
-                <div class="ship-card p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-flat-lg">
-                    <img src="./grandPrize.png" alt="Grand Prize" class="w-20 h-20 object-contain shrink-0">
-                    <div class="flex-1 text-center sm:text-left">
-                        <h4 class="text-2xl font-bold mb-2 text-shipWhite">Grand Prize</h4>
-                        <!-- TODO: UPDATE GRAND PRIZE DESCRIPTION AND IMAGE ONCE FINALIZED BEFORE EVENT -->
-                        <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded to the overall best mobile app. Creatively integrate the prompt into a practical or entertaining experience. Full functionality isn't required, but ingenuity, striking design, and solid execution earn top marks.</p>
-                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
+                <div class="flex items-center justify-center gap-4 md:gap-8 mb-16 px-4">
+                    <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                        <img src="./builder1.png" alt="Sticker 1" class="w-12 h-12 md:w-16 md:h-16 object-contain -rotate-12 hover:scale-110 transition-transform">
+                        <img src="./builder2.png" alt="Sticker 2" class="w-12 h-12 md:w-16 md:h-16 object-contain rotate-6 hover:scale-110 transition-transform">
+                    </div>
+                    <h3 id="archive-title" class="text-3xl md:text-5xl font-bold tracking-tight text-center text-shipWhite whitespace-nowrap">Results</h3>
+                    <div class="flex items-center gap-2 sm:gap-3 shrink-0">
+                        <img src="./builder3.png" alt="Sticker 3" class="w-12 h-12 md:w-16 md:h-16 object-contain rotate-12 hover:scale-110 transition-transform">
+                        <img src="./builder4.png" alt="Sticker 4" class="w-12 h-12 md:w-16 md:h-16 object-contain -rotate-6 hover:scale-110 transition-transform">
                     </div>
                 </div>
 
-                <div class="ship-card p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-flat-lg">
-                    <img src="./slidePrize.png" alt="Slide Deck Prize" class="w-20 h-20 object-contain shrink-0">
-                    <div class="flex-1 text-center sm:text-left">
-                        <h4 class="text-2xl font-bold mb-2 text-shipWhite">Slide Deck Prize</h4>
-                        <!-- TODO: UPDATE SLIDE DECK PRIZE DESCRIPTION AND IMAGE ONCE FINALIZED BEFORE EVENT -->
-                        <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded for the most compelling presentation made in Adobe Express. Showcase your vision, impact, app screenshots, and a demo video all within your deck.</p>
-                        <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
-                    </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-24" id="leaderboards-container"></div>
+
+                <div class="text-center mb-8">
+                    <h4 id="bubbles-title" class="text-2xl font-bold mb-2 text-shipWhite">Everything Shipped</h4>
+                    <p id="bubbles-subtitle" class="text-shipGray">Saluting every team that crossed the finish line.</p>
                 </div>
-
-            </div>
-        </div>
-    </section>
-
-    <section id="post-event-section" class="py-20 hidden relative overflow-hidden">
-        <img src="./largeCat2.svg" class="absolute -right-10 top-[40%] -translate-y-1/2 opacity-20 animate-float-slow pointer-events-none w-[50vw] max-w-[600px]" alt="Giant Floating Cat">
-
-        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
-            <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center">Hackathon Archive</h2>
-            
-            <div class="flex items-center justify-center gap-4 md:gap-8 mb-16 px-4">
-                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-                    <img src="./builder1.png" alt="Sticker 1" class="w-12 h-12 md:w-16 md:h-16 object-contain -rotate-12 hover:scale-110 transition-transform">
-                    <img src="./builder2.png" alt="Sticker 2" class="w-12 h-12 md:w-16 md:h-16 object-contain rotate-6 hover:scale-110 transition-transform">
-                </div>
-                <h3 id="archive-title" class="text-3xl md:text-5xl font-bold tracking-tight text-center text-shipWhite whitespace-nowrap">Results</h3>
-                <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-                    <img src="./builder3.png" alt="Sticker 3" class="w-12 h-12 md:w-16 md:h-16 object-contain rotate-12 hover:scale-110 transition-transform">
-                    <img src="./builder4.png" alt="Sticker 4" class="w-12 h-12 md:w-16 md:h-16 object-contain -rotate-6 hover:scale-110 transition-transform">
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mb-24" id="leaderboards-container"></div>
-
-            <div class="text-center mb-8">
-                <h4 id="bubbles-title" class="text-2xl font-bold mb-2 text-shipWhite">Everything Shipped</h4>
-                <p id="bubbles-subtitle" class="text-shipGray">Saluting every team that crossed the finish line.</p>
-            </div>
-            
-            <div class="relative w-full min-h-[400px] flex flex-wrap justify-center content-center gap-4 p-8 border-2 border-[#5F4C66] rounded-2xl bg-shipCard shadow-flat-lg" id="bubbles-container"></div>
-        </div>
-    </section>
-
-    <section id="sponsors-section" class="py-20 relative">
-        <div class="max-w-[1100px] mx-auto px-6 lg:px-8 relative z-10">
-            <img src="./mediumCat2.svg" class="absolute -left-16 -top-16 opacity-70 animate-float-fast pointer-events-none w-24 md:w-32 hidden md:block scale-x-[-1]" alt="Floating Cat">
-            
-            <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center">Event Partners</h2>
-            <h3 class="text-3xl font-bold tracking-tight mb-8 text-center text-shipWhite">Powered by the best.</h3>
-
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <a href="https://edu.adobe.com" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
-                    <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                    <div class="sponsor-base adobe-mask" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png');"></div>
-                    <div class="sponsor-reveal adobe-mask" style="background-image: url('./adobeLogo.png');"></div>
-                </a>
-                <a href="https://www.revenuecat.com" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
-                    <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                    <div class="sponsor-base" style="-webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');"></div>
-                    <div class="sponsor-reveal" style="background-image: url('./revenueLogo.png');"></div>
-                </a>
-                <a href="https://www.instagram.com/txstswe/" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
-                    <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                    <div class="sponsor-base swe-mask" style="-webkit-mask-image: url('./sweLogo.png'); mask-image: url('./sweLogo.png');"></div>
-                    <div class="sponsor-reveal swe-mask" style="background-image: url('./sweLogo.png');"></div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="hosts" class="py-24 border-t-2 border-[#5F4C66] bg-[#2D1E3D]">
-        <div class="max-w-[1200px] mx-auto px-6 lg:px-8 text-center">
-            <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-shipWhite">Meet the judges.</h3>
-            <p class="text-shipGray max-w-2xl mx-auto mb-16">Fellow TXST builders who grew closer through hackathons. We're here to help you ship your best work.</p>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
-                <a href="https://www.linkedin.com/in/meidad-troper-13383a28a/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
-                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
-                        <img src="./meidadHeadshot.jpeg" alt="Meidad Troper" class="w-full h-full rounded-full object-cover">
-                    </div>
-                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
-                        Meidad Troper
-                        <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                    </h4>
-                    <p class="text-[13px] text-shipGray mt-1">Image Quality Engineer @ Apple</p>
-                </a>
                 
-                <a href="https://www.linkedin.com/in/priyanka-karki/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
-                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
-                        <img src="./priyankaHeadshot.png" alt="Priyanka Karki" class="w-full h-full rounded-full object-cover">
-                    </div>
-                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
-                        Priyanka Karki
-                        <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                    </h4>
-                    <p class="text-[13px] text-shipGray mt-1">Ex-SDE Intern (2x) @ Amazon</p>
-                </a>
+                <div class="relative w-full min-h-[400px] flex flex-wrap justify-center content-center gap-4 p-8 border-2 border-[#5F4C66] rounded-2xl bg-shipCard shadow-flat-lg" id="bubbles-container"></div>
+            </div>
+        </section>
+
+        <section id="sponsors-section" class="pt-12 pb-24 relative">
+            <div class="max-w-[1100px] mx-auto px-6 lg:px-8 relative z-10">
+                <img src="./mediumCat2.svg" class="absolute left-6 sm:-left-16 -top-12 sm:-top-16 opacity-70 animate-float-fast pointer-events-none w-20 md:w-32 scale-x-[-1] z-0" alt="Floating Cat">
                 
-                <a href="https://www.linkedin.com/in/vaidic-soni1004/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
-                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
-                        <img src="./vaidicHeadshot.png" alt="Vaidic Soni" class="w-full h-full rounded-full object-cover">
-                    </div>
-                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
-                        Vaidic Soni
-                        <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                    </h4>
-                    <p class="text-[13px] text-shipGray mt-1">AI Intern @ The Launch Box</p>
-                </a>
+                <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center relative z-10">Event Partners</h2>
+                <h3 class="text-3xl font-bold tracking-tight mb-8 text-center text-shipWhite relative z-10">Powered by the best.</h3>
 
-                <a href="https://www.linkedin.com/in/kelvinmathew/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
-                    <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
-                        <img src="./kelvinHeadshot.png" alt="Kelvin Mathew" class="w-full h-full rounded-full object-cover">
-                    </div>
-                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
-                        Kelvin Mathew
-                        <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                    </h4>
-                    <p class="text-[13px] text-shipGray mt-1">Ex-SDE Intern @ Amazon</p>
-                </a>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 relative z-10">
+                    <a href="https://edu.adobe.com" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
+                        <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        <div class="sponsor-base adobe-mask" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png');"></div>
+                        <div class="sponsor-reveal adobe-mask" style="background-image: url('./adobeLogo.png');"></div>
+                    </a>
+                    <a href="https://www.revenuecat.com" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
+                        <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        <div class="sponsor-base" style="-webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');"></div>
+                        <div class="sponsor-reveal" style="background-image: url('./revenueLogo.png');"></div>
+                    </a>
+                    <a href="https://www.instagram.com/txstswe/" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
+                        <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        <div class="sponsor-base swe-mask" style="-webkit-mask-image: url('./sweLogo.png'); mask-image: url('./sweLogo.png');"></div>
+                        <div class="sponsor-reveal swe-mask" style="background-image: url('./sweLogo.png');"></div>
+                    </a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <footer class="py-4 border-t-2 border-[#5F4C66] text-center text-shipGray text-sm bg-shipBg">
-        <div class="max-w-[1400px] mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p>&copy; TXST Shipathon. A local event part of the global Shipathon 2026.</p>
-            <div class="flex items-center gap-6">
-                <a href="https://revenuecat-shipaton-2026.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Submissions+open" target="_blank" class="text-shipGray/60 hover:text-shipWhite transition-colors flex items-center gap-1 text-xs group">
-                    Global Devpost 
-                    <svg class="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-                </a>
-                <button onclick="document.getElementById('coc-modal').classList.remove('hidden')" class="hover:text-shipWhite transition-colors underline underline-offset-4">Code of Conduct</button>
+        <section id="hosts" class="py-24 border-t-2 border-[#5F4C66] bg-[#2D1E3D]">
+            <div class="max-w-[1200px] mx-auto px-6 lg:px-8 text-center">
+                <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-shipWhite">Meet the judges.</h3>
+                <p class="text-shipGray max-w-2xl mx-auto mb-16">Fellow TXST builders who grew closer through hackathons. We're here to help you ship your best work.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-12">
+                    <a href="https://www.linkedin.com/in/meidad-troper-13383a28a/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
+                        <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
+                            <img src="./meidadHeadshot.jpeg" alt="Meidad Troper" class="w-full h-full rounded-full object-cover">
+                        </div>
+                        <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
+                            Meidad Troper
+                            <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </h4>
+                        <p class="text-[13px] text-shipGray mt-1">Image Quality Engineer @ Apple</p>
+                    </a>
+                    
+                    <a href="https://www.linkedin.com/in/priyanka-karki/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
+                        <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
+                            <img src="./priyankaHeadshot.png" alt="Priyanka Karki" class="w-full h-full rounded-full object-cover">
+                        </div>
+                        <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
+                            Priyanka Karki
+                            <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </h4>
+                        <p class="text-[13px] text-shipGray mt-1">Ex-SDE Intern (2x) @ Amazon</p>
+                    </a>
+                    
+                    <a href="https://www.linkedin.com/in/vaidic-soni1004/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
+                        <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
+                            <img src="./vaidicHeadshot.png" alt="Vaidic Soni" class="w-full h-full rounded-full object-cover">
+                        </div>
+                        <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
+                            Vaidic Soni
+                            <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </h4>
+                        <p class="text-[13px] text-shipGray mt-1">AI Intern @ The Launch Box</p>
+                    </a>
+
+                    <a href="https://www.linkedin.com/in/kelvinmathew/" target="_blank" class="flex flex-col items-center group cursor-pointer block">
+                        <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
+                            <img src="./kelvinHeadshot.png" alt="Kelvin Mathew" class="w-full h-full rounded-full object-cover">
+                        </div>
+                        <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
+                            Kelvin Mathew
+                            <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                        </h4>
+                        <p class="text-[13px] text-shipGray mt-1">Ex-SDE Intern @ Amazon</p>
+                    </a>
+                </div>
             </div>
-        </div>
-    </footer>
+        </section>
+
+        <footer class="py-4 border-t-2 border-[#5F4C66] text-center text-shipGray text-sm bg-shipBg mt-auto">
+            <div class="max-w-[1400px] mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p>&copy; TXST Shipathon. A local event part of the global Shipathon 2026.</p>
+                <div class="flex items-center gap-6">
+                    <a href="https://revenuecat-shipaton-2026.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Submissions+open" target="_blank" class="text-shipGray/60 hover:text-shipWhite transition-colors flex items-center gap-1 text-xs group">
+                        Global Devpost 
+                        <svg class="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </a>
+                    <button onclick="document.getElementById('coc-modal').classList.remove('hidden')" class="hover:text-shipWhite transition-colors underline underline-offset-4">Code of Conduct</button>
+                </div>
+            </div>
+        </footer>
+    </div> <!-- End of overflow wrapper -->
 
     <div id="coc-modal" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-shipCard border-2 border-[#5F4C66] rounded-xl max-w-2xl w-full p-8 relative shadow-flat-lg">
