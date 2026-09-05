@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth overflow-x-hidden">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TXST Shipathon</title>
     
-    <!-- Safari-friendly Favicon loading -->
     <link rel="icon" href="./tinyCat.png" type="image/png">
     <link rel="apple-touch-icon" href="./tinyCat.png">
     <link rel="shortcut icon" href="./tinyCat.png">
@@ -54,16 +53,17 @@
     </script>
     
     <style>
-        body { background-color: #1D162C; color: #FFF7EC; overflow-x: hidden; }
+        html, body { overflow-x: hidden; width: 100%; max-width: 100%; }
+        body { background-color: #1D162C; color: #FFF7EC; }
         .bg-grid {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: radial-gradient(circle at center, #FFF7EC 2px, transparent 2.5px);
             background-size: 150px 150px; opacity: 0.25; z-index: -1; pointer-events: none;
         }
         .glow-bg {
             position: absolute; top: 0; right: 0; transform: translate(20%, -20%);
             width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,129,0,0.12) 0%, rgba(14,9,22,0) 65%);
-            z-index: -1; pointer-events: none;
+            z-index: -1; pointer-events: none; max-width: 100vw;
         }
         .ship-card {
             background-color: #2E243D; 
@@ -77,26 +77,41 @@
             border-radius: 8px;
         }
         
-        /* Sponsor Reveal Effect */
         .sponsor-card { position: relative; overflow: hidden; display: block; text-decoration: none; }
         .sponsor-base, .sponsor-reveal {
-            position: absolute; inset: 0; width: 100%; height: 100%;
-            -webkit-mask-size: 80%; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
-            mask-size: 80%; mask-repeat: no-repeat; mask-position: center;
-            background-size: 80%; background-repeat: no-repeat; background-position: center;
+            position: absolute; inset: 0; margin: auto; 
+            width: 75%; height: 65%; /* Default scale for RevenueCat */
+            -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
+            mask-size: contain; mask-repeat: no-repeat; mask-position: center;
+            background-size: contain; background-repeat: no-repeat; background-position: center;
         }
-        .sponsor-base { background-color: #4b5563; z-index: 1; }
+        .sponsor-base { 
+            background-color: #4b5563; 
+            z-index: 1; 
+            opacity: 1;
+            transition: opacity 0.4s ease-in-out;
+        }
         .sponsor-reveal {
             opacity: 0; transition: opacity 0.4s ease-in-out; z-index: 2;
+        }
+        .sponsor-card:hover .sponsor-base {
+            opacity: 0;
         }
         .sponsor-card:hover .sponsor-reveal {
             opacity: 1; 
         }
+
+        @media (max-width: 767px) {
+            .sponsor-base { opacity: 0 !important; }
+            .sponsor-reveal { opacity: 1 !important; }
+        }
+        
+        /* Specific sizing overrides using percentages for dynamic scaling */
         .adobe-mask {
-            -webkit-mask-size: 60%; mask-size: 60%; background-size: 60%;
+            width: 60%; height: 50%;
         }
         .swe-mask {
-            -webkit-mask-size: 50%; mask-size: 50%; background-size: 50%;
+            width: 55%; height: 55%;
         }
 
         .host-img-wrapper {
@@ -133,7 +148,7 @@
         }
     </style>
 </head>
-<body class="font-sans antialiased selection:bg-shipOrange selection:text-shipWhite pb-20 text-shipWhite">
+<body class="font-sans antialiased selection:bg-shipOrange selection:text-shipWhite pb-20 text-shipWhite overflow-x-hidden">
     <div class="bg-grid"></div>
     <div class="glow-bg"></div>
 
@@ -168,7 +183,7 @@
 
         <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
             <div class="flex flex-col lg:flex-row items-center gap-4 lg:gap-10">
-                <div class="flex-1 text-left w-full max-w-[1100px]"> 
+                <div class="text-left w-full lg:w-2/3 xl:w-3/4 max-w-[1100px] lg:pr-8 xl:pr-0"> 
                     <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight leading-[1.05] mb-6 text-shipWhite">
                         A local edition of the world's <span class="text-shipOrange">biggest</span> mobile hackathon.
                     </h1>
@@ -267,13 +282,11 @@
                     </div>
                     <h4 class="text-xl font-bold mb-3 text-shipWhite">The Challenge</h4>
                     <div id="prompt-content-dynamic" class="flex-1 flex flex-col justify-between">
-                        <!-- Populated by JS -->
                     </div>
                 </div>
             </div>
             
             <div id="full-prompt-details" class="mt-8 ship-card p-8 border-shipOrange/30 hidden shadow-flat-lg">
-                <!-- Populated by JS -->
             </div>
 
         </div>
@@ -292,7 +305,8 @@
                     <img src="./grandPrize.png" alt="Grand Prize" class="w-20 h-20 object-contain shrink-0">
                     <div class="flex-1 text-center sm:text-left">
                         <h4 class="text-2xl font-bold mb-2 text-shipWhite">Grand Prize</h4>
-                        <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded to the overall best mobile application built during the hackathon. The exact prize is hidden, but it's our biggest loot yet.</p>
+                        <!-- TODO: UPDATE GRAND PRIZE DESCRIPTION AND IMAGE ONCE FINALIZED BEFORE EVENT -->
+                        <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded to the overall best mobile app. Creatively integrate the prompt into a practical or entertaining experience. Full functionality isn't required, but ingenuity, striking design, and solid execution earn top marks.</p>
                         <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                     </div>
                 </div>
@@ -301,7 +315,8 @@
                     <img src="./slidePrize.png" alt="Slide Deck Prize" class="w-20 h-20 object-contain shrink-0">
                     <div class="flex-1 text-center sm:text-left">
                         <h4 class="text-2xl font-bold mb-2 text-shipWhite">Slide Deck Prize</h4>
-                        <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded for the most visually compelling presentation and prototype. Adobe Express and AI tools strongly encouraged.</p>
+                        <!-- TODO: UPDATE SLIDE DECK PRIZE DESCRIPTION AND IMAGE ONCE FINALIZED BEFORE EVENT -->
+                        <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded for the most compelling presentation made in Adobe Express. Showcase your vision, impact, app screenshots, and a demo video all within your deck.</p>
                         <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                     </div>
                 </div>
@@ -343,22 +358,22 @@
         <div class="max-w-[1100px] mx-auto px-6 lg:px-8 relative z-10">
             <img src="./mediumCat2.svg" class="absolute -left-16 -top-16 opacity-70 animate-float-fast pointer-events-none w-24 md:w-32 hidden md:block scale-x-[-1]" alt="Floating Cat">
             
-            <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center">Event Sponsors</h2>
+            <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center">Event Partners</h2>
             <h3 class="text-3xl font-bold tracking-tight mb-8 text-center text-shipWhite">Powered by the best.</h3>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <!-- Adobe Sponsor -->
-                <a href="https://edu.adobe.com" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
+                <a href="https://edu.adobe.com" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
+                    <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                     <div class="sponsor-base adobe-mask" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png');"></div>
                     <div class="sponsor-reveal adobe-mask" style="background-image: url('./adobeLogo.png');"></div>
                 </a>
-                <!-- RevenueCat Sponsor -->
-                <a href="https://www.revenuecat.com" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
+                <a href="https://www.revenuecat.com" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
+                    <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                     <div class="sponsor-base" style="-webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');"></div>
                     <div class="sponsor-reveal" style="background-image: url('./revenueLogo.png');"></div>
                 </a>
-                <!-- SWE Sponsor -->
-                <a href="https://www.instagram.com/txstswe/" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg">
+                <a href="https://www.instagram.com/txstswe/" target="_blank" class="ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
+                    <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                     <div class="sponsor-base swe-mask" style="-webkit-mask-image: url('./sweLogo.png'); mask-image: url('./sweLogo.png');"></div>
                     <div class="sponsor-reveal swe-mask" style="background-image: url('./sweLogo.png');"></div>
                 </a>
@@ -376,7 +391,10 @@
                     <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
                         <img src="./meidadHeadshot.jpeg" alt="Meidad Troper" class="w-full h-full rounded-full object-cover">
                     </div>
-                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Meidad Troper</h4>
+                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
+                        Meidad Troper
+                        <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </h4>
                     <p class="text-[13px] text-shipGray mt-1">Image Quality Engineer @ Apple</p>
                 </a>
                 
@@ -384,7 +402,10 @@
                     <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
                         <img src="./priyankaHeadshot.png" alt="Priyanka Karki" class="w-full h-full rounded-full object-cover">
                     </div>
-                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Priyanka Karki</h4>
+                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
+                        Priyanka Karki
+                        <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </h4>
                     <p class="text-[13px] text-shipGray mt-1">Ex-SDE Intern (2x) @ Amazon</p>
                 </a>
                 
@@ -392,7 +413,10 @@
                     <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
                         <img src="./vaidicHeadshot.png" alt="Vaidic Soni" class="w-full h-full rounded-full object-cover">
                     </div>
-                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Vaidic Soni</h4>
+                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
+                        Vaidic Soni
+                        <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </h4>
                     <p class="text-[13px] text-shipGray mt-1">AI Intern @ The Launch Box</p>
                 </a>
 
@@ -400,7 +424,10 @@
                     <div class="host-img-wrapper mb-5 w-[110px] h-[110px] relative bg-shipBg">
                         <img src="./kelvinHeadshot.png" alt="Kelvin Mathew" class="w-full h-full rounded-full object-cover">
                     </div>
-                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors">Kelvin Mathew</h4>
+                    <h4 class="text-[17px] font-bold text-shipOrange transition-colors flex items-center justify-center gap-1.5">
+                        Kelvin Mathew
+                        <svg class="w-4 h-4 md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                    </h4>
                     <p class="text-[13px] text-shipGray mt-1">Ex-SDE Intern @ Amazon</p>
                 </a>
             </div>
@@ -434,7 +461,6 @@
         </div>
     </div>
 
-    <!-- Local Dev UI Tool -->
     <div id="dev-controls" class="fixed bottom-4 left-4 z-[100] hidden bg-black/90 backdrop-blur-md border-2 border-[#5F4C66] p-4 rounded-xl shadow-flat-lg flex-col gap-2">
         <span class="text-[10px] text-shipGray font-mono uppercase tracking-wider">Local Dev Tools</span>
         <div class="flex gap-2">
@@ -447,34 +473,23 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            
-            // ==========================================
-            // FEATURE FLAG & SETTINGS
-            // 0 = PRE HACKATHON
-            // 1 = DURING HACKATHON 
-            // 2 = GRADING STAGE (Submissions closed, results pending)
-            // 3 = POST HACKATHON (Results revealed)
-            // ==========================================
             let HACKATHON_STATE = 0; 
 
-            // ==========================================
-            // PROMPT CONTENT (FILL THESE IN LATER)
-            // ==========================================
+            // TODO: UPDATE THESE STRINGS WHEN HACKATHON BEGINS AND PROMPT IS REVEALED
             const HACKATHON_CONTENT = {
                 preRequisites: "Ensure you have the necessary IDEs installed (e.g., Xcode for iOS or Android Studio) before the event begins. You will also need an <a href='https://adobesparkpost-web.app.link/e/cXxlzPSXV4b' target='_blank' class='text-shipOrange hover:underline'>Adobe Express account</a> for your presentation. Don't forget to bring your laptop fully charged (power outlets may be limited)!",
-                promptDescription: "Your challenge is to build an app that translates cat meows into Shakespearean sonnets while calculating the exact trajectory of a laser pointer. May the odds be ever in your favor.", 
-                categories: ["Meow Translation", "Quantum Hairballs", "Feline Astrophysics", "Cardboard Box Analysis"], 
-                submissionRules: "Submissions must be written entirely in Brainfuck or Malbolge. A 50-page thesis on why cats knock glasses off tables is required. Also, the app must run on a smart toaster.", 
-                slideTemplateLink: "", 
-                googleFormLink: "https://forms.google.com/YOUR_LINK",
-                adobeReferralLink: "https://adobesparkpost-web.app.link/e/cXxlzPSXV4b"
+                promptDescription: "Your challenge is to build an app that...", // UPDATE THIS
+                categories: ["Category 1", "Category 2", "Category 3", "Category 4"], // UPDATE THIS
+                submissionRules: "Submissions must include...", // UPDATE THIS
+                slideTemplateLink: "", // UPDATE THIS
+                googleFormLink: "https://forms.google.com/YOUR_LINK", // UPDATE THIS
+                adobeReferralLink: "https://adobesparkpost-web.app.link/e/cXxlzPSXV4b" // UPDATE THIS IF NEEDED
             };
 
             const START_DATE = new Date(2026, 8, 14, 9, 0, 0).getTime(); 
             const END_DATE = new Date(2026, 8, 14, 23, 59, 0).getTime(); 
 
-            // Put mock/random data here for Stage 2
-            // Put final actual winners here for Stage 3 (will be revealed).
+            // TODO: UPDATE THESE ARRAYS WITH ACTUAL WINNERS/SUBMISSIONS POST-HACKATHON
             const WINNING_DATA = {
                 grandPrize: [
                     { app: "StudyBuddy AI", team: "Alice, Bob, Charlie" },
@@ -527,7 +542,7 @@
                             <p class="text-shipGray mb-2 text-sm font-semibold uppercase tracking-wider">Preparation</p>
                             <p class="text-shipWhite text-sm leading-relaxed">${HACKATHON_CONTENT.preRequisites}</p>
                         </div>
-                        <p class="text-shipOrange font-bold text-lg mt-auto">Full prompt announced at event kickoff.</p>
+                        <p class="text-shipOrange font-bold text-lg mt-auto">Full prompt revealed here at event kickoff.</p>
                     `;
                 } else {
                     const catHTML = HACKATHON_CONTENT.categories.map(c => `<div class="bg-[#1D162C] border border-shipBorder/50 px-3 py-2 rounded text-xs text-shipGray">${c}</div>`).join('');
@@ -571,16 +586,12 @@
             }
 
             function initializeState() {
-                
-                // Set appropriate Hero Cat Image based on Stage
                 if (heroCatImg) {
                     if (HACKATHON_STATE === 1 || HACKATHON_STATE === 2) {
                         heroCatImg.src = './largeCat.webp';
-                        // Keep large cat shifted slightly inward on the right
                         heroCatImg.className = "absolute right-20 lg:right-32 top-48 opacity-100 drop-shadow-[0_0_35px_rgba(255,129,0,0.25)] animate-float pointer-events-none w-48 md:w-64 hidden lg:block";
                     } else {
                         heroCatImg.src = './mediumCat.svg';
-                        // Revert medium cat to right side as requested
                         heroCatImg.className = "absolute right-10 lg:right-24 top-48 opacity-100 drop-shadow-[0_0_35px_rgba(255,129,0,0.25)] animate-float pointer-events-none w-48 md:w-64 hidden lg:block";
                     }
                 }
@@ -637,7 +648,6 @@
                     renderLeaderboards(HACKATHON_STATE);
                 }
 
-                // Move shortcuts to the right when button is hidden (Stages 2 & 3)
                 if (HACKATHON_STATE === 2 || HACKATHON_STATE === 3) {
                     navShortcuts.classList.remove('hidden');
                     navShortcuts.classList.add('flex', 'ml-auto', 'mr-8');
@@ -673,7 +683,6 @@
                 timerInterval = setInterval(update, 1000);
             }
 
-            // --- DEV TOOLS (Local Testing) ---
             const hostname = window.location.hostname;
             if (hostname !== 'txstshipaton.com' && hostname !== 'www.txstshipaton.com') {
                 const devControls = document.getElementById('dev-controls');
@@ -685,14 +694,12 @@
                 HACKATHON_STATE = state;
                 clearInterval(timerInterval);
                 
-                // Reset UI before applying new state
                 cdContainer.style.display = '';
                 navBtn.style.display = '';
                 heroSubtitle.style.display = '';
                 heroSubtitle.innerText = "*Registration is mandatory due to venue capacity limits.";
                 document.getElementById('post-event-section').classList.add('hidden');
                 
-                // Reset nav button back to registration mode just in case
                 navBtn.href = "https://luma.com/w7bixtts";
                 navBtn.innerHTML = `Register <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>`;
                 
