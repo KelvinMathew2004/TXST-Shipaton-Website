@@ -65,6 +65,26 @@
             width: 800px; height: 800px; background: radial-gradient(circle, rgba(255,129,0,0.12) 0%, rgba(14,9,22,0) 65%);
             z-index: -1; pointer-events: none; max-width: 100vw;
         }
+        
+        /* Spotlight Overlay Styles */
+        .spotlight-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            background-image: radial-gradient(
+                circle at var(--spot-x, 50%) var(--spot-y, 50%), 
+                transparent 60px, 
+                rgba(14, 9, 22, 0.85) 160px,
+                rgba(10, 5, 15, 0.98) 100%
+            );
+            transition: opacity 1.5s ease-in-out;
+        }
+        .spotlight-overlay.active {
+            opacity: 1;
+        }
+
         .ship-card {
             background-color: #2E243D; 
             border: 2px solid #5F4C66; 
@@ -101,13 +121,8 @@
             opacity: 1; 
         }
 
-        /* Specific sizing overrides using percentages for dynamic scaling */
-        .adobe-mask {
-            width: 60%; height: 50%;
-        }
-        .swe-mask {
-            width: 55%; height: 55%;
-        }
+        .adobe-mask { width: 60%; height: 50%; }
+        .swe-mask { width: 55%; height: 55%; }
 
         .host-img-wrapper {
             border: 2px solid transparent; 
@@ -145,7 +160,9 @@
 </head>
 <body class="font-sans antialiased selection:bg-shipOrange selection:text-shipWhite text-shipWhite overflow-x-hidden bg-[#1D162C]">
     
-    <!-- Wrapper completely blocks horizontal scrolling on mobile -->
+    <!-- Registration Spotlight Overlay -->
+    <div id="register-spotlight" class="spotlight-overlay"></div>
+
     <div class="relative w-full overflow-hidden flex flex-col min-h-screen pb-20">
         <div class="bg-grid"></div>
         <div class="glow-bg"></div>
@@ -303,7 +320,6 @@
                         <img src="./grandPrize.png" alt="Grand Prize" class="w-20 h-20 object-contain shrink-0">
                         <div class="flex-1 text-center sm:text-left">
                             <h4 class="text-2xl font-bold mb-2 text-shipWhite">Grand Prize</h4>
-                            <!-- TODO: UPDATE GRAND PRIZE DESCRIPTION AND IMAGE ONCE FINALIZED BEFORE EVENT -->
                             <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded to the best overall mobile app. Creatively integrate the prompt into a compelling practical or entertaining experience. Full functionality isn't required, but ingenuity, striking design, and solid execution earn top marks.</p>
                             <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                         </div>
@@ -313,7 +329,6 @@
                         <img src="./slidePrize.png" alt="Slide Deck Prize" class="w-20 h-20 object-contain shrink-0">
                         <div class="flex-1 text-center sm:text-left">
                             <h4 class="text-2xl font-bold mb-2 text-shipWhite">Slide Deck Prize</h4>
-                            <!-- TODO: UPDATE SLIDE DECK PRIZE DESCRIPTION AND IMAGE ONCE FINALIZED BEFORE EVENT -->
                             <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded for the most compelling presentation made in Adobe Express. Showcase your vision, impact, app screenshots, and a demo video all within your deck.</p>
                             <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                         </div>
@@ -444,7 +459,7 @@
                 </div>
             </div>
         </footer>
-    </div> <!-- End of overflow wrapper -->
+    </div> 
 
     <div id="coc-modal" class="fixed inset-0 z-[100] hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-shipCard border-2 border-[#5F4C66] rounded-xl max-w-2xl w-full p-8 relative shadow-flat-lg">
@@ -474,21 +489,19 @@
         document.addEventListener('DOMContentLoaded', () => {
             let HACKATHON_STATE = 0; 
 
-            // TODO: UPDATE THESE STRINGS WHEN HACKATHON BEGINS AND PROMPT IS REVEALED
             const HACKATHON_CONTENT = {
                 preRequisites: "Ensure you have the necessary IDEs installed (e.g., Xcode for iOS or Android Studio) before the event begins. You will also need an <a href='https://adobesparkpost-web.app.link/e/cXxlzPSXV4b' target='_blank' class='text-shipOrange hover:underline'>Adobe Express account</a> for your presentation. Don't forget to bring your laptop fully charged (power outlets may be limited)!",
-                promptDescription: "Your challenge is to build an app that...", // UPDATE THIS
-                categories: ["Category 1", "Category 2", "Category 3", "Category 4"], // UPDATE THIS
-                submissionRules: "Submissions must include...", // UPDATE THIS
-                slideTemplateLink: "", // UPDATE THIS
-                googleFormLink: "https://forms.google.com/YOUR_LINK", // UPDATE THIS
-                adobeReferralLink: "https://adobesparkpost-web.app.link/e/cXxlzPSXV4b" // UPDATE THIS IF NEEDED
+                promptDescription: "Your challenge is to build an app that...", 
+                categories: ["Category 1", "Category 2", "Category 3", "Category 4"], 
+                submissionRules: "Submissions must include...", 
+                slideTemplateLink: "", 
+                googleFormLink: "https://forms.google.com/YOUR_LINK", 
+                adobeReferralLink: "https://adobesparkpost-web.app.link/e/cXxlzPSXV4b" 
             };
 
             const START_DATE = new Date(2026, 8, 14, 9, 0, 0).getTime(); 
             const END_DATE = new Date(2026, 8, 14, 23, 59, 0).getTime(); 
 
-            // TODO: UPDATE THESE ARRAYS WITH ACTUAL WINNERS/SUBMISSIONS POST-HACKATHON
             const WINNING_DATA = {
                 grandPrize: [
                     { app: "StudyBuddy AI", team: "Alice, Bob, Charlie" },
@@ -533,6 +546,60 @@
             const heroSubtitle = document.getElementById('hero-subtitle');
             const heroContainer = document.getElementById('hero-action-container');
             const heroCatImg = document.getElementById('hero-cat-img');
+            
+            // --- Intro Spotlight Logic ---
+            const spotlight = document.getElementById('register-spotlight');
+            
+            function updateSpotlightPosition() {
+                const heroBtn = document.getElementById('hero-action-btn');
+                if (!heroBtn || !spotlight) return;
+                const rect = heroBtn.getBoundingClientRect();
+                // Ensure button is visible on screen before tracking
+                if (rect.width === 0 && rect.height === 0) return; 
+                
+                const x = rect.left + rect.width / 2;
+                const y = rect.top + rect.height / 2;
+                spotlight.style.setProperty('--spot-x', `${x}px`);
+                spotlight.style.setProperty('--spot-y', `${y}px`);
+            }
+
+            function triggerSpotlight() {
+                // Check if the spotlight has already been shown on this device
+                if (localStorage.getItem('shipathon_spotlight_seen') === 'true') {
+                    return; // Skip showing the spotlight
+                }
+
+                // Only trigger if user hasn't scrolled far down
+                if (window.scrollY < 100) {
+                    updateSpotlightPosition();
+                    spotlight.classList.add('active');
+                    window.addEventListener('resize', updateSpotlightPosition);
+
+                    // Mark as seen in localStorage so it doesn't happen again
+                    localStorage.setItem('shipathon_spotlight_seen', 'true');
+
+                    const hideSpotlight = () => {
+                        spotlight.classList.remove('active');
+                        window.removeEventListener('scroll', hideSpotlight);
+                        document.removeEventListener('click', hideSpotlight);
+                        document.removeEventListener('mousemove', hideSpotlight);
+                        window.removeEventListener('resize', updateSpotlightPosition);
+                    };
+
+                    // Delay adding removal listeners to prevent immediate micro-interactions clearing it
+                    setTimeout(() => {
+                        window.addEventListener('scroll', hideSpotlight, { passive: true, once: true });
+                        document.addEventListener('click', hideSpotlight, { passive: true, once: true });
+                        document.addEventListener('mousemove', hideSpotlight, { passive: true, once: true });
+                    }, 800);
+
+                    // Auto dismiss after 7 seconds if no interaction
+                    setTimeout(hideSpotlight, 7000);
+                }
+            }
+
+            // Trigger the spotlight slightly after layout renders
+            setTimeout(triggerSpotlight, 500);
             
             function buildPromptHTML(state) {
                 if (state === 0) {
