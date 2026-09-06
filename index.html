@@ -569,33 +569,40 @@
                     return; // Skip showing the spotlight
                 }
 
-                // Only trigger if user hasn't scrolled far down
-                if (window.scrollY < 100) {
-                    updateSpotlightPosition();
-                    spotlight.classList.add('active');
-                    window.addEventListener('resize', updateSpotlightPosition);
+                const heroBtn = document.getElementById('hero-action-btn');
+                if (!heroBtn || !spotlight) return;
 
-                    // Mark as seen in localStorage so it doesn't happen again
-                    localStorage.setItem('shipathon_spotlight_seen', 'true');
+                // Smoothly scroll the page so the button is centered in the viewport
+                heroBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
-                    const hideSpotlight = () => {
-                        spotlight.classList.remove('active');
-                        window.removeEventListener('scroll', hideSpotlight);
-                        document.removeEventListener('click', hideSpotlight);
-                        document.removeEventListener('mousemove', hideSpotlight);
-                        window.removeEventListener('resize', updateSpotlightPosition);
-                    };
+                // Continuously update the spotlight position for 1.2s to track the button while scrolling
+                const trackScroll = setInterval(updateSpotlightPosition, 16); 
+                setTimeout(() => clearInterval(trackScroll), 1200);
 
-                    // Delay adding removal listeners to prevent immediate micro-interactions clearing it
-                    setTimeout(() => {
-                        window.addEventListener('scroll', hideSpotlight, { passive: true, once: true });
-                        document.addEventListener('click', hideSpotlight, { passive: true, once: true });
-                        document.addEventListener('mousemove', hideSpotlight, { passive: true, once: true });
-                    }, 800);
+                spotlight.classList.add('active');
+                window.addEventListener('resize', updateSpotlightPosition);
 
-                    // Auto dismiss after 7 seconds if no interaction
-                    setTimeout(hideSpotlight, 7000);
-                }
+                // Mark as seen in localStorage so it doesn't happen again
+                localStorage.setItem('shipathon_spotlight_seen', 'true');
+
+                const hideSpotlight = () => {
+                    spotlight.classList.remove('active');
+                    window.removeEventListener('scroll', hideSpotlight);
+                    document.removeEventListener('click', hideSpotlight);
+                    document.removeEventListener('mousemove', hideSpotlight);
+                    window.removeEventListener('resize', updateSpotlightPosition);
+                };
+
+                // Delay adding removal listeners longer (1.5s) to allow smooth scroll to finish 
+                // without accidentally triggering the 'scroll' dismiss event.
+                setTimeout(() => {
+                    window.addEventListener('scroll', hideSpotlight, { passive: true, once: true });
+                    document.addEventListener('click', hideSpotlight, { passive: true, once: true });
+                    document.addEventListener('mousemove', hideSpotlight, { passive: true, once: true });
+                }, 1500);
+
+                // Auto dismiss after 7 seconds if no interaction
+                setTimeout(hideSpotlight, 7000);
             }
 
             // Trigger the spotlight slightly after layout renders
