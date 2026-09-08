@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TXST Shipathon</title>
+    <title>TXST Shipaton</title>
     
     <link rel="icon" href="./tinyCat.png" type="image/png">
     <link rel="apple-touch-icon" href="./tinyCat.png">
@@ -173,7 +173,7 @@
                     <img src="./tinyCat.png" alt="Logo" class="w-16 h-16 object-contain shrink-0">
                     
                     <span class="font-pixel font-normal text-lg sm:text-xl md:text-2xl text-shipWhite pt-2 whitespace-nowrap flex items-center">
-                        TXST Shipathon
+                        TXST Shipaton
                         <img src="./tiny26.png" alt="26" class="h-[12px] sm:h-[16px] object-contain ml-2 -mt-3 sm:-mt-4">
                     </span>
                 </div>
@@ -204,7 +204,7 @@
                         </h1>
                         
                         <p class="text-base sm:text-lg text-shipGray mb-8 sm:mb-10 max-w-3xl leading-relaxed pr-2 sm:pr-0">
-                            Shipathon is RevenueCat's global hackathon. Join our Texas State event to build apps, win local prizes, and ship. Open to all majors! Build your prototype here, then level it up for the global competition.
+                            Shipaton is RevenueCat's global hackathon. Join our Texas State event to build apps, win local prizes, and ship. Open to all majors! Build your prototype here, then level it up for the global competition.
                         </p>
                         
                         <div id="countdown-container" class="mb-6 w-full overflow-x-auto pb-6">
@@ -449,7 +449,7 @@
 
         <footer class="py-4 border-t-2 border-[#5F4C66] text-center text-shipGray text-sm bg-shipBg mt-auto">
             <div class="max-w-[1400px] mx-auto px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p>&copy; TXST Shipathon. A local event part of the global Shipathon 2026.</p>
+                <p>&copy; TXST Shipaton. A local event part of the global Shipaton 2026.</p>
                 <div class="flex items-center gap-6">
                     <a href="https://revenuecat-shipaton-2026.devpost.com/?ref_feature=challenge&ref_medium=your-open-hackathons&ref_content=Submissions+open" target="_blank" class="text-shipGray/60 hover:text-shipWhite transition-colors flex items-center gap-1 text-xs group">
                         Global Devpost 
@@ -468,7 +468,7 @@
             </button>
             <h3 class="text-2xl font-bold mb-4 text-shipWhite">Code of Conduct</h3>
             <div class="text-shipGray text-sm space-y-4 max-h-[60vh] overflow-y-auto pr-2">
-                <p>TXST Shipathon is dedicated to providing a safe, inclusive, and welcoming experience for everyone, regardless of background or identity.</p>
+                <p>TXST Shipaton is dedicated to providing a safe, inclusive, and welcoming experience for everyone, regardless of background or identity.</p>
                 <p>We do not tolerate harassment, discrimination, or disrespectful behavior in any form. All attendees, sponsors, partners, and volunteers are required to comply with this code of conduct throughout the entirety of the event.</p>
                 <p>If you experience or witness any unacceptable behavior, please immediately reach out to a judge or event organizer. Violations may result in immediate expulsion from the hackathon at the sole discretion of the organizers.</p>
             </div>
@@ -565,7 +565,7 @@
 
             function triggerSpotlight() {
                 // Check if the spotlight has already been shown on this device
-                if (localStorage.getItem('shipathon_spotlight_seen') === 'true') {
+                if (localStorage.getItem('shipaton_spotlight_seen') === 'true') {
                     return; // Skip showing the spotlight
                 }
 
@@ -583,7 +583,7 @@
                 window.addEventListener('resize', updateSpotlightPosition);
 
                 // Mark as seen in localStorage so it doesn't happen again
-                localStorage.setItem('shipathon_spotlight_seen', 'true');
+                localStorage.setItem('shipaton_spotlight_seen', 'true');
 
                 const hideSpotlight = () => {
                     spotlight.classList.remove('active');
