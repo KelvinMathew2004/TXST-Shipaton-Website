@@ -156,6 +156,199 @@
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 0.5rem;
         }
+
+        /* Category Fusion Randomizer */
+        .fusion-randomizer {
+            position: relative;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 50% -20%, rgba(255,129,0,.18), transparent 42%),
+                linear-gradient(180deg, rgba(46,36,61,.96), rgba(29,22,44,.98));
+        }
+        .fusion-randomizer::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(115deg, transparent 0 42%, rgba(255,255,255,.035) 48%, transparent 54%);
+        }
+        .fusion-machine-shell {
+            position: relative;
+            border: 2px solid #5F4C66;
+            border-radius: 18px;
+            padding: 16px;
+            background: linear-gradient(145deg, #3a2d4c 0%, #21192f 55%, #15101f 100%);
+            box-shadow:
+                inset 0 1px 0 rgba(255,255,255,.08),
+                inset 0 -12px 22px rgba(0,0,0,.22),
+                8px 8px 0 rgba(10,5,15,.35),
+                0 0 44px rgba(255,129,0,.08);
+            perspective: 900px;
+        }
+        .fusion-machine-shell::after {
+            content: "";
+            position: absolute;
+            inset: 7px;
+            border: 1px solid rgba(255,186,85,.16);
+            border-radius: 12px;
+            pointer-events: none;
+        }
+        .fusion-machine-label {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 10px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: #DDCBBC;
+        }
+        .fusion-machine-led {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            background: #FF8100;
+            box-shadow: 0 0 10px rgba(255,129,0,.9);
+        }
+        .fusion-reel-window {
+            position: relative;
+            height: 92px;
+            overflow: hidden;
+            border: 2px solid #110c18;
+            border-radius: 10px;
+            background: #120d1b;
+            box-shadow:
+                inset 0 16px 18px rgba(0,0,0,.75),
+                inset 0 -16px 18px rgba(0,0,0,.75),
+                0 1px 0 rgba(255,255,255,.07);
+            transform: rotateX(2deg);
+        }
+        .fusion-reel-window::before,
+        .fusion-reel-window::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 26px;
+            z-index: 4;
+            pointer-events: none;
+        }
+        .fusion-reel-window::before { top: 0; background: linear-gradient(#08060d, transparent); }
+        .fusion-reel-window::after { bottom: 0; background: linear-gradient(transparent, #08060d); }
+        .fusion-reel {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+            perspective: 340px;
+            transform-style: preserve-3d;
+        }
+        .fusion-reel-track {
+            position: absolute;
+            inset: 0;
+            transform-style: preserve-3d;
+            perspective: 420px;
+            will-change: transform;
+        }
+        .fusion-reel-item {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 100%;
+            height: 58px;
+            margin-top: -29px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 12px;
+            text-align: center;
+            font-size: clamp(15px, 2vw, 21px);
+            line-height: 1.1;
+            font-weight: 800;
+            color: #FFF7EC;
+            text-shadow: 0 0 18px rgba(255,129,0,.12);
+            backface-visibility: hidden;
+            transform-origin: center center -74px;
+            will-change: transform, opacity, filter;
+        }
+        .fusion-reel.spinning .fusion-reel-item {
+            text-shadow: 0 0 20px rgba(255,129,0,.16);
+        }
+        .fusion-reel::after {
+            content: "";
+            position: absolute;
+            left: 5px;
+            right: 5px;
+            top: 50%;
+            height: 58px;
+            transform: translateY(-50%);
+            border-top: 1px solid rgba(255,186,85,.14);
+            border-bottom: 1px solid rgba(255,186,85,.14);
+            box-shadow: inset 0 8px 16px rgba(255,129,0,.025), inset 0 -8px 16px rgba(255,129,0,.025);
+            pointer-events: none;
+            z-index: 3;
+        }
+        .fusion-machine-foot {
+            width: 58%;
+            height: 7px;
+            margin: 12px auto -11px;
+            border-radius: 0 0 7px 7px;
+            background: #120d1b;
+            border: 1px solid #5F4C66;
+        }
+        .fusion-connector {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 8;
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1D162C;
+            border: 2px solid #FF8100;
+            color: #FFBA55;
+            font-weight: 900;
+            box-shadow: 0 0 24px rgba(255,129,0,.24), 4px 4px 0 rgba(10,5,15,.35);
+        }
+        .fusion-spin-btn[disabled] {
+            opacity: .65;
+            cursor: wait;
+            transform: none !important;
+        }
+        .fusion-score-panel {
+            min-height: 74px;
+            border: 1px solid rgba(95,76,102,.8);
+            background: rgba(20,14,29,.58);
+            border-radius: 10px;
+            padding: 12px 14px;
+        }
+        .fusion-score-track {
+            height: 7px;
+            overflow: hidden;
+            border-radius: 999px;
+            background: #120d1b;
+            border: 1px solid rgba(95,76,102,.6);
+        }
+        .fusion-score-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, #FF8100, #FFBA55);
+            transition: width .7s cubic-bezier(.2,.8,.2,1);
+            box-shadow: 0 0 12px rgba(255,129,0,.45);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .fusion-reel.spinning { animation: none; filter: none; }
+            .fusion-score-fill { transition: none; }
+        }
+
     </style>
 </head>
 <body class="font-sans antialiased selection:bg-shipOrange selection:text-shipWhite text-shipWhite overflow-x-hidden bg-[#1D162C]">
@@ -264,11 +457,11 @@
 
         <section id="details" class="py-24 border-y-2 border-[#5F4C66] bg-[#2D1E3D] relative">
             <div class="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
-                <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase">Event Details</h2>
-                <h3 class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-shipWhite">Everything you need to know.</h3>
+                <h2 id="details-eyebrow" class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase">Event Details</h2>
+                <h3 id="details-title" class="text-4xl md:text-5xl font-bold tracking-tight mb-12 text-shipWhite">Everything you need to know.</h3>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
+                <div id="details-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div id="when-card" class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
                         <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
@@ -278,7 +471,7 @@
                         <p class="text-xs text-shipGray mt-4">*Flexible schedule: you can leave early, but please arrive on time if you need to form a team. Submissions are due by 11:59 PM.</p>
                     </div>
 
-                    <div class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
+                    <div id="where-card" class="ship-card p-8 hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg">
                         <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                         </div>
@@ -292,10 +485,10 @@
                     </div>
 
                     <div class="ship-card p-8 border-shipOrange/30 relative overflow-hidden bg-shipOrange/5 md:col-span-1 lg:col-span-1 flex flex-col hover:-translate-y-1 hover:border-shipOrange/50 shadow-flat-lg" id="prompt-container">
+                        <img id="collision-prompt-art" src="./collision.png" alt="Colliding meteors" class="hidden pointer-events-none select-none" aria-hidden="true">
                         <div class="w-12 h-12 bg-shipBg border-2 border-shipBorder rounded-lg flex items-center justify-center mb-6 text-shipOrange">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
                         </div>
-                        <h4 class="text-xl font-bold mb-3 text-shipWhite">The Challenge</h4>
                         <div id="prompt-content-dynamic" class="flex-1 flex flex-col justify-between">
                         </div>
                     </div>
@@ -319,16 +512,16 @@
                     <div class="ship-card p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-flat-lg">
                         <img src="./grandPrize.png" alt="Grand Prize" class="w-20 h-20 object-contain shrink-0">
                         <div class="flex-1 text-center sm:text-left">
-                            <h4 class="text-2xl font-bold mb-2 text-shipWhite">Grand Prize</h4>
-                            <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded to the best overall mobile app. Creatively integrate the prompt into a compelling practical or entertaining experience. Full functionality isn't required, but ingenuity, striking design, and solid execution earn top marks.</p>
+                            <h4 class="text-2xl font-bold mb-2 text-shipWhite">Product Awards</h4>
+                            <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded to the best overall mobile apps. Creatively integrate the prompt into a compelling practical or entertaining experience. Full functionality isn't required, but ingenuity, striking design, and solid execution earn top marks.</p>
                             <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                         </div>
                     </div>
 
                     <div class="ship-card p-8 flex flex-col sm:flex-row items-center sm:items-start gap-6 shadow-flat-lg">
-                        <img src="./slidePrize.png" alt="Slide Deck Prize" class="w-20 h-20 object-contain shrink-0">
+                        <img src="./slidePrize.png" alt="Best Product Storytelling" class="w-20 h-20 object-contain shrink-0">
                         <div class="flex-1 text-center sm:text-left">
-                            <h4 class="text-2xl font-bold mb-2 text-shipWhite">Slide Deck Prize</h4>
+                            <h4 class="text-2xl font-bold mb-2 text-shipWhite">Best Product Storytelling</h4>
                             <p class="text-shipGray mb-4 text-sm leading-relaxed">Awarded for the most compelling presentation made in Adobe Express. Showcase your vision, impact, app screenshots, and a demo video all within your deck.</p>
                             <span class="text-sm font-bold text-shipOrange flex items-center justify-center sm:justify-start gap-1">Prize Announced Soon <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg></span>
                         </div>
@@ -487,7 +680,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            let HACKATHON_STATE = 0; 
+            let HACKATHON_STATE = 1; 
             
             const SHOW_ADOBE_PARTNER = false;
             if (!SHOW_ADOBE_PARTNER) {
@@ -497,13 +690,52 @@
 
             const HACKATHON_CONTENT = {
                 preRequisites: "Ensure you have the necessary IDEs installed (e.g., Xcode for iOS or Android Studio) before the event begins. You will also need an <a href='https://adobesparkpost-web.app.link/e/cXxlzPSXV4b' target='_blank' class='text-shipOrange hover:underline'>Adobe Express account</a> for your presentation. Don't forget to bring your laptop fully charged (power outlets may be limited)!",
-                promptDescription: "Your challenge is to build an app that...", 
-                categories: ["Category 1", "Category 2", "Category 3", "Category 4"], 
-                submissionRules: "Submissions must include...", 
-                slideTemplateLink: "", 
-                googleFormLink: "https://forms.google.com/YOUR_LINK", 
+                promptDescription: "<span class='block text-lg sm:text-xl font-bold text-shipWhite mb-3'>Choose two categories. Make them depend on each other.</span><span class='block text-shipGray'>Build a fusion app that combines two distinct categories to solve a problem, improve an experience, or create something entirely new.</span>",
+                promptClarification: "<span class='block mt-4 text-sm text-shipGray border-l-2 border-shipOrange pl-4'>The strongest ideas are not two unrelated features living in the same app. The fusion should be essential to how the product works.<br><br><strong class='text-shipWhite'>For example:</strong> Health × Music is not simply a workout app that plays songs. A meaningful fusion could use movement, pace, or workout intensity to shape the music, while the music actively changes the workout experience. Ask yourself: <strong class='text-shipWhite'>what becomes possible only because these two categories collided?</strong></span>", 
+                categories: ["01. Art", "02. Sports", "03. Health", "04. Lifestyle", "05. Social Media", "06. Transportation", "07. Productivity", "08. Dating", "09. Gaming", "10. Entertainment", "11. Music", "12. Education", "13. Business", "14. Travel", "15. Fashion", "16. Navigation", "17. Photo & Video", "18. Developer Tools", "19. E-commerce", "20. Books"], 
+                submissionRules: "Submit two things by 11:59 PM CDT: <strong class='text-shipWhite'>1. Public GitHub Repository</strong> containing the app you built during the hackathon, and <strong class='text-shipWhite'>2. Public Adobe Express Presentation</strong> using the provided template to showcase your vision, impact, app screenshots, and demo video. Clearly distinguish what you built during the hackathon from future ideas.", 
+                slideTemplateLink: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:2cacae27-41c8-513f-b6ce-f2fa93aabdf4?accept=true&invite=true&promoid=Z2G1FQKR&mv=other", 
+                googleFormLink: "https://docs.google.com/forms/d/e/1FAIpQLSe27osm6IlX6bmnsIaumf8DzUeMNNTb5_Xqlwv65-H28Aj0ng/viewform?usp=sharing&ouid=106426938605772311420", 
                 adobeReferralLink: "https://adobesparkpost-web.app.link/e/cXxlzPSXV4b" 
             };
+
+            // Lightweight semantic profile for all 20 categories. The randomizer builds a
+            // complete 20 x 19 directional similarity map (380 pairings) from these traits.
+            const CATEGORY_TRAITS = {
+                "Art":             [1.00,.15,.10,.35,.75,.20,.20,.10],
+                "Sports":          [.15,1.00,.72,.35,.15,.35,.18,.30],
+                "Health":          [.08,.72,1.00,.45,.08,.18,.35,.28],
+                "Lifestyle":       [.38,.35,.45,1.00,.30,.35,.35,.45],
+                "Social Media":    [.45,.22,.14,.42,1.00,.25,.20,.38],
+                "Transportation":  [.06,.28,.18,.28,.12,1.00,.36,.20],
+                "Productivity":    [.08,.22,.30,.35,.12,.30,1.00,.38],
+                "Dating":          [.28,.18,.14,.50,.82,.12,.10,.34],
+                "Gaming":          [.62,.62,.18,.30,.38,.18,.18,.90],
+                "Entertainment":   [.72,.38,.12,.42,.58,.18,.12,.88],
+                "Music":           [.92,.22,.12,.42,.62,.12,.14,.72],
+                "Education":       [.22,.30,.35,.30,.15,.12,.72,.38],
+                "Business":        [.08,.16,.20,.30,.22,.20,.78,.42],
+                "Travel":          [.35,.32,.18,.76,.42,.76,.18,.62],
+                "Fashion":         [.82,.18,.14,.72,.55,.12,.18,.50],
+                "Navigation":      [.08,.25,.12,.25,.08,.94,.55,.20],
+                "Photo & Video":   [.90,.16,.08,.40,.74,.14,.20,.72],
+                "Developer Tools": [.05,.10,.12,.12,.08,.18,.88,.30],
+                "E-commerce":      [.22,.14,.16,.58,.32,.18,.55,.42],
+                "Books":           [.66,.12,.18,.46,.24,.10,.38,.55]
+            };
+
+            const CATEGORY_NAMES = Object.keys(CATEGORY_TRAITS);
+            const CATEGORY_SIMILARITY = {};
+            CATEGORY_NAMES.forEach(a => {
+                CATEGORY_NAMES.forEach(b => {
+                    if (a === b) return;
+                    const va = CATEGORY_TRAITS[a], vb = CATEGORY_TRAITS[b];
+                    const dot = va.reduce((sum, v, i) => sum + v * vb[i], 0);
+                    const ma = Math.sqrt(va.reduce((sum, v) => sum + v * v, 0));
+                    const mb = Math.sqrt(vb.reduce((sum, v) => sum + v * v, 0));
+                    CATEGORY_SIMILARITY[`${a}|||${b}`] = Math.round((dot / (ma * mb)) * 100);
+                });
+            });
 
             const START_DATE = new Date(2026, 8, 14, 9, 0, 0).getTime(); 
             const END_DATE = new Date(2026, 8, 14, 23, 59, 0).getTime(); 
@@ -547,6 +779,12 @@
             const cdLabelText = document.getElementById('cd-label-text');
             const promptContent = document.getElementById('prompt-content-dynamic');
             const fullPromptDetails = document.getElementById('full-prompt-details');
+            const whenCard = document.getElementById('when-card');
+            const whereCard = document.getElementById('where-card');
+            const promptContainer = document.getElementById('prompt-container');
+            const collisionPromptArt = document.getElementById('collision-prompt-art');
+            const detailsEyebrow = document.getElementById('details-eyebrow');
+            const detailsTitle = document.getElementById('details-title');
             const navBtn = document.getElementById('nav-action-btn');
             const navShortcuts = document.getElementById('nav-shortcuts');
             const heroSubtitle = document.getElementById('hero-subtitle');
@@ -616,9 +854,10 @@
             
             function buildPromptHTML(state) {
                 if (state === 0) {
+                    fullPromptDetails.classList.add('hidden');
                     return `
                         <div class="mb-4">
-                            <p class="text-shipGray mb-2 text-sm font-semibold uppercase tracking-wider">Preparation</p>
+                            <h4 class="text-xl font-bold mb-3 text-shipWhite">Preparation</h4>
                             <p class="text-shipWhite text-sm leading-relaxed">${HACKATHON_CONTENT.preRequisites}</p>
                         </div>
                         <p class="text-shipOrange font-bold text-lg mt-auto">Full prompt revealed here at event kickoff.</p>
@@ -643,28 +882,307 @@
                                 <p class="text-shipGray text-sm leading-relaxed mb-6">${HACKATHON_CONTENT.submissionRules}</p>
                                 <div class="mt-auto flex flex-col gap-2">
                                     <a href="${HACKATHON_CONTENT.slideTemplateLink}" target="_blank" class="group-btn bg-[#1D162C] text-shipWhite border-2 border-shipBorder px-4 py-2 rounded font-bold text-sm transition-all flex justify-center items-center gap-2 w-fit shadow-flat-sm">
-                                        Slide Deck Template 
+                                        Presentation Template 
                                         <svg class="w-4 h-4 btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                                     </a>
                                     <a href="${HACKATHON_CONTENT.adobeReferralLink}" target="_blank" class="text-[11px] text-shipGray hover:text-shipWhite underline underline-offset-2 transition-colors w-fit ml-1 mt-1">Create Adobe Express Account</a>
                                 </div>
                             </div>
                         </div>
+
+                        <div class="fusion-randomizer mt-10 border-2 border-shipBorder rounded-xl p-5 sm:p-7 shadow-flat-lg">
+                            <div class="relative z-10 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 mb-6">
+                                <div>
+                                    <p class="text-[11px] font-mono uppercase tracking-[0.18em] text-shipLightOrange mb-2">Optional idea generator</p>
+                                    <h4 class="text-2xl font-bold text-shipWhite">Having trouble deciding categories?</h4>
+                                    <p class="text-shipGray text-sm mt-2 max-w-2xl">Let the Fusion Machine choose two different categories at once. Spin again as many times as you want. The similarity score shows how closely related the two categories are.</p>
+                                </div>
+                                <button id="fusion-spin-btn" type="button" class="fusion-spin-btn group-btn bg-shipOrange hover:bg-shipOrangeHover text-black px-5 py-3 rounded-lg font-black text-sm transition-all shadow-flat-sm flex items-center justify-center gap-2 shrink-0">
+                                    <span id="fusion-spin-icon" class="text-lg leading-none">↻</span> Spin Both
+                                </button>
+                            </div>
+
+                            <div class="relative grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-8 mb-5">
+                                <div class="fusion-machine-shell">
+                                    <div class="fusion-machine-label"><span>Reel 01</span><span class="fusion-machine-led"></span></div>
+                                    <div class="fusion-reel-window"><div id="fusion-reel-a" class="fusion-reel"><div class="fusion-reel-track"></div></div></div>
+                                    <div class="fusion-machine-foot"></div>
+                                </div>
+                                <div class="fusion-connector hidden sm:flex">×</div>
+                                <div class="fusion-machine-shell">
+                                    <div class="fusion-machine-label"><span>Reel 02</span><span class="fusion-machine-led"></span></div>
+                                    <div class="fusion-reel-window"><div id="fusion-reel-b" class="fusion-reel"><div class="fusion-reel-track"></div></div></div>
+                                    <div class="fusion-machine-foot"></div>
+                                </div>
+                            </div>
+
+                            <div class="fusion-score-panel relative z-10">
+                                <div class="flex items-center justify-between gap-4 mb-2">
+                                    <div>
+                                        <span class="text-[10px] font-mono uppercase tracking-[0.16em] text-shipGray">Category Similarity</span>
+                                        <p id="fusion-score-caption" class="text-xs text-shipGray mt-1">Spin to reveal a pairing.</p>
+                                    </div>
+                                    <div id="fusion-score-value" class="text-2xl font-black text-shipOrange tabular-nums">--%</div>
+                                </div>
+                                <div class="fusion-score-track"><div id="fusion-score-fill" class="fusion-score-fill"></div></div>
+                            </div>
+                        </div>
                     `;
                     fullPromptDetails.classList.remove('hidden');
+                    requestAnimationFrame(initFusionRandomizer);
 
                     let statusText = '';
                     if (state === 2) statusText = '<p class="text-shipOrange text-sm font-bold mt-4">Submissions Closed. Judging in Progress.</p>';
                     if (state === 3) statusText = '<p class="text-shipOrange text-sm font-bold mt-4">Hackathon Concluded.</p>';
 
+                    const clarification = state === 1 ? HACKATHON_CONTENT.promptClarification : '';
                     return `
-                        <p class="text-shipWhite font-medium text-[15px] leading-relaxed">${HACKATHON_CONTENT.promptDescription}</p>
+                        <p class="text-shipWhite font-medium text-[15px] leading-relaxed">${HACKATHON_CONTENT.promptDescription}${clarification}</p>
                         ${statusText}
                     `;
                 }
             }
 
+            let fusionSpinTimerA = null;
+            let fusionSpinTimerB = null;
+            let fusionSpinning = false;
+
+            function similarityLabel(score) {
+                if (score >= 80) return "Close cousins — an intuitive fusion.";
+                if (score >= 62) return "Related — familiar, with room for a twist.";
+                if (score >= 44) return "Unexpected — a balanced creative stretch.";
+                return "Wild collision — very different worlds.";
+            }
+
+            function initFusionRandomizer() {
+                const btn = document.getElementById('fusion-spin-btn');
+                if (!btn || btn.dataset.bound === 'true') return;
+                btn.dataset.bound = 'true';
+                const reelA = document.getElementById('fusion-reel-a');
+                const reelB = document.getElementById('fusion-reel-b');
+                if (reelA && !reelA.querySelector('.fusion-reel-track')?.children.length) prepareFusionReel(reelA, 0);
+                if (reelB && !reelB.querySelector('.fusion-reel-track')?.children.length) prepareFusionReel(reelB, 10);
+                btn.addEventListener('click', spinFusionMachines);
+            }
+
+            function prepareFusionReel(reel, initialIndex = 0) {
+                const track = reel.querySelector('.fusion-reel-track');
+                if (!track) return;
+
+                // Each DOM label owns one absolute position on the virtual cylinder.
+                // Labels are only recycled after they have rotated fully out of view,
+                // so a visible word never changes into another word mid-spin.
+                const poolSize = 7;
+                const half = Math.floor(poolSize / 2);
+                const centerRow = Math.round(initialIndex);
+                const items = [];
+
+                for (let i = 0; i < poolSize; i++) {
+                    const absoluteRow = centerRow - half + i;
+                    const div = document.createElement('div');
+                    div.className = 'fusion-reel-item';
+                    div.dataset.absoluteRow = String(absoluteRow);
+                    const categoryIndex = ((absoluteRow % CATEGORY_NAMES.length) + CATEGORY_NAMES.length) % CATEGORY_NAMES.length;
+                    div.textContent = CATEGORY_NAMES[categoryIndex];
+                    items.push(div);
+                }
+
+                track.replaceChildren(...items);
+                track.dataset.row = String(initialIndex);
+                renderCurvedReel(reel, initialIndex);
+            }
+
+            function renderCurvedReel(reel, rowPosition) {
+                const track = reel.querySelector('.fusion-reel-track');
+                if (!track) return;
+
+                const items = [...track.children];
+                if (!items.length) return;
+
+                const radius = 74;
+                const angleStep = 31; // degrees between printed positions on the cylinder
+                const recycleBoundary = 3.25; // recycle beyond the visible face; only 7 unique adjacent labels exist at once
+
+                // Recycle only labels that are completely outside the visible cylinder.
+                // Because the wheel only spins forward, old rows leave through the top
+                // and are reused at the bottom as the next sequential category.
+                let maxRow = Math.max(...items.map(item => Number(item.dataset.absoluteRow)));
+                const exiting = items
+                    .filter(item => Number(item.dataset.absoluteRow) - rowPosition < -recycleBoundary)
+                    .sort((a, b) => Number(a.dataset.absoluteRow) - Number(b.dataset.absoluteRow));
+
+                exiting.forEach(item => {
+                    maxRow += 1;
+                    item.dataset.absoluteRow = String(maxRow);
+                    const categoryIndex = ((maxRow % CATEGORY_NAMES.length) + CATEGORY_NAMES.length) % CATEGORY_NAMES.length;
+                    item.textContent = CATEGORY_NAMES[categoryIndex];
+                });
+
+                items.forEach(item => {
+                    const absoluteRow = Number(item.dataset.absoluteRow);
+                    const logicalOffset = absoluteRow - rowPosition;
+                    const angle = logicalOffset * angleStep;
+                    const radians = angle * Math.PI / 180;
+                    const y = Math.sin(radians) * radius;
+                    const z = Math.cos(radians) * radius - radius;
+                    const absAngle = Math.abs(angle);
+                    const opacity = Math.max(0, 1 - Math.pow(absAngle / 116, 1.55));
+                    const scale = Math.max(.76, 1 - absAngle / 520);
+                    const blur = Math.max(0, (absAngle - 32) / 85);
+
+                    item.style.transform = `translate3d(0, ${y}px, ${z}px) rotateX(${-angle}deg) scale(${scale})`;
+                    item.style.opacity = opacity.toFixed(3);
+                    item.style.filter = `blur(${blur.toFixed(2)}px)`;
+                    item.style.zIndex = String(100 - Math.round(absAngle));
+                });
+            }
+
+            function spinFusionMachines() {
+                if (fusionSpinning) return;
+                const reelA = document.getElementById('fusion-reel-a');
+                const reelB = document.getElementById('fusion-reel-b');
+                const btn = document.getElementById('fusion-spin-btn');
+                const scoreValue = document.getElementById('fusion-score-value');
+                const scoreCaption = document.getElementById('fusion-score-caption');
+                const scoreFill = document.getElementById('fusion-score-fill');
+                if (!reelA || !reelB || !btn) return;
+
+                const trackA = reelA.querySelector('.fusion-reel-track');
+                const trackB = reelB.querySelector('.fusion-reel-track');
+                if (!trackA || !trackB) return;
+
+                if (!trackA.children.length) prepareFusionReel(reelA, Math.floor(Math.random() * CATEGORY_NAMES.length));
+                if (!trackB.children.length) prepareFusionReel(reelB, Math.floor(Math.random() * CATEGORY_NAMES.length));
+
+                fusionSpinning = true;
+                btn.disabled = true;
+                btn.querySelector('span:first-child').textContent = '⌁';
+                reelA.classList.add('spinning');
+                reelB.classList.add('spinning');
+                scoreValue.textContent = '--%';
+                scoreCaption.textContent = 'Calculating category chemistry…';
+                scoreFill.style.width = '0%';
+
+                const finalAIndex = Math.floor(Math.random() * CATEGORY_NAMES.length);
+                let finalBIndex = Math.floor(Math.random() * (CATEGORY_NAMES.length - 1));
+                if (finalBIndex >= finalAIndex) finalBIndex++;
+                const finalA = CATEGORY_NAMES[finalAIndex];
+                const finalB = CATEGORY_NAMES[finalBIndex];
+
+                // A longer, weighted spin: deliberate start, smooth acceleration,
+                // a short cruising phase, then a visibly long mechanical coast.
+                function animateReel(reel, finalIndex, duration, extraTurns) {
+                    const track = reel.querySelector('.fusion-reel-track');
+                    let currentRow = Number(track.dataset.row || 0);
+                    const currentIndex = ((Math.round(currentRow) % CATEGORY_NAMES.length) + CATEGORY_NAMES.length) % CATEGORY_NAMES.length;
+                    const deltaToFinal = (finalIndex - currentIndex + CATEGORY_NAMES.length) % CATEGORY_NAMES.length;
+                    const targetRow = currentRow + (extraTurns * CATEGORY_NAMES.length) + deltaToFinal;
+                    const distance = targetRow - currentRow;
+
+                    // Continuous wheel physics. Instead of stepping through fixed speed
+                    // phases, velocity follows one smooth curve from rest -> peak -> rest.
+                    // The integral is normalized into position, so there are no visible
+                    // acceleration boundaries or interval changes.
+                    const CURVE_SAMPLES = 240;
+                    const cumulative = new Float64Array(CURVE_SAMPLES + 1);
+                    let totalArea = 0;
+                    let previousVelocity = 0;
+
+                    for (let i = 1; i <= CURVE_SAMPLES; i++) {
+                        const x = i / CURVE_SAMPLES;
+                        // Rounded wheel inertia: gentle pickup, moderate peak speed,
+                        // and a long natural-feeling coast into the final category.
+                        const velocity = Math.pow(Math.sin(Math.PI * x), 1.45);
+                        totalArea += (previousVelocity + velocity) * 0.5 / CURVE_SAMPLES;
+                        cumulative[i] = totalArea;
+                        previousVelocity = velocity;
+                    }
+
+                    function interpolateMotion(t) {
+                        if (t <= 0) return 0;
+                        if (t >= 1) return 1;
+                        const scaled = t * CURVE_SAMPLES;
+                        const i = Math.floor(scaled);
+                        const fraction = scaled - i;
+                        const a = cumulative[i];
+                        const b = cumulative[Math.min(i + 1, CURVE_SAMPLES)];
+                        return (a + (b - a) * fraction) / totalArea;
+                    }
+
+                    return new Promise(resolve => {
+                        const start = performance.now();
+                        function frame(now) {
+                            const t = Math.min(1, (now - start) / duration);
+                            const progress = interpolateMotion(t);
+                            const row = currentRow + distance * progress;
+                            renderCurvedReel(reel, row);
+                            if (t < 1) {
+                                requestAnimationFrame(frame);
+                            } else {
+                                track.dataset.row = String(targetRow);
+                                renderCurvedReel(reel, targetRow);
+                                resolve();
+                            }
+                        }
+                        requestAnimationFrame(frame);
+                    });
+                }
+
+                Promise.all([
+                    animateReel(reelA, finalAIndex, 5200, 2),
+                    animateReel(reelB, finalBIndex, 5650, 2)
+                ]).then(() => {
+                    reelA.classList.remove('spinning');
+                    reelB.classList.remove('spinning');
+
+                    const score = CATEGORY_SIMILARITY[`${finalA}|||${finalB}`];
+                    scoreValue.textContent = `${score}%`;
+                    scoreCaption.textContent = similarityLabel(score);
+                    requestAnimationFrame(() => { scoreFill.style.width = `${score}%`; });
+
+                    btn.disabled = false;
+                    btn.querySelector('span:first-child').textContent = '↻';
+                    fusionSpinning = false;
+                });
+            }
+
             function initializeState() {
+                // Stage 1 focuses the page entirely on the newly revealed challenge.
+                // Other stages restore the normal event-detail cards.
+                const challengeOnly = HACKATHON_STATE === 1;
+                if (whenCard) whenCard.classList.toggle('hidden', challengeOnly);
+                if (whereCard) whereCard.classList.toggle('hidden', challengeOnly);
+                if (promptContainer) {
+                    promptContainer.classList.toggle('md:col-span-3', challengeOnly);
+                    promptContainer.classList.toggle('lg:col-span-3', challengeOnly);
+                    promptContainer.classList.toggle('md:col-span-1', !challengeOnly);
+                    promptContainer.classList.toggle('lg:col-span-1', !challengeOnly);
+                    promptContainer.classList.toggle('p-8', !challengeOnly);
+                    promptContainer.classList.toggle('p-10', challengeOnly);
+                }
+                if (detailsEyebrow) detailsEyebrow.innerText = challengeOnly ? 'THE CHALLENGE' : 'Event Details';
+                if (detailsTitle) detailsTitle.innerText = challengeOnly ? 'Build where categories collide.' : 'Everything you need to know.';
+
+                // Collision artwork: hero-sized beside the Stage 1 prompt, then a small
+                // corner badge once the challenge moves into judging/archive stages.
+                if (collisionPromptArt) {
+                    if (HACKATHON_STATE === 1) {
+                        promptContainer.classList.add('overflow-hidden');
+                        collisionPromptArt.className = 'absolute right-3 sm:right-8 lg:right-12 top-1/2 -translate-y-1/2 w-36 sm:w-52 lg:w-72 xl:w-80 opacity-95 drop-shadow-[0_0_35px_rgba(255,129,0,0.28)] pointer-events-none select-none z-0';
+                        promptContent.classList.add('relative', 'z-10', 'lg:pr-[22rem]');
+                    } else if (HACKATHON_STATE === 2 || HACKATHON_STATE === 3) {
+                        // Let the artwork hang beyond the card edge like a clipped-on sticker.
+                        promptContainer.classList.remove('overflow-hidden');
+                        collisionPromptArt.className = 'absolute -right-5 sm:-right-7 -top-10 sm:-top-12 w-20 sm:w-24 opacity-100 rotate-12 drop-shadow-[0_6px_10px_rgba(10,5,15,0.45)] pointer-events-none select-none z-20';
+                        promptContent.classList.add('relative', 'z-10');
+                        promptContent.classList.remove('lg:pr-[22rem]');
+                    } else {
+                        promptContainer.classList.add('overflow-hidden');
+                        collisionPromptArt.className = 'hidden pointer-events-none select-none';
+                        promptContent.classList.remove('lg:pr-[22rem]');
+                    }
+                }
+
                 if (heroCatImg) {
                     if (HACKATHON_STATE === 1 || HACKATHON_STATE === 2) {
                         heroCatImg.src = './largeCat.webp';
@@ -819,8 +1337,8 @@
                     </div>`;
 
                 document.getElementById('leaderboards-container').innerHTML = 
-                    buildList("Grand Prize Winners", WINNING_DATA.grandPrize) + 
-                    buildList("Slide Deck Winners", WINNING_DATA.slideDeck);
+                    buildList("Product Awards Winners", WINNING_DATA.grandPrize) + 
+                    buildList("Best Product Storytelling Winners", WINNING_DATA.slideDeck);
 
                 const bubbleHtml = WINNING_DATA.otherSubmissions.map((text, i) => {
                     return `<div class="bg-shipCard border-2 border-[#5F4C66] px-4 py-2 rounded-full text-sm text-shipGray shadow-flat-sm cursor-default hover:border-shipOrange hover:text-shipWhite transition-colors">${text}</div>`;
