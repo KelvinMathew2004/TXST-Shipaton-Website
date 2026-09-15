@@ -556,29 +556,29 @@
                     <p id="bubbles-subtitle" class="text-shipGray">Saluting every team that crossed the finish line.</p>
                 </div>
                 
-                <div class="relative w-full min-h-[400px] flex flex-wrap justify-center content-center gap-4 p-8 border-2 border-[#5F4C66] rounded-2xl bg-shipCard shadow-flat-lg" id="bubbles-container"></div>
+                <div class="relative w-full flex flex-wrap justify-center content-start gap-4 p-8 border-2 border-[#5F4C66] rounded-2xl bg-shipCard shadow-flat-lg" id="bubbles-container"></div>
             </div>
         </section>
 
         <section id="sponsors-section" class="pt-12 pb-24 relative">
-            <div class="max-w-[1100px] mx-auto px-6 lg:px-8 relative z-10">
+            <div class="max-w-[1200px] mx-auto px-6 lg:px-8 relative z-10">
                 <img src="./mediumCat2.svg" class="absolute left-6 sm:-left-16 -top-12 sm:-top-16 opacity-70 animate-float-fast pointer-events-none w-20 md:w-32 scale-x-[-1] z-0" alt="Floating Cat">
                 
                 <h2 class="text-xs font-semibold tracking-wider text-shipOrange mb-4 uppercase text-center relative z-10">Event Partners</h2>
                 <h3 class="text-3xl font-bold tracking-tight mb-8 text-center text-shipWhite relative z-10">Powered by the best.</h3>
 
-                <div class="flex flex-col sm:flex-row justify-center flex-wrap gap-6 relative z-10">
-                    <a id="adobe-partner" href="https://edu.adobe.com" target="_blank" class="w-full sm:w-[340px] ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
+                <div class="flex flex-col sm:flex-row sm:flex-nowrap justify-center gap-6 relative z-10">
+                    <a id="adobe-partner" href="https://edu.adobe.com" target="_blank" class="w-full sm:flex-1 sm:min-w-0 sm:max-w-[340px] ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
                         <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         <div class="sponsor-base adobe-mask" style="-webkit-mask-image: url('./adobeLogo.png'); mask-image: url('./adobeLogo.png');"></div>
                         <div class="sponsor-reveal adobe-mask" style="background-image: url('./adobeLogo.png');"></div>
                     </a>
-                    <a href="https://www.revenuecat.com" target="_blank" class="w-full sm:w-[340px] ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
+                    <a href="https://www.revenuecat.com" target="_blank" class="w-full sm:flex-1 sm:min-w-0 sm:max-w-[340px] ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
                         <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         <div class="sponsor-base" style="-webkit-mask-image: url('./revenueLogo.png'); mask-image: url('./revenueLogo.png');"></div>
                         <div class="sponsor-reveal" style="background-image: url('./revenueLogo.png');"></div>
                     </a>
-                    <a href="https://www.instagram.com/txstswe/" target="_blank" class="w-full sm:w-[340px] ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
+                    <a href="https://www.instagram.com/txstswe/" target="_blank" class="w-full sm:flex-1 sm:min-w-0 sm:max-w-[340px] ship-card sponsor-card h-32 flex items-center justify-center p-8 shadow-flat-lg relative">
                         <svg class="absolute top-3 right-3 w-5 h-5 text-shipOrange md:hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
                         <div class="sponsor-base swe-mask" style="-webkit-mask-image: url('./sweLogo.png'); mask-image: url('./sweLogo.png');"></div>
                         <div class="sponsor-reveal swe-mask" style="background-image: url('./sweLogo.png');"></div>
@@ -682,7 +682,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             let HACKATHON_STATE = 2; 
             
-            const SHOW_ADOBE_PARTNER = false;
+            const SHOW_ADOBE_PARTNER = true;
             if (!SHOW_ADOBE_PARTNER) {
                 const adobePartner = document.getElementById('adobe-partner');
                 if (adobePartner) adobePartner.classList.add('hidden');
@@ -756,38 +756,38 @@
                     { app: "VibeCheck", team: "Tom, Uma, Vic" }
                 ],
                 otherSubmissions: [
-                    "AI Research",
-                    "ArtLens",
-                    "Calc Lab",
-                    "Care Companion",
-                    "Class Lens",
-                    "DayRoute",
-                    "Fashion DNA",
-                    "GO discover",
-                    "Local Map Adventure",
-                    "Medusa",
-                    "Motion Art",
-                    "Musically",
-                    "NERATE",
-                    "OOTD: Your Outfit of the Day",
-                    "PACE",
-                    "PairUp",
-                    "Paw Ping",
-                    "PlayScript",
-                    "QuestFit!",
-                    "risqué",
-                    "Rommie",
-                    "Shadefinder",
-                    "Social Sentry by Stack NeverFlows",
-                    "Spot.",
-                    "STEADY",
-                    "syncflow-ai",
-                    "Teardown",
-                    "TrackStar",
-                    "TryNGo",
-                    "Tutti",
-                    "WaitWisely",
-                    "WaySignal"
+                    { app: "AI Research", github: "https://github.com/eduarduque/shipaton-ai-research-fusion", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:83c6a22b-37f7-4ca0-967d-d5f4a592c525?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "ArtLens", github: "https://github.com/IoannisDev/Artlens", adobe: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:AP:b3baa3fe-48bc-5aa2-b2ce-5845d7700a1b?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other" },
+                    { app: "Calc Lab", github: "https://github.com/bishleshan/CalcLab", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:AP:5f670bd5-36ba-57b0-9660-d27cd59d9edb?invite=true&accept=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "Care Companion", github: "https://github.com/diwaspandit/carecompanion", adobe: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:AP:44f5c1a7-79a6-53d8-a8bc-5687d3880923?sdid=C4SZ2FYJ&pageId=4fb3208a-a892-4bd2-b73c-47529cdc56cc&category=search&promoid=FHRLZ472&mv=other" },
+                    { app: "Class Lens", github: "https://github.com/rejankarki1/classLens", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:US:c9ae42de-58da-408e-8beb-78834e27c1ae?pageId=de1d85f0-9303-404b-91f0-6390d3256fab&q=presentation&entryPoint=start-from-own-ppt&isNew=true" },
+                    { app: "DayRoute", github: "https://github.com/samrakshanadhikari/DAYRoute", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:US:c8d4d575-34bf-53f9-9910-ea12b53874cb?accept=true&pageId=b1c39c78-ef58-43d7-b58b-a5ac8b073d68" },
+                    { app: "Fashion DNA", github: "https://github.com/aashishhdhital/aashishhdhital-SHIPATON-PROJECT-style_dna", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:34fa71a0-bb26-5329-87b2-eaf81650dfaa?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "GO discover", github: "https://github.com/rojanregmi-dev/go-college/tree/main", adobe: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:US:7ef1375f-414b-57f0-b382-0d94027c7abd?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other" },
+                    { app: "Local Map Adventure", github: "https://github.com/tex-tsu/LocalMapAdventure", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:US:f6d1fb33-2489-5543-9de6-417284850718?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "Medusa", github: "https://github.com/saurab200/snake-xoxo", adobe: "https://express.adobe.com/publishedV2/urn:aaid:sc:US:80cd78fc-7989-565d-80ce-6633950a0f9a?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other" },
+                    { app: "Motion Art", github: "https://github.com/aayushraj1425/MotionArt", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:ffd5a55b-42af-5ce8-a254-dbc6415dc54b?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "Musically", github: "https://github.com/aalok012/shipaton-2026", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:ab37052d-e75b-527b-8ec5-458e693bf592?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "NERATE", github: "https://github.com/SumanAch10/Nerate", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:US:b7da1e05-3988-529f-8f37-d984c9318069?pageId=f04d96f6-01eb-417f-a8b6-b1fc176760f1" },
+                    { app: "OOTD: Your Outfit of the Day", github: "https://github.com/ritiz1/OOTD", adobe: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:VA6C2:36c61da0-e400-5a8c-b51f-0ae5146d097f?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other" },
+                    { app: "PACE", github: "https://github.com/ythapacs29-lgtm/PACE", adobe: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:US:01672a8a-bf22-5e53-9933-d8e1135af194?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other" },
+                    { app: "PairUp", github: "https://github.com/oasis-pandey/TXST_SHIPATHON", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:6971c5d9-6ae6-5c86-b735-2abf33fc74f6?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "Paw Ping", github: "https://github.com/anamgiri91/paw-ping", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:42fde335-f7bd-5062-b4dd-c2080d486004?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "PlayScript", github: "https://github.com/Txst-Shipaton/PlayScript", adobe: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:US:ad88f06d-1006-50f9-b555-13a4e8f93d0b?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other" },
+                    { app: "QuestFit!", github: "https://github.com/bellaiscool93/Da-Dream-Team.git", adobe: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:VA6C2:4df43bb0-073e-5e92-9b6e-a645a963123f?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other" },
+                    { app: "risqué", github: "https://github.com/StinkyCat0/txstshipathon", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:c1746cc3-d6df-50dc-a503-1bed4dcbc91f?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "Rommie", github: "https://github.com/Kalevaii/shipathontxst", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:US:95815bd7-8b97-46b1-8cf3-ee3ce5d8e9a7?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "Shadefinder", github: "https://github.com/aviyannn/shadefinder", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:ee024c50-7956-4912-8a75-a070b002f461?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "Social Sentry by Stack NeverFlows", github: "https://github.com/shayan-a-builds/TXST-Shipaton-Child-Predator-Education", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:US:24ed65c3-9d53-4ed9-a025-8803b1d5b1ee?accept=true&pageId=7e041422-5d64-4338-8700-04a96dade358" },
+                    { app: "Spot.", github: "https://github.com/Theprasunkhanal/Spot", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:AP:f02c91bf-c20e-5441-a362-83093d49463d?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "STEADY", github: "https://github.com/Lowhilowhi/TXSTShipathon", adobe: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:US:cb4a73e2-f756-5617-8f26-8f96d55d02ca?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other" },
+                    { app: "syncflow-ai", github: "https://github.com/swikritik63/syncflow-ai", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:US:17728b96-a0b7-420a-a2ca-733a7235ff05?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "Teardown", github: "https://github.com/ProXteller/teardown.git", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:06486259-a7e9-5d2a-89cf-546e5dea0823?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "TrackStar", github: "https://github.com/Cap-Naomi/TrackStar-App", adobe: "https://new.express.adobe.com/publishedV2/urn:aaid:sc:VA6C2:ff4eab95-da9f-582b-a158-c1319c787e51?promoid=Y69SGM5H&sdid=C4SZ2FYJ&mv=other" },
+                    { app: "TryNGo", github: "https://github.com/jokolie12378/shipathon-tryngo", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:VA6C2:3106a258-b1c1-4140-8855-d64126472873?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "Tutti", github: "https://github.com/ashok-526/tutti", adobe: "https://express.adobe.com/publishedV2/urn:aaid:sc:AP:196b26a5-94ff-51a1-b808-5818c75545d5?sdid=C4SZ2FYJ&pageId=9958bdba-ab93-4eab-83aa-74b70268729b&category=search" },
+                    { app: "WaitWisely", github: "https://github.com/ayimakochkorova-jpg/WaitWisely", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:AP:5ceb3c5c-9d97-44b9-84d8-31d95bc0b30c?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" },
+                    { app: "WaySignal", github: "https://github.com/ayushkh-txst/waysignal", adobe: "https://new.express.adobe.com/id/urn:aaid:sc:AP:86ee8058-7700-4ba7-add1-ada354df7443?accept=true&invite=true&promoid=Z2G1FQKR&mv=other" }
                 ]
             };
 
@@ -1322,23 +1322,42 @@
             function renderLeaderboards(state) {
                 const isGrading = state === 2;
 
-                const buildList = (title, data) => `
+                const leaderboardGithubIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5 grayscale group-hover/github:grayscale-0 transition-all duration-200" fill="currentColor" aria-hidden="true"><path d="M12 .7a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2.23c-3.22.7-3.9-1.37-3.9-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.39.97.1-.75.4-1.27.74-1.56-2.57-.29-5.27-1.29-5.27-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.1c.98 0 1.95.13 2.86.38 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.71 5.39-5.29 5.68.42.36.79 1.07.79 2.16v3.21c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"/></svg>`;
+                const leaderboardAdobeIcon = `<img src="./adobeMini.png" alt="Adobe Express" class="w-5 h-5 object-contain grayscale brightness-[1.65] group-hover/adobe:grayscale-0 group-hover/adobe:brightness-100 transition-all duration-200">`;
+                const submissionFor = (app) => WINNING_DATA.otherSubmissions.find(entry => entry.app.trim().toLowerCase() === app.trim().toLowerCase());
+
+                const buildList = (title, data, isProductAwards = false) => `
                     <div class="ship-card p-8 relative overflow-hidden bg-shipCard shadow-flat-lg">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-shipOrange to-yellow-500"></div>
                         <h4 class="text-2xl font-bold mb-6 text-shipWhite">${title}</h4>
                         <div class="relative">
                             <div class="space-y-3 ${isGrading ? 'blur-[6px] opacity-40 select-none pointer-events-none' : ''}">
-                                ${data.map((item, idx) => `
+                                ${data.map((item, idx) => {
+                                    const links = submissionFor(item.app) || item;
+                                    const githubControl = links.github
+                                        ? `<a href="${links.github}" target="_blank" rel="noopener noreferrer" class="group/github text-[#b9adbF] hover:text-shipWhite transition-all duration-200" aria-label="Open ${item.app} GitHub repository">${leaderboardGithubIcon}</a>`
+                                        : `<span class="group/github text-[#8f8496] cursor-not-allowed" title="GitHub link not provided">${leaderboardGithubIcon}</span>`;
+                                    const adobeControl = links.adobe
+                                        ? `<a href="${links.adobe}" target="_blank" rel="noopener noreferrer" class="group/adobe opacity-90 hover:opacity-100 transition-all duration-200" aria-label="Open ${item.app} Adobe Express presentation">${leaderboardAdobeIcon}</a>`
+                                        : `<span class="group/adobe opacity-55 cursor-not-allowed" title="Adobe Express link not provided">${leaderboardAdobeIcon}</span>`;
+                                    return `
                                     <div class="flex items-center gap-4 p-3 rounded-lg ${idx === 0 ? 'bg-shipOrange/10 border-2 border-shipOrange/40' : 'bg-shipBg border-2 border-[#5F4C66]/50'}">
-                                        <div class="font-black text-xl w-8 text-center ${idx === 0 ? 'text-yellow-500' : 'text-shipGray'} flex items-center justify-center">
+                                        <div class="font-black text-xl w-8 text-center ${idx === 0 ? 'text-yellow-500' : 'text-shipGray'} flex items-center justify-center shrink-0">
                                             ${idx === 0 ? '<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>' : idx + 1}
                                         </div>
-                                        <div>
-                                            <p class="font-bold text-shipWhite leading-tight text-sm">${item.app}</p>
+                                        <div class="min-w-0 flex-1">
+                                            <div class="flex items-center gap-2 flex-wrap">
+                                                <p class="font-bold text-shipWhite leading-tight text-sm">${item.app}</p>
+                                                ${isProductAwards && idx === 1 ? '<span class="text-[9px] uppercase tracking-wider font-black px-2 py-0.5 rounded-full border border-shipOrange/60 text-shipOrange">Runner-Up</span>' : ''}
+                                            </div>
                                             <p class="text-[11px] text-shipGray mt-0.5">${item.team}</p>
                                         </div>
-                                    </div>
-                                `).join('')}
+                                        <div class="ml-auto flex items-center gap-3 shrink-0">
+                                            ${githubControl}
+                                            ${adobeControl}
+                                        </div>
+                                    </div>`;
+                                }).join('')}
                             </div>
                             
                             ${isGrading ? `
@@ -1353,11 +1372,22 @@
                     </div>`;
 
                 document.getElementById('leaderboards-container').innerHTML = 
-                    buildList("Product Awards Winners", WINNING_DATA.grandPrize) + 
+                    buildList("Product Awards Winners", WINNING_DATA.grandPrize, true) + 
                     buildList("Best Product Storytelling Winners", WINNING_DATA.slideDeck);
 
-                const bubbleHtml = WINNING_DATA.otherSubmissions.map((text, i) => {
-                    return `<div class="bg-shipCard border-2 border-[#5F4C66] px-4 py-2 rounded-full text-sm text-shipGray shadow-flat-sm cursor-default hover:border-shipOrange hover:text-shipWhite transition-colors">${text}</div>`;
+                const bubbleHtml = WINNING_DATA.otherSubmissions.map((item, i) => {
+                    const githubIcon = `<svg viewBox="0 0 24 24" class="w-5 h-5" fill="currentColor" aria-hidden="true"><path d="M12 .7a11.5 11.5 0 0 0-3.64 22.4c.58.1.79-.25.79-.56v-2.23c-3.22.7-3.9-1.37-3.9-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.17.08 1.78 1.2 1.78 1.2 1.04 1.78 2.72 1.27 3.39.97.1-.75.4-1.27.74-1.56-2.57-.29-5.27-1.29-5.27-5.69 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18A10.9 10.9 0 0 1 12 6.1c.98 0 1.95.13 2.86.38 2.2-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.71 5.39-5.29 5.68.42.36.79 1.07.79 2.16v3.21c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z"/></svg>`;
+                    const adobeIcon = `<img src="./adobeMini.png" alt="" class="w-5 h-5 object-contain brightness-0 invert">`;
+                    const adobeSide = item.adobe
+                        ? `<a href="${item.adobe}" target="_blank" rel="noopener noreferrer" class="w-1/2 h-full flex items-center justify-center bg-shipCard hover:bg-[#EB1000] transition-colors" aria-label="Open ${item.app} Adobe Express presentation">${adobeIcon}</a>`
+                        : `<div class="w-1/2 h-full flex items-center justify-center bg-shipCard opacity-45 cursor-not-allowed" title="Adobe Express link not provided">${adobeIcon}</div>`;
+                    return `<div class="group relative overflow-hidden h-[42px] min-w-fit bg-shipCard border-2 border-[#5F4C66] rounded-full text-sm text-shipGray shadow-flat-sm hover:border-[#77647f] transition-colors duration-200" style="width: max-content; min-width: 9rem;">
+                        <div class="relative h-full flex items-center justify-center px-4 text-center whitespace-nowrap transition-opacity duration-150 group-hover:opacity-0 pointer-events-none">${item.app}</div>
+                        <div class="absolute inset-0 flex text-shipWhite bg-shipCard opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-150">
+                            <a href="${item.github}" target="_blank" rel="noopener noreferrer" class="w-1/2 h-full flex items-center justify-center bg-shipCard border-r border-white/10 hover:bg-black transition-colors duration-200 text-white" aria-label="Open ${item.app} GitHub repository">${githubIcon}</a>
+                            ${adobeSide}
+                        </div>
+                    </div>`;
                 }).join('');
                 
                 const bubblesContainer = document.getElementById('bubbles-container');
