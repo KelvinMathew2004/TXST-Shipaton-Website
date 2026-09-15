@@ -680,7 +680,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            let HACKATHON_STATE = 1; 
+            let HACKATHON_STATE = 2; 
             
             const SHOW_ADOBE_PARTNER = false;
             if (!SHOW_ADOBE_PARTNER) {
@@ -756,22 +756,38 @@
                     { app: "VibeCheck", team: "Tom, Uma, Vic" }
                 ],
                 otherSubmissions: [
-                    "SnoozeAlert", "TutorMatch", "LaundryPing", "CodeDash", "ParkIt", "GrocerEase",
-                    "StudyBuddy", "DineOut", "GymRat", "PetPal", "ZenSpace", "Budgeteer", "CampusNav",
-                    "Eventify", "ClassTracker", "RoomieSync", "MealPrep", "FocusFlow", "FlashCardPro",
-                    "HabitHero", "TransitTX", "BobcatRide", "CatWatch", "RiverFloat", "SquareUp",
-                    "PitchPerfect", "NoteNinja", "StudySync", "CoffeeQuest", "SnackSpot", "LibraryLens",
-                    "TutorMe", "QuickBite", "RideShare", "EventHub", "CampusMarket", "BookTrade",
-                    "JobHunt", "SkillSwap", "StudyGroup", "FocusApp", "MindfulMinutes", "SleepCycle",
-                    "WaterLog", "StepTracker", "FitnessFriend", "RecipeShare", "PantryPal", "LeftoverLove",
-                    "BudgetApp", "ExpenseTracker", "SplitBill", "RentDivide", "ChoreChart", "HouseMate",
-                    "PlantCare", "PetSitter", "DogWalker", "CatFeeder", "FishTank", "BirdWatcher",
-                    "BugTracker", "CodeSnippets", "DevTools", "UIBuilder", "ColorPicker", "FontFinder",
-                    "IconSearch", "AssetManager", "ProjectPlan", "TaskMaster", "TimeTracker", "Pomodoro",
-                    "FocusTimer", "DistractFree", "MindMap", "BrainStorm", "IdeaVault", "NoteTaker",
-                    "JournalApp", "DailyDiary", "MoodTracker", "GratitudeLog", "Affirmations", "Meditation",
-                    "BreatheApp", "YogaFlow", "WorkoutPlan", "RunTracker", "BikeRoute", "TrailMap",
-                    "CampGuide", "HikeLog", "NatureSpot", "BirdCall", "StarGaze", "WeatherApp"
+                    "AI Research",
+                    "ArtLens",
+                    "Calc Lab",
+                    "Care Companion",
+                    "Class Lens",
+                    "DayRoute",
+                    "Fashion DNA",
+                    "GO discover",
+                    "Local Map Adventure",
+                    "Medusa",
+                    "Motion Art",
+                    "Musically",
+                    "NERATE",
+                    "OOTD: Your Outfit of the Day",
+                    "PACE",
+                    "PairUp",
+                    "Paw Ping",
+                    "PlayScript",
+                    "QuestFit!",
+                    "risqué",
+                    "Rommie",
+                    "Shadefinder",
+                    "Social Sentry by Stack NeverFlows",
+                    "Spot.",
+                    "STEADY",
+                    "syncflow-ai",
+                    "Teardown",
+                    "TrackStar",
+                    "TryNGo",
+                    "Tutti",
+                    "WaitWisely",
+                    "WaySignal"
                 ]
             };
 
@@ -1160,8 +1176,8 @@
                     promptContainer.classList.toggle('p-8', !challengeOnly);
                     promptContainer.classList.toggle('p-10', challengeOnly);
                 }
-                if (detailsEyebrow) detailsEyebrow.innerText = challengeOnly ? 'THE CHALLENGE' : 'Event Details';
-                if (detailsTitle) detailsTitle.innerText = challengeOnly ? 'Build where categories collide.' : 'Everything you need to know.';
+                if (detailsEyebrow) detailsEyebrow.innerText = challengeOnly || HACKATHON_STATE >= 2 ? 'THE CHALLENGE' : 'Event Details';
+                if (detailsTitle) detailsTitle.innerText = challengeOnly ? 'Build where categories collide.' : (HACKATHON_STATE >= 2 ? 'What everyone built from.' : 'Everything you need to know.');
 
                 // Collision artwork: hero-sized beside the Stage 1 prompt, then a small
                 // corner badge once the challenge moves into judging/archive stages.
@@ -1173,7 +1189,7 @@
                     } else if (HACKATHON_STATE === 2 || HACKATHON_STATE === 3) {
                         // Let the artwork hang beyond the card edge like a clipped-on sticker.
                         promptContainer.classList.remove('overflow-hidden');
-                        collisionPromptArt.className = 'absolute -right-5 sm:-right-7 -top-10 sm:-top-12 w-20 sm:w-24 opacity-100 rotate-12 drop-shadow-[0_6px_10px_rgba(10,5,15,0.45)] pointer-events-none select-none z-20';
+                        collisionPromptArt.className = 'absolute right-2 sm:right-3 -top-5 sm:-top-6 w-20 sm:w-24 opacity-100 rotate-3 drop-shadow-[0_6px_10px_rgba(10,5,15,0.45)] pointer-events-none select-none z-20';
                         promptContent.classList.add('relative', 'z-10');
                         promptContent.classList.remove('lg:pr-[22rem]');
                     } else {
